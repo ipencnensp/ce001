@@ -64,9 +64,3 @@ cat(paste0("- **", datas1, " (Qua)", "**:\n", "- **",
 
 
 ## Exercícios
-
-
-
-## Notas
-
-As notas estão disponíveis [nesta página](notas.html).

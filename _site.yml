@@ -26,6 +26,8 @@ navbar:
       href: referencias.html
     - text: "Programas"
       href: programas.html
+    - text: "Notas"
+      href: notas.html
     - text: "Materiais"
       menu:
       - text: "Alguma coisa"
