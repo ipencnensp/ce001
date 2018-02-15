@@ -1,0 +1,74 @@
+---
+title: "CE001 - Bioestatística"
+output:
+  html_document:
+    toc: false
+---
+
+```{r setup, include=FALSE, cache=FALSE}
+source("setup_knitr.R")
+```
+
+[![Build Status](https://travis-ci.org/fernandomayer/ce083.svg?branch=master)](https://travis-ci.org/fernandomayer/ce083)
+
+<!-- <div class="alert alert-danger" role="alert"> -->
+<!-- **AVISO:** -->
+<!-- </div> -->
+
+# Detalhes da oferta da disciplina
+
+- **Cursos:**
+  - Biologia matutino (MB)
+  - Biologia noturno (N)
+  - Engenharia Madeireira (MN)
+- **Período:** primeiro semestre de 2018
+- **Professores Responsáveis:**
+  - [Elias Teixeira Krainski][], [LEG][]/DEST/UFPR, Turma MB
+  - [Fernando de Pol Mayer][], [LEG][]/DEST/UFPR, Turmas N e MN
+- **Horários e Locais:**
+  - Biologia matutino (MB):
+    - Quarta, 07:30 - 09:30h, **A definir**
+    - Sexta, 07:30 - 09:30h, **A definir**
+  - Biologia noturno (N):
+    - Quarta, 18:30 - 20:10h, **A definir**
+    - Sexta, 18:30 - 20:10h, **A definir**
+  - Engenharia Madeireira (MN):
+    - Quarta, 20:30 - 22:30h, **A definir**
+    - Sexta, 20:30 - 22:30h, **A definir**
+- **Horários de atendimento dos professores:**
+    - Quartas e sextas, 14:00-20:00 (preferenciais). Outros horários
+      podem ser agendados previamente por email.
+- **Frequência**: de acordo com as normas da Universidade, mínimo de 75%
+- **Avaliação**: sabatinas, aplicadas ao final de um módulo da disciplina
+  - As sabatinas são provas menores, e com conteúdo específico
+  - O número de sabatinas em um semestre pode variar conforme o
+  andamento da disciplina (geralmente entre 6 e 10)
+  - As datas das sabatinas serão definidas durante o semestre, e sempre
+  será avisado com antecedência
+  - A média final será a média das 75% maiores notas (as 25% menores
+  notas serão descartadas)
+  - **Importante**: nas sabatinas não há segunda chamada. Ao perder
+  uma sabatina, a nota é 0, e automaticamente estará dentro das 25%
+  menores notas que serão excluídas para o cálculo da média final
+- **Datas importantes:** De acordo com a [Resolução 30/17 - CEPE][]:
+    - **19/02**: Início do semestre letivo
+    - **23/06**: Final do semestre letivo
+    - **02/07-07/07**: Período de exames
+
+# Programa/objetivos da disciplina
+
+O objetivo desta disciplina é capacitar os alunos em conceitos básicos
+de estatística que permitam a interpretação de resultados de análises e
+procedimentos estatísticos, bem como a execução de procedimentos e
+análises estatística básicas. O curso compreende três grandes tópicos:
+
+- Análise descritiva e exploratória de dados
+- Noções de probabilidades e distribuições de probabilidades
+- Introdução à procedimentos de inferência estatística
+
+<!-- links -->
+
+[Elias Teixeira Krainski]: http://www.leg.ufpr.br/~elias/
+[Fernando de Pol Mayer]: http://leg.ufpr.br/~fernandomayer
+[LEG]: http://www.leg.ufpr.br
+[Resolução 30/17 - CEPE]: http://www.est.ufpr.br/calendario/cepe3017.pdf

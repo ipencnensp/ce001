@@ -1,0 +1,37 @@
+name: "ce001"
+output_dir: "docs"
+exclude: ["README.md", "\\.sh"]
+output:
+  html_document:
+    theme: flatly
+    highlight: default
+    code_folding: hide
+    number_sections: false
+    toc: true
+    toc_depth: 4
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    includes:
+      #in_header: analytics.html
+      after_body: footer.html
+navbar:
+  title: "CE001"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Aulas"
+      href: aulas.html
+    - text: "Referências"
+      href: referencias.html
+    - text: "Programas"
+      href: programas.html
+    - text: "Materiais"
+      menu:
+      - text: "Alguma coisa"
+      - text: "Material"
+        href: material.html
+  right:
+    - text: GitHub
+      icon: fa-github fa-lg
+      href: https://github.com/leg-ufpr/ce003
