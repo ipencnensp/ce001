@@ -36,15 +36,13 @@ source("setup_knitr.R")
     - Quarta, 20:30 - 22:30h, **A definir**
     - Sexta, 20:30 - 22:30h, **A definir**
 - **Horários de atendimento dos professores:**
-    - Quartas e sextas, 14:00-20:00 (preferenciais). Outros horários
+    - Terças e quintas, 14:00-20:00 (preferenciais). Outros horários
       podem ser agendados previamente por email.
 - **Frequência**: de acordo com as normas da Universidade, mínimo de 75%
 - **Avaliação**: sabatinas, aplicadas ao final de um módulo da disciplina
   - As sabatinas são provas menores, e com conteúdo específico
   - O número de sabatinas em um semestre pode variar conforme o
   andamento da disciplina (geralmente entre 6 e 10)
-  - As datas das sabatinas serão definidas durante o semestre, e sempre
-  será avisado com antecedência
   - A média final será a média das 75% maiores notas (as 25% menores
   notas serão descartadas)
   - **Importante**: nas sabatinas não há segunda chamada. Ao perder

@@ -1,5 +1,5 @@
 ---
-title: "Histórico das aulas do curso"
+title: "Cronograma das aulas do curso"
 output:
   html_document:
     toc: false
@@ -9,9 +9,8 @@ output:
 source("setup_knitr.R")
 ```
 
-Abaixo o histórico de atividades realizadas em classe e atividades extra
-classe aplicadas.
-
+Abaixo está o cronograma inicial planejado para a disciplina. (Pode
+sofrer alterações).
 
 ```{r, eval=FALSE, include=FALSE}
 ## Gera a lista com as datas de todas as aulas. O resultado do último
