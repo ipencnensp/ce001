@@ -1,0 +1,18 @@
+---
+title: "Notas"
+output:
+  html_document:
+    toc: false
+---
+
+```{r setup, include=FALSE, cache=FALSE}
+source("setup_knitr.R")
+```
+
+## Escolha a aba de sua turma {.tabset}
+
+### CE001-MB
+
+### CE001-N
+
+### CE003-MN
