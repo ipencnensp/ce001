@@ -4,7 +4,7 @@ opts_chunk$set(
     cache = TRUE,
     tidy = FALSE,
     comment = NA,
-    ## collapse = TRUE, ## colapsa chunks em R Markdown
+    collapse = TRUE, ## colapsa chunks em R Markdown
     ## fig.width = 10,
     ## fig.height = 8,
     fig.align = "center",
@@ -13,6 +13,3 @@ opts_chunk$set(
     fig.path = "figures/",
     cache.path = "cache/"
     )
-
-## Set a common seed for all files
-set.seed(100)
