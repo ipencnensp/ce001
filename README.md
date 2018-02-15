@@ -1,6 +1,6 @@
 # CE001
 
-[![Build Status](https://travis-ci.org/fernandomayer/ce083.svg?branch=master)](https://travis-ci.org/fernandomayer/ce083)
+[![Build Status](https://travis-ci.org/leg-ufpr/ce001.svg?branch=master)](https://travis-ci.org/leg-ufpr/ce001)
 
 ## CE001 - Bioestatística
 
