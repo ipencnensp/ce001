@@ -27,14 +27,14 @@ source("setup_knitr.R")
   - [Fernando de Pol Mayer][], [LEG][]/DEST/UFPR, Turmas N e MN
 - **Horários e Locais:**
   - Biologia matutino (MB):
-    - Quarta, 07:30 - 09:30h, **A definir**
-    - Sexta, 07:30 - 09:30h, **A definir**
+    - Quarta, 07:30 - 09:30h, **PA-01**
+    - Sexta, 07:30 - 09:30h, **PA-03**
   - Biologia noturno (N):
-    - Quarta, 18:30 - 20:10h, **A definir**
-    - Sexta, 18:30 - 20:10h, **A definir**
-  - Engenharia Madeireira (MN):
-    - Quarta, 20:30 - 22:30h, **A definir**
-    - Sexta, 20:30 - 22:30h, **A definir**
+    - Quarta, 18:30 - 20:10h, **CT-04**
+    - Sexta, 18:30 - 20:10h, **CT-02**
+  - Engenharia Industrial Madeireira (MN):
+    - Quarta, 20:30 - 22:30h, **PC-18**
+    - Sexta, 20:30 - 22:30h, **PC-16**
 - **Horários de atendimento dos professores:**
     - Terças e quintas, 14:00-20:00 (preferenciais). Outros horários
       podem ser agendados previamente por email.
