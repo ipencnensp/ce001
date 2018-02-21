@@ -20,7 +20,7 @@ source("setup_knitr.R")
 - **Cursos:**
   - Biologia matutino (MB)
   - Biologia noturno (N)
-  - Engenharia Madeireira (MN)
+  - Engenharia Industrial Madeireira (MN)
 - **Período:** primeiro semestre de 2018
 - **Professores Responsáveis:**
   - [Elias Teixeira Krainski][], [LEG][]/DEST/UFPR, Turma MB
