@@ -4,7 +4,9 @@
 .Ruserdata
 Rplots.pdf
 cache/
+*_cache/
 auto/
+*.tex
 .synctex.gz
 .aux
 .log
