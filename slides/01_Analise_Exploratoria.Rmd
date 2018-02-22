@@ -20,7 +20,7 @@ output:
 ---
 
 ```{r setup, cache=FALSE, include=FALSE}
-source("../setup_knitr.R")
+source("setup_knitr_slides.R")
 library(xtable)
 ```
 
@@ -34,7 +34,7 @@ Livro-texto:
   de Probabilidade e Estatística**. Editora: EDUSP.
 
 \begin{figure}
-\includegraphics[height=0.5\textheight]{img/livro.png}
+\includegraphics[height=0.5\textheight]{../img/livro.png}
 \end{figure}
 
 ### Tópicos do curso
@@ -68,7 +68,7 @@ do conhecimento.
 ### População e amostra
 
 ```{r, out.width='70%'}
-knitr::include_graphics("img/populacao_amostra.png")
+knitr::include_graphics("../img/populacao_amostra.png")
 ```
 
 ### Etapas da análise estatística
@@ -87,7 +87,7 @@ knitr::include_graphics("img/populacao_amostra.png")
 ### Etapas da análise estatística
 
 ```{r, out.width='90%'}
-knitr::include_graphics("img/organograma_estatistica.png")
+knitr::include_graphics("../img/organograma_estatistica.png")
 ```
 
 # Análise exploratória de dados
@@ -112,7 +112,7 @@ knitr::include_graphics("img/organograma_estatistica.png")
 
 ```{r, comment=NA}
 # Carregando os dados
-dados <- read.table("questionario.txt", header = TRUE)
+dados <- read.table("../dados/questionario.txt", header = TRUE)
 print(head(dados), row.names = FALSE)
 ```
 
@@ -125,7 +125,7 @@ print(head(dados), row.names = FALSE)
 ### Tipos de variáveis
 
 ```{r, out.width='70%'}
-knitr::include_graphics("img/classificacao_variaveis.png")
+knitr::include_graphics("../img/classificacao_variaveis.png")
 ```
 
 ## Tabelas de frequência
