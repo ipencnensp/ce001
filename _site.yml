@@ -30,9 +30,9 @@ navbar:
       href: notas.html
     - text: "Materiais"
       menu:
-      - text: "Alguma coisa"
-      - text: "Material"
-        href: material.html
+      - text: "Slides"
+      - text: "Introdução à análise exploratória de dados [PDF]"
+        href: slides/01_Analise_Exploratoria.pdf
   right:
     - text: GitHub
       icon: fa-github fa-lg
