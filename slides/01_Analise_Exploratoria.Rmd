@@ -53,17 +53,21 @@ Livro-texto:
 
 ### O que é estatística?
 
-- Estatística é um conjunto de técnicas que permite, de forma
-sistemática, organizar, descrever, analisar e interpretar dados
-oriundos de estudos ou experimentos, realizados em qualquer área
-do conhecimento.
-- Estatística pode ser dividida em:
-  - Estatística descritiva.
-  - Probabilidade.
-  - Inferência estatística.
+- Estatística é um conjunto de técnicas para, sistematicamente: 
+    - planejar a coleta de dados oriundos de estudos ou experimentos, realizados em qualquer área do conhecimento.
+    - descrever, analisar e interpretar dados
+    - extrair informações para subsidiar decisões ou conclusões
+
+### Tópicos de estatística básica
+
+- Conceitos essenciais em Estatística:
+    - Estatística descritiva.
+    - Probabilidade.
+    - Inferência estatística.
 - Conceitos fundamentais:
-  - **População**: Conjunto de todos os elementos sob investigação.
-  - **Amostra**:  Subconjunto da população.
+    - **População**: Conjunto de todos os elementos sob investigação.
+    - **Amostra**:  Subconjunto da população.
+    - **Variável** de interesse: característica a ser observada em cada indivíduo da amostra
 
 ### População e amostra
 
@@ -73,16 +77,57 @@ knitr::include_graphics("../img/populacao_amostra.png")
 
 ### Etapas da análise estatística
 
-- Definição da população e característica de interesse.
-- Amostragem:
-  - Aleatória simples (com ou sem reposição)
-  - Estratificada
-  - Conglomerados
-  - Sistemática
-- Estatística Descritiva (consistência e interpretações iniciais).
-- Inferência estatística (baseado na amostra extrapolar para a população).
-  - Estimação de quantidades desconhecidas.
-  - Formulação e teste de hipóteses.
+- Definição do método de coleta de dados 
+    - estabelecer os objetivos (questões) de pesquisa 
+    - definir critérios objetivos de como e quais dados coletar 
+    - postular a análise estatística a ser utilizada
+
+\pause
+
+- Estatística Descritiva 
+    - depende do tipo de dado coletado 
+    - deve ser racionalizada 
+    - relacionada com os objetivos da pesquisa
+
+\pause
+
+- Inferência estatística 
+    - depende do objetivo da pesquisa
+
+### Planejamento da coleta de dados 
+
+- definição do experimento
+    - variáveis respostas
+    - variáveis de controle 
+    - desenho do experimento e randomização
+
+\pause
+
+ - coleta de dados por amostragem
+    - definição da população e característica de interesse
+    - definição do plano amostral
+        - Aleatória simples (com ou sem reposição) ou sistemática 
+        - Estratificada, por estratos da população (segundo uma característica) 
+        - Conglomerados, por grupos de indivíduos da população (subpopulações)
+        - Amostragem complexa (combina anteriores)
+
+\pause
+
+ - coleta de dados observacionais. Exemplos:
+    - população de plantas 
+    - presença de seres vivos num ambiente
+    - fenômenos climáticos
+
+### Análise estatística 
+
+  - Estatística Descritiva 
+    - consistência e interpretações iniciais 
+    - visualização dos dados e relações entre variáveis 
+
+  - Inferência estatística 
+    - estimação de quantidades desconhecidas
+    - formulação e teste de hipóteses 
+    - extrapolar para a população, se os dados são de uma amostra.
 
 ### Etapas da análise estatística
 
@@ -97,11 +142,10 @@ knitr::include_graphics("../img/organograma_estatistica.png")
 ### Organização de Dados
 
 - A partir de um conjunto de dados coletado, a questão é:
-  - Como extrair informações a respeito de uma ou mais características de
-    interesse?
+    - Como extrair informações a respeito de uma ou mais características de interesse?
 - Basicamente temos duas opções:
-  - Tabelas de frequência
-  - Gráficos
+    - Tabelas de frequência
+    - Gráficos
 - O importante é levar em consideração a **natureza dos dados**.
 
 ### Organização de Dados
