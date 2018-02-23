@@ -53,8 +53,9 @@ Livro-texto:
 
 ### O que é estatística?
 
-- Estatística é um conjunto de técnicas para, sistematicamente: 
-    - planejar a coleta de dados oriundos de estudos ou experimentos, realizados em qualquer área do conhecimento.
+- Estatística é um conjunto de técnicas para, sistematicamente:
+    - planejar a coleta de dados oriundos de estudos ou experimentos,
+      realizados em qualquer área do conhecimento.
     - descrever, analisar e interpretar dados
     - extrair informações para subsidiar decisões ou conclusões
 
@@ -77,56 +78,56 @@ knitr::include_graphics("../img/populacao_amostra.png")
 
 ### Etapas da análise estatística
 
-- Definição do método de coleta de dados 
-    - estabelecer os objetivos (questões) de pesquisa 
-    - definir critérios objetivos de como e quais dados coletar 
+- Definição do método de coleta de dados
+    - estabelecer os objetivos (questões) de pesquisa
+    - definir critérios objetivos de como e quais dados coletar
     - postular a análise estatística a ser utilizada
 
 \pause
 
-- Estatística Descritiva 
-    - depende do tipo de dado coletado 
-    - deve ser racionalizada 
+- Estatística Descritiva
+    - depende do tipo de dado coletado
+    - deve ser racionalizada
     - relacionada com os objetivos da pesquisa
 
 \pause
 
-- Inferência estatística 
+- Inferência estatística
     - depende do objetivo da pesquisa
 
-### Planejamento da coleta de dados 
+### Planejamento da coleta de dados
 
-- definição do experimento
+- Definição do experimento
     - variáveis respostas
-    - variáveis de controle 
+    - variáveis de controle
     - desenho do experimento e randomização
 
 \pause
 
- - coleta de dados por amostragem
+ - Coleta de dados por amostragem
     - definição da população e característica de interesse
     - definição do plano amostral
-        - Aleatória simples (com ou sem reposição) ou sistemática 
-        - Estratificada, por estratos da população (segundo uma característica) 
+        - Aleatória simples (com ou sem reposição) ou sistemática
+        - Estratificada, por estratos da população (segundo uma característica)
         - Conglomerados, por grupos de indivíduos da população (subpopulações)
         - Amostragem complexa (combina anteriores)
 
 \pause
 
- - coleta de dados observacionais. Exemplos:
-    - população de plantas 
+ - Coleta de dados observacionais. Exemplos:
+    - população de plantas
     - presença de seres vivos num ambiente
     - fenômenos climáticos
 
-### Análise estatística 
+### Análise estatística
 
-  - Estatística Descritiva 
-    - consistência e interpretações iniciais 
-    - visualização dos dados e relações entre variáveis 
+  - Estatística Descritiva
+    - consistência e interpretações iniciais
+    - visualização dos dados e relações entre variáveis
 
-  - Inferência estatística 
+  - Inferência estatística
     - estimação de quantidades desconhecidas
-    - formulação e teste de hipóteses 
+    - formulação e teste de hipóteses
     - extrapolar para a população, se os dados são de uma amostra.
 
 ### Etapas da análise estatística
@@ -137,20 +138,22 @@ knitr::include_graphics("../img/organograma_estatistica.png")
 
 # Análise exploratória de dados
 
-### Exemplo 
+### Exemplo
 Pesquisa foi realizada com alunos. Variáveis:
 
-- **Id**: identificação do aluno;  **Turma**:  A ou B 
-- **Sexo**: feminino (F) ou masculino (M) 
-- **Idade**: em anos; **Alt**: altura em metros 
-- **Peso**: em quilogramas; **Filhos**: nº de filhos na família 
-- **Fuma**: hábito de fumar: sim (S) ou não (N) 
-- **Toler**: tolerância ao cigarro: (I) indiferente; (P) incomoda pouco; (M) incomoda muito 
-- **Exerc.**: horas de atividade física, por semana 
-- **Cine**: nº. de vezes que vai ao cinema por semana 
-- **Op Cine**: opinião a respeito das salas de cinema na cidade: (B) regular a boa; (M) muito boa 
-- **TV**: horas gastas assistindo TV, por semana 
-- **Op TV**:  opinião  a  respeito  da  qualidade  da  programação  na  TV: (R)  ruim;  (M)  média;  (B)  boa; (N) não sabe. 
+- **Id**: identificação do aluno;  **Turma**:  A ou B
+- **Sexo**: feminino (F) ou masculino (M)
+- **Idade**: em anos; **Alt**: altura em metros
+- **Peso**: em quilogramas; **Filhos**: nº de filhos na família
+- **Fuma**: hábito de fumar: sim (S) ou não (N)
+- **Toler**: tolerância ao cigarro: (I) indiferente; (P) incomoda pouco; (M) incomoda muito
+- **Exerc.**: horas de atividade física, por semana
+- **Cine**: nº. de vezes que vai ao cinema por semana
+- **OpCine**: opinião a respeito das salas de cinema na cidade: (B)
+  regular a boa; (M) muito boa
+- **TV**: horas gastas assistindo TV, por semana
+- **OpTV**:  opinião  a  respeito  da  qualidade  da  programação  na
+  TV: (R)  ruim;  (M)  média;  (B)  boa; (N) não sabe.
 
 ## Organização de Dados
 
@@ -333,7 +336,7 @@ print(xtable(dtab, digits = c(0, 0, 2, 2)),
 - Assim como nas tabelas, existe um tipo de gráfico adequado para cada
   tipo de variável
 - Cuidado deve ser tomado com representações visuais pois um gráfico
-  desproporcional pode gerar interŕetações distorcidas
+  desproporcional pode gerar interpretações distorcidas
 - Os principais são:
     - Diagrama circular  (setores ou "pizza")
     - Gráfico de barras
