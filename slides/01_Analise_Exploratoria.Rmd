@@ -137,6 +137,21 @@ knitr::include_graphics("../img/organograma_estatistica.png")
 
 # Análise exploratória de dados
 
+### Exemplo 
+Pesquisa foi realizada com alunos. Variáveis:
+
+- **Id**: identificação do aluno;  **Turma**:  A ou B 
+- **Sexo**: feminino (F) ou masculino (M) 
+- **Idade**: em anos; **Alt**: altura em metros 
+- **Peso**: em quilogramas; **Filhos**: nº de filhos na família 
+- **Fuma**: hábito de fumar: sim (S) ou não (N) 
+- **Toler**: tolerância ao cigarro: (I) indiferente; (P) incomoda pouco; (M) incomoda muito 
+- **Exerc.**: horas de atividade física, por semana 
+- **Cine**: nº. de vezes que vai ao cinema por semana 
+- **Op Cine**: opinião a respeito das salas de cinema na cidade: (B) regular a boa; (M) muito boa 
+- **TV**: horas gastas assistindo TV, por semana 
+- **Op TV**:  opinião  a  respeito  da  qualidade  da  programação  na  TV: (R)  ruim;  (M)  média;  (B)  boa; (N) não sabe. 
+
 ## Organização de Dados
 
 ### Organização de Dados
