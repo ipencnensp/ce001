@@ -151,8 +151,8 @@ knitr::include_graphics("../img/organograma_estatistica.png")
 ### Organização de Dados
 
 - Uma típica **tabela de dados brutos** contém:
-  - Variáveis (características, medições, etc) nas colunas
-  - Sujeito (indivíduo, objetos, etc) nas linhas
+    - Variáveis (características, medições, etc) nas colunas
+    - Sujeito (indivíduo, objetos, etc) nas linhas
 
 ```{r, comment=NA}
 # Carregando os dados
@@ -161,10 +161,10 @@ print(head(dados), row.names = FALSE)
 ```
 
 - Tipos de variáveis:
-  - Qualitativa nominal: Turma, Sexo, Fuma,
-  - Qualitativa ordinal: Toler, OpCine, OpTV.
-  - Quantitativa discreta: Idade, Filh, Exer, Cine, TV.
-  - Quantitativa contínua: Alt, Peso.
+    - Qualitativa nominal: Turma, Sexo, Fuma,
+    - Qualitativa ordinal: Toler, OpCine, OpTV.
+    - Quantitativa discreta: Idade, Filh, Exer, Cine, TV.
+    - Quantitativa contínua: Alt, Peso.
 
 ### Tipos de variáveis
 
@@ -181,11 +181,11 @@ knitr::include_graphics("../img/classificacao_variaveis.png")
 - As **tabelas de frequência** ajudam a resumir a informação da variável
   de interesse
 - Vamos usar 3 tipos de frequência:
-  - Frequência **absoluta**: contagem de cada valor observado.
+    - Frequência **absoluta**: contagem de cada valor observado.
     Representado por $n_i$ o número de valores $i$, e $n$ o número total
-  - Frequência **relativa**: número de valores $i$ dividido pelo total
+    - Frequência **relativa**: número de valores $i$ dividido pelo total
     $n$, ou seja $f_i = \frac{n_i}{n}$
-  - Frequência **acumulada**: frequência (absoluta ou relativa)
+    - Frequência **acumulada**: frequência (absoluta ou relativa)
     acumulada até um certo valor, obtida pela soma das frequências de
     todos os valores da variável, menores ou iguais ao valor considerado
 
@@ -268,8 +268,8 @@ $(a,b]$   $a \dashv b$  Aberto em a, fechado em b  Não inclui a, inclui b
 ### Tabela de frequência - quantitativa contínua
 
 - Considerando a variável `Peso`
-  - Foram construídas 6 classes de amplitude 10
-  - As classes são do tipo $[a,b)$ ou $a \vdash b$
+    - Foram construídas 6 classes de amplitude 10
+    - As classes são do tipo $[a,b)$ ou $a \vdash b$
 
 ```{r, results='asis'}
 ## Peso
@@ -291,9 +291,9 @@ print(xtable(dtab, digits = c(0, 0, 2, 2)),
 - Apesar de ser discreta, a amplitude de valores é muito grande e não
   seria viável contar as frequências de cada valor
 - Nesse caso, utiliza-se o mesmo procedimento para quantitativas contínuas
-  - Foram construídas 6 classes de amplitude 6^[**Obs.**: no livro a
+    - Foram construídas 6 classes de amplitude 6^[**Obs.**: no livro a
     tabela tem 5 classes, pois a última tem comprimento 12.]
-  - As classes são do tipo $[a,b)$ ou $a \vdash b$
+    - As classes são do tipo $[a,b)$ ou $a \vdash b$
 
 ```{r, results='asis'}
 ## TV
@@ -320,10 +320,10 @@ print(xtable(dtab, digits = c(0, 0, 2, 2)),
 - Cuidado deve ser tomado com representações visuais pois um gráfico
   desproporcional pode gerar interŕetações distorcidas
 - Os principais são:
-  - Diagrama circular  (setores ou "pizza")
-  - Gráfico de barras
-  - Histograma
-  - Boxplot
+    - Diagrama circular  (setores ou "pizza")
+    - Gráfico de barras
+    - Histograma
+    - Boxplot
 
 ### Diagrama circular
 
@@ -378,16 +378,16 @@ ordenados em dois subgrupos de mesmo tamanho.
 - **Quartis**: valores da variável que divide o conjunto de dados
 ordenados em quatro subgrupos de mesmo tamanho.
 - **Posição** dos quartis:
-  - $Q_1 = 0.25 \cdot (N+1)$ e arredonde.
-  - $Q_2 =$ média dos valores nas posições $(N/2)$ e $(N/2)+1$ se N par
+    - $Q_1 = 0.25 \cdot (N+1)$ e arredonde.
+    - $Q_2 =$ média dos valores nas posições $(N/2)$ e $(N/2)+1$ se N par
     e $Q_2 = (N+1)/2$ se N ímpar.
-  - $Q_3 = 0.75 \cdot (N+1)$  e arredonde.
+    - $Q_3 = 0.75 \cdot (N+1)$  e arredonde.
 - Exemplo: Conside o conjunto de dados: $8.43(1)$, $8.65(2)$, $9.96(3)$,
   $10.91(4)$,  $10.46(5)$ e $10.83(6)$.
-  - $Q_1 = 0.25 \cdot 7 = 1.75 \approx 2$, ou seja $8.65$.
-  - $Q_2 =$ média dos valores nas posições $3$ e $4$, ou seja, $(9.96 +
+    - $Q_1 = 0.25 \cdot 7 = 1.75 \approx 2$, ou seja $8.65$.
+    - $Q_2 =$ média dos valores nas posições $3$ e $4$, ou seja, $(9.96 +
     10.91 )/2 = 10.43$.
-  - $Q_3 = 0.75 \cdot 7 = 5.25 \approx 5$, ou seja, $10.46$.
+    - $Q_3 = 0.75 \cdot 7 = 5.25 \approx 5$, ou seja, $10.46$.
 
 ### Boxplots
 
