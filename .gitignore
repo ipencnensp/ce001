@@ -6,6 +6,7 @@ Rplots.pdf
 cache/
 *_cache/
 auto/
+logo/
 *.tex
 .synctex.gz
 .aux
