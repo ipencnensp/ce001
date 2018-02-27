@@ -1,0 +1,119 @@
+---
+title: "Probabilidades"
+short-title: "Probabilidades"
+author: |
+  | Wagner H. Bonat
+  | Elias T. Krainski
+  | Fernando P. Mayer
+short-author: "WB, EK, FM"
+date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+short-date: "2018/1"
+institute: "Laboratório de Estatística e Geoinformação"
+short-institute: "LEG/DEST/UFPR"
+department: |
+  | Universidade Federal do Paraná
+  | Departamento de Estatística
+safe-columns: true
+fontfamily: inconsolata
+output:
+  legtheme::beamer_leg
+---
+
+```{r setup, cache=FALSE, include=FALSE}
+source("setup_knitr_slides.R")
+library(xtable)
+```
+
+# Probabilidades
+
+### Definições
+
+- Fenômeno aleatório: situação ou acontecimento cujos resultados
+não podem ser previstos com certeza.
+- Espaço amostral: conjunto de todos os resultados possíveis de
+um fenômeno aleatório, denotado por $\Omega$.
+- Eventos: subconjuntos de $\Omega$, denotado por $A, B, ...$.
+- Conjunto vazio: conjunto sem eventos, denotado por $\emptyset$.
+- União $A \cup B$: ocorrência de pelo menos um dos eventos A ou B.
+- Intersecção $A \cap B$: ocorrência simultânea de A e B.
+- Eventos disjuntos ou mutuamente exclusivos: $A \cap B = \emptyset$.
+- Eventos complementares: $A \cup A^{c} = \Omega$ e $A \cap A^{c} = \emptyset$.
+
+### Definição de probabilidade
+
+- Probabilidade é uma função $P(\cdot)$ que atribui valores
+numéricos aos eventos do espaço amostral, de tal forma que
+  i. $0   \leq P(A) \leq 1, \quad \forall A \in \Omega$;
+  ii. $P(\Omega) = 1$;
+  iii. $P(\bigcup_{j=1}^n A_j) = \sum_{j=1}^n P(A_j)$, com os $A_j$'s
+  disjuntos.
+- Exemplos triviais: lançamento de uma moeda e lançamento de um dado.
+- Regra da adição de probabilidades. Sejam A e B eventos em $\Omega$. Então
+$$ P(A \cup B) = P(A) + P(B) - P(A \cap B).$$
+- Mostre que
+$$ P(A) = 1 - P(A^c).$$
+
+
+### Probabilidade condicional
+
+- Definição: Dados dois eventos A e B, a probabilidade condicional
+de A dado que ocorreu B é representado por $P(A | B)$ e dada por
+$$ P(A | B) = \frac{P(A \cap B)}{P(B)}, \quad \text{para} \quad P(B) > 0. $$
+- Caso $P(B) = 0$ definimos $P(A | B) = P(A).$
+- Regra do produto: Sejam A e B eventos em $\Omega$, Então
+$$ P(A \cap B) = P(A | B)P(B), \quad \text{com} \quad P(B) > 0.$$
+- Exemplo usando dado (ver Exemplo 2.3 livro).
+
+### Independência de eventos
+
+- Definição: Dois eventos A e B são independentes, se a informação
+da ocorrência ou não de B não altera a probabilidade de ocorrência de A. Isto é,
+$$ P(A | B) = P(A), \quad P(B) > 0,$$
+ou ainda da seguinte forma
+$$ P(A \cap B) = P(A)P(B).$$
+- Exemplo 2.4.
+
+### Exemplo 2.4
+
+- Uma empresa produz peças em duas máquinas I e II, que podem
+apresentar desajustes com probabilidade $0.05$ e $0.10$; respectivamente.
+No início do dia de operação um teste é realizado e, caso a máquina esteja
+fora de ajuste, ela ficará sem operar nesse dia passando por revisão técnica.
+Para cumprir o nível mínimo de produção pelo menos uma das máquinas deve operar.
+Você diria que a empresa corre o risco de não cumprir com suas metas de produção?
+
+### Partição do espaço amostral
+
+- Definição: Os eventos $C_1, C_2, ..., C_k$ formam uma
+partiç\~ao do espaço amostral, se eles não tem intersecção
+entre si e se sua união é igual ao espaço amostral. Isto é,
+$$ C_i \cap C_j = \emptyset \quad \text{para} \quad i \not= j \quad
+\text{e} \quad \bigcup_{i=1}^k C_i = \Omega.$$
+- Figura 2.4 e exemplo 2.5.
+
+### Exemplo 2.5
+
+- Suponha que um fabricante de sorvetes recebe $20\%$ de todo
+o leite que utiliza de uma fazenda $F_1$, $30\%$ de uma outra fazendo $F_2$ e $50\%$
+de $F_3$. Um órgão de fiscalização inspecionou as fazendas de surpresa e observou que
+$20\%$ do leite produzido por $F_1$ estava adulterado por adição de água, enquanto
+que para $F_2$ e $F_3$, essa proporção era de $5\%$ e $2\%$, respectivamente.
+Na indústria de sorvetes os galões de leite são armazenados em um refrigerador sem
+identificação das fazendas. Para um galão escolhido qual a probabilidade do leite
+estar adulterado?
+
+### Teorema de Bayes
+
+- Suponha que os eventos $C_1, C_2, ..., C_k$ formem uma
+partição de $\Omega$ e que suas probabilidades sejam conhecidas.
+Suponha, ainda, que para um evento A, se conheçam as probabilidades
+$P(A | C_i)$ para todos $i = 1, 2, ..., k.$ Então, para qualquer $j$,
+$$ P(C_j | A ) = \frac{P(A | C_j)P(C_j)}{\sum_{i=1}^k P(A | C_i)
+P(C_i)}, \quad j = 1,2, ...,k.$$
+- Demonstração e Exemplo 2.6.
+
+### Exercícios recomendados
+- Seção $2.1$ Ex. $1, 2, 3, 4$ e $5$.
+- Seção $2.2$ Ex. $1, 2, 3, 4, 5, 6$ e $7$.
+- Seção $2.3$ Ex. $1, 3, 8, 9, 11, 13, 15$ e $19$.
+- Próxima aula - Exercícios e tira dúvidas.
