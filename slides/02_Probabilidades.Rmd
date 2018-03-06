@@ -445,56 +445,182 @@ P(A|B) &= \frac{P(A \cap B)}{P(B)} \\
 &= \frac{1}{3}
 \end{align*}
 
+### Regra do produto
+
+A regra do produto é uma expressão derivada do conceito de
+probabilidade condicional. Uma vez que
+
+$$
+P(A|B) = \frac{P(A\cap B)}{P(B)}
+$$
+
+temos que
+
+$$
+P(A\cap B) = P(B) \cdot P(A|B)
+$$
+
+Essa expressão permite calcular probabilidades em espaços amostrais
+que são realizados em sequência, onde a ocorrência da *segunda*
+etapa **depende** (ou não) da ocorrência da *primeira* etapa.
+
+### Regra do produto
+
+Qual a probabilidade de se obter dois ases em seguida, quando se
+extraem duas cartas de um baralho comum de 52 cartas, se:
+
+a. A primeira carta é reposta no baralho antes da extração da
+segunda carta.
+b. A primeira carta extraída não é reposta antes da extração da
+segunda carta.
+
 ### Independência de eventos
 
-- Definição: Dois eventos A e B são independentes, se a informação
-da ocorrência ou não de B não altera a probabilidade de ocorrência de A. Isto é,
-$$ P(A | B) = P(A), \quad P(B) > 0,$$
-ou ainda da seguinte forma
-$$ P(A \cap B) = P(A)P(B).$$
-- Exemplo 2.4.
+Vimos que para probabilidades condicionais, $P(A|B)$, saber que $B$
+ocorreu nos dá uma informação "extra" sobre a ocorrência de $A$.
 
-### Exemplo 2.4
+Porém, existem algumas situações nas quais saber que o evento $B$
+ocorreu, não tem qualquer interferência na ocorrência ou não de $A$.
 
-- Uma empresa produz peças em duas máquinas I e II, que podem
-apresentar desajustes com probabilidade $0.05$ e $0.10$; respectivamente.
-No início do dia de operação um teste é realizado e, caso a máquina esteja
-fora de ajuste, ela ficará sem operar nesse dia passando por revisão técnica.
-Para cumprir o nível mínimo de produção pelo menos uma das máquinas deve operar.
-Você diria que a empresa corre o risco de não cumprir com suas metas de produção?
+Nestes casos, podemos dizer que os aventos $A$ e $B$ são
+**independentes**.
+
+### Independência de eventos
+
+Os eventos A e B são **eventos independentes** se a ocorrência de
+B não altera a probabilidade de ocorrência de A, ou seja, eventos A e
+B são independentes se
+
+$$
+P(A|B) = P(A) \quad \text{e também que} \quad P(B|A) = P(B)
+$$
+
+Com isso, e a regra do produto, temos que
+
+\begin{align*}
+P(A \cap B) &= P(B) \cdot P(A|B) = P(B) \cdot P(A) \\
+P(A \cap B) &= P(A) \cdot P(B|A) = P(A) \cdot P(B)
+\end{align*}
+
+### Exemplo
+
+Considere o lançamento de um dado e os seguintes eventos
+
+$A = \text{``resultado é um número par''}$
+$B = \text{``resultado é um número menor ou igual a 4''}$
+
+Os eventos $A$ e $B$ são independentes?
+
+```{r, out.width='40%'}
+knitr::include_graphics("../img/independencia-crop.pdf")
+```
+
+### Exemplo
+
+**Pela definição intuitiva**:
+
+$P(A) = 1/2$, \quad $P(A|B) = P(A\cap B)/P(B) = \frac{2/6}{4/6} =
+1/2$
+
+$P(B) = 2/3$, \quad $P(B|A) = P(B\cap A)/P(A) = \frac{2/6}{3/6} =
+2/3$.
+
+Portanto: $P(A|B) = P(A)$ e $P(B|A) = P(B)$
+
+**Pela definição formal:**
+
+$P(A \cap B) = P(A)P(B) = \frac{1}{2} \cdot \frac{2}{3} = 1/3$
+
+$P(A \cap B) = \frac{2}{6} = 1/3$, assim $P(A \cap B) = P(A)P(B)$
+
+Portanto, os eventos $A$ e $B$ são independentes. Saber que $A$
+ocorreu não muda a probabilidade de $B$ ocorrer e vice-versa.
+
+### Exemplo 2.4 (livro)
+
+- Uma empresa produz peças em duas máquinas I e II, que podem apresentar
+desajustes com probabilidade $0.05$ e $0.10$; respectivamente. No início
+do dia de operação um teste é realizado e, caso a máquina esteja fora de
+ajuste, ela ficará sem operar nesse dia passando por revisão técnica.
+Para cumprir o nível mínimo de produção pelo menos uma das máquinas deve
+operar. Você diria que a empresa corre o risco de não cumprir com suas
+metas de produção?
 
 ### Partição do espaço amostral
 
-- Definição: Os eventos $C_1, C_2, ..., C_k$ formam uma
-partiç\~ao do espaço amostral, se eles não tem intersecção
-entre si e se sua união é igual ao espaço amostral. Isto é,
-$$ C_i \cap C_j = \emptyset \quad \text{para} \quad i \not= j \quad
-\text{e} \quad \bigcup_{i=1}^k C_i = \Omega.$$
-- Figura 2.4 e exemplo 2.5.
+Dizemos que os eventos $C_1, C_2, ..., C_k$ formam uma
+**partição** do espaço amostral, se eles não tem interseção
+entre si, e se sua união é igual ao espaço amostral. Isto é,
 
-### Exemplo 2.5
+$$
+C_i \cap C_j = \emptyset \quad \text{para} \quad i \not= j \quad
+\text{e} \quad \bigcup_{i=1}^k C_i = \Omega.
+$$
 
-- Suponha que um fabricante de sorvetes recebe $20\%$ de todo
-o leite que utiliza de uma fazenda $F_1$, $30\%$ de uma outra fazendo $F_2$ e $50\%$
-de $F_3$. Um órgão de fiscalização inspecionou as fazendas de surpresa e observou que
-$20\%$ do leite produzido por $F_1$ estava adulterado por adição de água, enquanto
-que para $F_2$ e $F_3$, essa proporção era de $5\%$ e $2\%$, respectivamente.
-Na indústria de sorvetes os galões de leite são armazenados em um refrigerador sem
-identificação das fazendas. Para um galão escolhido qual a probabilidade do leite
-estar adulterado?
+```{r}
+knitr::include_graphics("../img/particao.pdf")
+```
+
+### Exemplo 2.5 (livro)
+
+Suponha que um fabricante de sorvetes recebe $20\%$ de todo o leite
+que utiliza de uma fazenda $F_1$, $30\%$ de uma outra fazendo $F_2$ e
+$50\%$ de $F_3$.
+
+Um órgão de fiscalização inspecionou as fazendas de surpresa e observou
+que $20\%$ do leite produzido por $F_1$ estava adulterado por adição de
+água, enquanto que para $F_2$ e $F_3$, essa proporção era de $5\%$ e
+$2\%$, respectivamente.
+
+Na indústria de sorvetes os galões de leite são armazenados em um
+refrigerador sem identificação das fazendas. Para um galão escolhido ao
+acaso, qual a probabilidade do leite estar adulterado?
+
+### Exemplo 2.5 (livro)
+
+Seja $A$ o evento "o leite está adulterado", podemos defini-lo conforme
+a figura abaixo.
+
+```{r}
+knitr::include_graphics("../img/bayes.pdf")
+```
+
+Calcule $P(A)$.
 
 ### Teorema de Bayes
 
-- Suponha que os eventos $C_1, C_2, ..., C_k$ formem uma
+Podemos estar interessados também na probabilidade de uma amostra
+adulterada ter sido obtida a partir da fazenda $F_1$, ou seja,
+$P(F_1|A)$.
+
+#### Teorema de Bayes
+Suponha que os eventos $C_1, C_2, \ldots, C_k$ formem uma
 partição de $\Omega$ e que suas probabilidades sejam conhecidas.
-Suponha, ainda, que para um evento A, se conheçam as probabilidades
-$P(A | C_i)$ para todos $i = 1, 2, ..., k.$ Então, para qualquer $j$,
-$$ P(C_j | A ) = \frac{P(A | C_j)P(C_j)}{\sum_{i=1}^k P(A | C_i)
-P(C_i)}, \quad j = 1,2, ...,k.$$
-- Demonstração e Exemplo 2.6.
+Suponha, ainda, que para um evento $A$, se conheçam as probabilidades
+$P(A | C_i)$ para todo $i = 1, 2, \ldots, k.$ Então, para qualquer $j$,
+
+$$
+P(C_j | A ) = \frac{P(A | C_j)P(C_j)}{\sum_{i=1}^k P(A | C_i)
+P(C_i)}, \quad j = 1,2, ...,k.
+$$
+
+### Exemplo 2.6 (livro)
+
+Usando o exemplo anterior, podemos agora calcular a probabilidade de que
+o leite adulterado tenha sido obtido a partir da fazenda $F_1$.
+
+\begin{align*}
+P(F_1|A) &= \frac{P(A|F_1)P(F_1)}
+{P(A|F_1)P(F_1) + P(A|F_2)P(F_2) + P(A|F_2)P(F_2)} \\
+  &= \frac{0,2 \times 0,2}
+{0,2 \times 0,2 + 0,3 \times 0,05 + 0,5 \times 0,02} \\
+  &= 0,615
+\end{align*}
+
+De maneira similar, podemos obter $P(F_2|A)$ e $P(F_3|A)$.
 
 ### Exercícios recomendados
+
 - Seção $2.1$ Ex. $1, 2, 3, 4$ e $5$.
 - Seção $2.2$ Ex. $1, 2, 3, 4, 5, 6$ e $7$.
 - Seção $2.3$ Ex. $1, 3, 8, 9, 11, 13, 15$ e $19$.
-- Próxima aula - Exercícios e tira dúvidas.
