@@ -89,12 +89,12 @@ cara", B = "sair face par".
 
 ####
 
-- **Experimento:** retirar uma carta de um baralho de 54 cartas.
+- **Experimento:** retirar uma carta de um baralho de 52 cartas.
 - **Espaço amostral:** $\Omega=\{\clubsuit A,\clubsuit 2,...,\heartsuit
 A,...,\spadesuit A, ...,\diamondsuit J, \diamondsuit Q, \diamondsuit
 K\}$.
 - **Pontos amostrais:** $\omega_1=\clubsuit A$, $\omega_2=\clubsuit 2$,
-..., $\omega_{54}=\diamondsuit K$.
+..., $\omega_{52}=\diamondsuit K$.
 - **Eventos:** A = "sair um ás", B = "sair uma letra", C = "sair carta
   de $\clubsuit$".
 
@@ -125,7 +125,7 @@ $A^c = \{\omega \not\in A \}$
 ### Tipos de eventos
 
 - **Disjuntos** (mutuamente exclusivos) são eventos que possuem
-interseção nula, ou seja, $A\cap B = \{\varnothing\}$.
+interseção nula, ou seja, $A\cap B = \{\emptyset\}$.
 - **Complementares** são eventos que a união é o espaço amostral, ou
 seja, $A\cup B = \Omega$.
 
@@ -283,7 +283,7 @@ $$
 
 ### Exemplo
 
-Considerandos os dados das variáveis `Sexo` e `Turma`
+Considerando os dados das variáveis `Sexo` e `Turma`
 
 ```{r, results='asis'}
 ## Turma x Sexo
@@ -362,8 +362,8 @@ $$
 P(A \cup B) = P(A) + P(B)
 $$
 
-pois, neste caso, $A \cap B = \varnothing \quad \Rightarrow \quad
-P(A \cap B) = P(\varnothing) = 0$
+pois, neste caso, $A \cap B = \emptyset \quad \Rightarrow \quad
+P(A \cap B) = P(\emptyset) = 0$
 
 ```{r, out.width='70%'}
 knitr::include_graphics("../img/regra_adicao2-crop.pdf")
@@ -405,12 +405,7 @@ $$
 P(A | B) = \frac{P(A \cap B)}{P(B)}, \quad \text{para} \quad P(B) > 0.
 $$
 
-- Caso $P(B) = 0$ definimos $P(A | B) = P(A).$
-
-- Regra do produto: Sejam A e B eventos em $\Omega$, Então
-$$ P(A \cap B) = P(A | B)P(B), \quad \text{com} \quad P(B) > 0.$$
-- Exemplo usando dado (ver Exemplo 2.3 livro).
-
+- Caso $P(B) = 0$, definimos $P(A | B) = P(A).$
 
 ### Probabilidade condicional
 
@@ -469,9 +464,9 @@ etapa **depende** (ou não) da ocorrência da *primeira* etapa.
 Qual a probabilidade de se obter dois ases em seguida, quando se
 extraem duas cartas de um baralho comum de 52 cartas, se:
 
-a. A primeira carta é reposta no baralho antes da extração da
+a. A primeira carta extraída **não** é reposta antes da extração da
 segunda carta.
-b. A primeira carta extraída não é reposta antes da extração da
+b. A primeira carta é reposta no baralho antes da extração da
 segunda carta.
 
 ### Independência de eventos
@@ -538,10 +533,13 @@ ocorreu não muda a probabilidade de $B$ ocorrer e vice-versa.
 
 ### Exemplo 2.4 (livro)
 
-- Uma empresa produz peças em duas máquinas I e II, que podem apresentar
-desajustes com probabilidade $0.05$ e $0.10$; respectivamente. No início
-do dia de operação um teste é realizado e, caso a máquina esteja fora de
-ajuste, ela ficará sem operar nesse dia passando por revisão técnica.
+Uma empresa produz peças em duas máquinas I e II, que podem apresentar
+desajustes com probabilidade $0,05$ e $0,10$, respectivamente.
+
+No início do dia de operação um teste é realizado e, caso a máquina
+esteja fora de ajuste, ela ficará sem operar nesse dia passando por
+revisão técnica.
+
 Para cumprir o nível mínimo de produção pelo menos uma das máquinas deve
 operar. Você diria que a empresa corre o risco de não cumprir com suas
 metas de produção?
@@ -600,8 +598,8 @@ Suponha, ainda, que para um evento $A$, se conheçam as probabilidades
 $P(A | C_i)$ para todo $i = 1, 2, \ldots, k.$ Então, para qualquer $j$,
 
 $$
-P(C_j | A ) = \frac{P(A | C_j)P(C_j)}{\sum_{i=1}^k P(A | C_i)
-P(C_i)}, \quad j = 1,2, ...,k.
+P(C_j | A ) = \frac{P(C_j)P(A | C_j)}{\sum_{i=1}^k P(C_i)P(A | C_i)},
+\quad j = 1,2, \ldots,k.
 $$
 
 ### Exemplo 2.6 (livro)
@@ -610,8 +608,8 @@ Usando o exemplo anterior, podemos agora calcular a probabilidade de que
 o leite adulterado tenha sido obtido a partir da fazenda $F_1$.
 
 \begin{align*}
-P(F_1|A) &= \frac{P(A|F_1)P(F_1)}
-{P(A|F_1)P(F_1) + P(A|F_2)P(F_2) + P(A|F_2)P(F_2)} \\
+P(F_1|A) &= \frac{P(F_1)P(A|F_1)}
+{P(F_1)P(A|F_1) + P(F_2)P(A|F_2) + P(F_2)P(A|F_2)} \\
   &= \frac{0,2 \times 0,2}
 {0,2 \times 0,2 + 0,3 \times 0,05 + 0,5 \times 0,02} \\
   &= 0,615
