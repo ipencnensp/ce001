@@ -33,6 +33,8 @@ navbar:
       - text: "Slides"
       - text: "Introdução à análise exploratória de dados [PDF]"
         href: slides/01_Analise_Exploratoria.pdf
+      - text: "Probabilidades [PDF]"
+        href: slides/02_Probabilidades.pdf
   right:
     - text: GitHub
       icon: fa-github fa-lg
