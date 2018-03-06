@@ -1,0 +1,16 @@
+\documentclass{beamer}
+
+%\usetheme{Berlin}
+%\setbeamercovered{transparent}
+
+\usepackage{tikz}
+%\usepackage{multicol}
+\setbeamertemplate{navigation symbols}{} % retira a barra de navegacao
+
+\begin{document}
+
+%\begin{frame}{}
+<>
+%\end{frame}
+
+\end{document}
