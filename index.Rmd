@@ -11,9 +11,10 @@ source("setup_knitr.R")
 
 [![Build Status](https://travis-ci.org/leg-ufpr/ce001.svg?branch=master)](https://travis-ci.org/leg-ufpr/ce001)
 
-<!-- <div class="alert alert-danger" role="alert"> -->
-<!-- **AVISO:** -->
-<!-- </div> -->
+<div class="alert alert-danger" role="alert">
+**AVISO:** a partir de hoje (14/03), as aulas da turma N (Biologia
+noturno) serão na sala **PH-18**.
+</div>
 
 # Detalhes da oferta da disciplina
 
@@ -30,8 +31,8 @@ source("setup_knitr.R")
     - Quarta, 07:30 - 09:30h, **PA-01**
     - Sexta, 07:30 - 09:30h, **PA-03**
   - Biologia noturno (N):
-    - Quarta, 18:30 - 20:10h, **CT-04**
-    - Sexta, 18:30 - 20:10h, **CT-02**
+    - Quarta, 18:30 - 20:10h, ~~CT-04~~ **PH-18**
+    - Sexta, 18:30 - 20:10h, ~~CT-02~~ **PH-18**
   - Engenharia Industrial Madeireira (MN):
     - Quarta, 20:30 - 22:30h, **PC-18**
     - Sexta, 20:30 - 22:30h, **PC-16**
