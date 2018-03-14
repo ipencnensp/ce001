@@ -296,108 +296,120 @@ E os valores completos da função de distribuição são:
 \right.
 \]
 
-# Exemplo $3.6$
-- Num estudo sobre a incidência de câncer foi registrado, para
-cada paciente com esse diagnóstico, o número de casos de câncer em
-parentes próximos (pais, irmãos, tios, filhos, primos e sobrinhos).
-Os dados de 26 pacientes são os seguintes:
-```{r eval = TRUE}
-x <- c(2,5,0,2,1,5,3,3,3,2,0,1,1,4,5,2,2,3,2,1,5,4,0,0,3,3)
-table(x)
-prop.table(table(x))
-```
-<!-- -->
+<!-- ### Exemplo 3.6 (livro) -->
 
-<!-- -->
+<!-- Num estudo sobre a incidência de câncer foi registrado, para -->
+<!-- cada paciente com esse diagnóstico, o número de casos de câncer em -->
+<!-- parentes próximos (pais, irmãos, tios, filhos, primos e sobrinhos). -->
+<!-- Os dados de 26 pacientes são os seguintes: -->
 
-# Exemplo $3.6$
-- Estudos anteriores assumem que a incidência de câncer em parentes próximos
-pode ser teoricamente modelada pela seguinte função discreta de probabilidade:
-Incidência & 0   & 1   & 2   & 3   & 4   & 5   \\
-$p_i$       & 0.1 & 0.1 & 0.3 & 0.3 & 0.1 & 0.1 \\
-Os dados observados concordam com o modelo teórico?
-```{r }
-esperado <- c(0.1,0.1,0.3,0.3,0.1,0.1)
-obs <- prop.table(table(x))
-cbind(round(cbind(esperado, obs), 2) , 26*cbind(esperado, obs))
-```
-<!-- -->
+<!-- ```{r} -->
+<!-- x <- c(2,5,0,2,1,5,3,3,3,2,0,1,1,4,5,2,2,3,2,1,5,4,0,0,3,3) -->
+<!-- table(x) -->
+<!-- prop.table(table(x)) -->
+<!-- ``` -->
 
-<!-- -->
+<!-- # Exemplo $3.6$ -->
+<!-- - Estudos anteriores assumem que a incidência de câncer em parentes próximos -->
+<!-- pode ser teoricamente modelada pela seguinte função discreta de probabilidade: -->
+<!-- Incidência & 0   & 1   & 2   & 3   & 4   & 5   \\ -->
+<!-- $p_i$       & 0.1 & 0.1 & 0.3 & 0.3 & 0.1 & 0.1 \\ -->
+<!-- Os dados observados concordam com o modelo teórico? -->
+
+<!-- ```{r } -->
+<!-- esperado <- c(0.1,0.1,0.3,0.3,0.1,0.1) -->
+<!-- obs <- prop.table(table(x)) -->
+<!-- cbind(round(cbind(esperado, obs), 2) , 26*cbind(esperado, obs)) -->
+<!-- ``` -->
+
 
 # Principais modelos discretos
-# Modelo Uniforme Discreto
-- Seja $X$ uma va cujos possíveis valores são representados por
-$x_1, x_2, ..., x_k$. Dizemos que $X$ segue o modelo Uniforme Discreto
+
+### Modelo Uniforme Discreto
+
+Seja $X$ uma VA cujos possíveis valores são representados por
+$x_1, x_2, \ldots, x_k$. Dizemos que $X$ segue o modelo Uniforme Discreto
 se atribui a mesma probabilidade $1/k$ a cada um desses $k$ valores.
+
 Sua função de probabilidade é dada por
-$$ P(X = x_j) =  1/k, \forall j = 1, 2, ..., k.$$
-```{r eval = FALSE}
+$$
+P(X = x_j) =  1/k, \forall j = 1, 2, \ldots, k.
+$$
+
+```{r}
 x = c(0:10)
 dx = dunif(x = x, min = 0, max = 10)
 plot(dx, type = "h")
 ```
-<!-- -->
 
-<!-- -->
+### Exemplo 3.7 (livro)
 
-# Exemplo $3.7$
-- Uma rifa tem $100$ bilhetes numerados de $1$ a $100$. Tenho $5$
-bilhetes consecutivos numerados de $21$ a $25$ e meu colega tem outros
-$5$ bilhetes, com os números $1, 11, 29, 68$ e $93$. Quem tem maior
+Uma rifa tem 100 bilhetes numerados de 1 a 100. Tenho 5 bilhetes
+consecutivos numerados de 21 a 25 e meu colega tem outros 5
+bilhetes, com os números 1, 11, 29, 68 e 93. Quem tem maior
 possibilidade de ser sorteado?
-<!-- -->
 
-<!-- -->
+### Modelo Bernoulli
 
-# Modelo Bernoulli
-- Dizemos que uma variável $X$ segue o modelo Bernoulli se atribui
+Dizemos que uma variável $X$ segue o modelo Bernoulli se atribui
 $0$ ou $1$ à ocorrência de fracasso ou sucesso, respectivamente.
+
 Sendo, $p$ a probabilidade de sucesso, $0 \leq p \leq 1$, sua função
 de probabilidade é dada por
-$$ P(X = x) = p^x (1-p)^{1-x}, \quad x = 0,1. $$
-- Exemplo $3.8$ - Sabe-se que a eficiência de uma vacina é de $80\%$.
-Um grupo de três indivíduos é sorteado, dentre a população vacinada,
-e submetido a testes para averiguar se a imunização foi efetiva,
-evento representado por $I$. Determine o comportamento da va número
-de indivíduos imunizados neste grupo.
-<!-- -->
+$$
+P(X = x) = p^x (1-p)^{1-x}, \quad x = 0,1.
+$$
 
-<!-- -->
+**Exemplo 3.8** (livro): Sabe-se que a eficiência de uma vacina é de
+80%. Um grupo de três indivíduos é sorteado, dentre a população
+vacinada, e submetido a testes para averiguar se a imunização foi
+efetiva, evento representado por $I$. Determine o comportamento da VA
+número de indivíduos imunizados neste grupo.
 
-# Modelo Binomial
-- Considere a repetição de $n$ ensaios Bernoulli independentes
-e todos com a mesma probabilidade de sucesso $p$. A va que conta o
-número total de sucessos é denominada Binomial com parâmetros $n$ e $p$
-e sua função de probabilidade é dada por
-$$ P(X = k) = \dbinom{n}{k} p^k (1 - p)^{n-k}, \quad k = 0,1, ..., n,$$
+### Modelo Binomial
+
+Considere a repetição de $n$ ensaios de Bernoulli independentes
+e todos com a mesma probabilidade de sucesso $p$.
+
+A VA que conta o número total de sucessos é denominada Binomial com
+parâmetros $n$ e $p$ e sua função de probabilidade é dada por
+$$
+P(X = k) = \dbinom{n}{k} p^k (1 - p)^{n-k}, \quad k = 0,1, \ldots, n,
+$$
 onde
-$$ \dbinom{n}{k} = \frac{n!}{k!(n-k)!}.$$
-- Notação $X \sim b(n, p)$.
-- Calculando probabilidades baseadas na Binomial.
+$$
+\dbinom{n}{k} = \frac{n!}{k!(n-k)!}.
+$$
+
+Notação: $X \sim b(n, p)$.
+
+ Calculando probabilidades baseadas na Binomial.
 ```{r }
 dbinom(3, prob = 0.4, size = 12)
 round(dbinom(0:12, prob = 0.4, size = 12),3)
 ```
-<!-- -->
 
-<!-- -->
+### Exemplo 3.9 (livro)
 
-# Exemplo $3.9$
 - O escore de um teste internacional de proficiência na língua
 inglesa varia de $0$ a $700$ pontos, com mais pontos indicando um
 melhor desempenho. Informações, coletadas durante vários anos,
 permite estabelecer o seguinte modelo para o desempenho no teste:
-Pontos & $[0,200)$ & $[200,300)$ & $[300,400)$ & $[400,500)$ & $[500,600)$ & $[600,700)$ \\
-$p_i$   & $0.06$   & $0.15$       & $0.16$       & $0.25$     & $0.28$   & $0.10$        \\
+
+\begin{table}[]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+Pontos & $[0,200)$ & $[200,300)$ & $[300,400)$ & $[400,500)$ & $[500,600)$ & $[600,700)$ \\ \hline
+$p_i$   & $0.06$   & $0.15$       & $0.16$       & $0.25$     & $0.28$   & $0.10$        \\ \hline
+\end{tabular}
+\end{table}
+
 Várias universidades americanas, exigem um escore mínimo de $600$
 pontos para aceitar candidatos de países de língua não inglesa.
 De um grande grupo de estudantes brasileiros que prestaram o último
 exame, escolhemos ao acaso $20$ deles. Qual é a probabilidade de no
 máximo $3$ atenderem ao requisito mínimo?
-<!-- -->
-
-<!-- -->
 
 # Exemplo $3.9$
 - Um veterinário está estudando o índice de natalidade em porcos
