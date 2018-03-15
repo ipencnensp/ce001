@@ -114,7 +114,7 @@ $$
 \sum_{i} p(x_i) = 1
 $$
 
-### Exemplo
+### Exemplo 3.3
 
 #### Experimento
 Lançamento de duas moedas. $X$ = número de resultados cara (C)
@@ -123,7 +123,7 @@ Lançamento de duas moedas. $X$ = número de resultados cara (C)
 knitr::include_graphics("../img/exp_moedas-crop.pdf")
 ```
 
-### Exemplo
+### Exemplo 3.3
 
 Podemos montar uma tabela de distribuição de frequência para a
 variável aleatória $X$ = número de resultados cara (C)
@@ -151,7 +151,7 @@ P[X=1] &= 2/4 = 1/2 \\
 P[X=2] &= 1/4
 \end{align*}
 
-### Exemplo
+### Exemplo 3.3
 
 Dessa forma, a **distribuição de probabilidade** da variável
 aleatória $X$ = número de resultados cara (C) é a tabela
@@ -177,7 +177,7 @@ satisfeitas:
 i. As probabilidades $p(x_i)$ estão entre 0 e 1
 ii. A soma de todas as probabilidades $p(x_i)$ é 1
 
-### Exemplo 3.1 (livro)
+### Exemplo 3.1
 
 Com dados do último censo, a assistente social de um Centro de Saúde
 constatou que para as famílias da região, $20\%$ não tem filhos, $30\%$
@@ -187,7 +187,7 @@ entre três, quatro ou cinco filhos.
 Descreva a função de probabilidade da VA $N$ definida como número de
 filhos.
 
-### Exemplo 3.2 (livro)
+### Exemplo 3.2
 
 Na construção de um certo prédio, as fundações devem atingir $15$ metros
 de profundidade e, para cada $5$ metros de estacas colocadas, o operador
@@ -218,7 +218,7 @@ $$
 
 para qualquer número real $x$.
 
-### Exemplo 3.5 (livro)
+### Exemplo 3.5
 
 Uma população de 1000 crianças foi analisada num estudo para
 determinar a efetividade de uma vacina contra um tipo de alergia.
@@ -241,7 +241,7 @@ print(xtable(t(dtab), digits = rep(0, 6)),
 Para uma criança sorteado ao acaso qual a probabilidade dela
 ter recebido $2$ doses? E até $2$ doses?
 
-### Exemplo 3.5 (livro)
+### Exemplo 3.5
 
 \begincols
 \column{.5\textwidth}
@@ -272,7 +272,7 @@ plot(stepfun(x = 1:5, y = c(0,dtab[-6,3]), right = FALSE),
 ```
 \endcols
 
-### Exemplo 3.5 (livro)
+### Exemplo 3.5
 
 Assim,
 $$
@@ -296,32 +296,66 @@ E os valores completos da função de distribuição são:
 \right.
 \]
 
-<!-- ### Exemplo 3.6 (livro) -->
+### Exemplo 3.6
 
-<!-- Num estudo sobre a incidência de câncer foi registrado, para -->
-<!-- cada paciente com esse diagnóstico, o número de casos de câncer em -->
-<!-- parentes próximos (pais, irmãos, tios, filhos, primos e sobrinhos). -->
-<!-- Os dados de 26 pacientes são os seguintes: -->
+Num estudo sobre a incidência de câncer foi registrado, para
+cada paciente com esse diagnóstico, o número de casos de câncer em
+parentes próximos (pais, irmãos, tios, filhos, primos e sobrinhos).
+A distribuição de frequência para 26 pacientes é a seguinte:
 
-<!-- ```{r} -->
-<!-- x <- c(2,5,0,2,1,5,3,3,3,2,0,1,1,4,5,2,2,3,2,1,5,4,0,0,3,3) -->
-<!-- table(x) -->
-<!-- prop.table(table(x)) -->
-<!-- ``` -->
+```{r, results='asis'}
+x <- c(2,5,0,2,1,5,3,3,3,2,0,1,1,4,5,2,2,3,2,1,5,4,0,0,3,3)
+tab <- table(x)
+dtab <- cbind(n_i = tab)
+print(xtable(t(dtab), digits = rep(0, 7)),
+      comment = FALSE,
+      sanitize.rownames.function = function(x){
+    paste0("$", x, "$")
+})
+```
 
-<!-- # Exemplo $3.6$ -->
-<!-- - Estudos anteriores assumem que a incidência de câncer em parentes próximos -->
-<!-- pode ser teoricamente modelada pela seguinte função discreta de probabilidade: -->
-<!-- Incidência & 0   & 1   & 2   & 3   & 4   & 5   \\ -->
-<!-- $p_i$       & 0.1 & 0.1 & 0.3 & 0.3 & 0.1 & 0.1 \\ -->
-<!-- Os dados observados concordam com o modelo teórico? -->
+Estudos anteriores assumem que a incidência de câncer em parentes próximos
+pode ser teoricamente modelada pela seguinte função discreta de
+probabilidade:
 
-<!-- ```{r } -->
-<!-- esperado <- c(0.1,0.1,0.3,0.3,0.1,0.1) -->
-<!-- obs <- prop.table(table(x)) -->
-<!-- cbind(round(cbind(esperado, obs), 2) , 26*cbind(esperado, obs)) -->
-<!-- ``` -->
+```{r, results='asis'}
+p <- c(.1,.1,.3,.3,.1,.1)
+dtab <- cbind(p_i = p)
+print(xtable(t(dtab), digits = rep(1, 7)),
+      comment = FALSE,
+      sanitize.rownames.function = function(x){
+    paste0("$", x, "$")
+})
+```
 
+Os dados observados concordam com o modelo teórico?
+
+### Exemplo 3.6
+
+O número de observações de incidência que seria esperado seguindo o
+modelo teórico é calculado como $$e_i = n \times p_i$$.
+
+\begincols
+\column{.5\textwidth}
+```{r, results='asis'}
+esp <- p * 26
+dtab <- cbind(n_i = addmargins(tab),
+              e_i = c(esp, sum(esp)))
+print(xtable(dtab, digits = c(0, 0, 1)),
+      comment = FALSE,
+      hline.after = c(-1, 0, nrow(dtab)-1, nrow(dtab)),
+      sanitize.colnames.function = function(x){
+    paste0("$", x, "$")
+})
+```
+\column{.5\textwidth}
+```{r esperado, out.width='90%'}
+plot(0:5, dtab[-7,1], xlab = "Casos", ylab = "Frequência",
+     ylim = c(0, 8))
+points(0:5, dtab[-7,2], pch = 3)
+legend("topright", legend = c("Observado", "Esperado"), pch = c(1, 3))
+```
+\endcols
 
 # Modelos discretos
 
@@ -329,22 +363,38 @@ E os valores completos da função de distribuição são:
 
 ### Modelo Uniforme Discreto
 
-Seja $X$ uma VA cujos possíveis valores são representados por
-$x_1, x_2, \ldots, x_k$. Dizemos que $X$ segue o modelo Uniforme Discreto
-se atribui a mesma probabilidade $1/k$ a cada um desses $k$ valores.
+**Definição:** Seja $X$ uma VA assumindo valores $1, 2, \ldots, k$.
+Dizemos que $X$ segue o modelo **Uniforme Discreto** se atribui a mesma
+probabilidade $1/k$ a cada um desses $k$ valores.
 
-Sua função de probabilidade é dada por
+Entãos, sua função de probabilidade é dada por
 $$
-P(X = x_j) =  1/k, \forall j = 1, 2, \ldots, k.
+P[X = j] =  \frac{1}{k}, \quad j = 1, 2, \ldots, k.
 $$
 
-```{r}
-x = c(0:10)
-dx = dunif(x = x, min = 0, max = 10)
-plot(dx, type = "h")
+
+**Notação**: $X \sim \text{U}_D[1,k]$
+
+### Modelo Uniforme Discreto
+
+```{r, out.width='80%', fig.width=8, fig.height=6}
+par(mfrow=c(2,2))
+plot(1:2, dunif(x = 1:2, min = 0, max = 2), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "k = 2",
+     ylim = c(0,1))
+plot(1:5, dunif(x = 1:5, min = 0, max = 5), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "k = 5",
+     ylim = c(0,1))
+plot(1:10, dunif(x = 1:10, min = 0, max = 10), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "k = 10",
+     ylim = c(0,1))
+plot(1:20, dunif(x = 1:20, min = 0, max = 20), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "k = 20",
+     ylim = c(0,1))
+par(mfrow=c(1,1))
 ```
 
-### Exemplo 3.7 (livro)
+### Exemplo 3.7
 
 Uma rifa tem 100 bilhetes numerados de 1 a 100. Tenho 5 bilhetes
 consecutivos numerados de 21 a 25 e meu colega tem outros 5
@@ -354,7 +404,7 @@ possibilidade de ser sorteado?
 ### Modelo Bernoulli
 
 **Definição:** Uma variável aleatória $X$ segue o modelo Bernoulli
-se assume apenas os valores 0 (``fracasso'') ou 1 (``sucesso''). Sua
+se assume apenas os valores 0 ("fracasso") ou 1 ("sucesso"). Sua
 função de probabilidade é dada por
 $$
 P[X = x] = p^x (1-p)^{1-x}, \quad \quad x = 0, 1
@@ -365,7 +415,7 @@ onde o parâmetro $0 \leq p \leq 1$ é a probabilidade de sucesso.
 
 ### Modelo Bernoulli
 
-```{r}
+```{r, out.width='80%', fig.width=8, fig.height=6}
 par(mfrow=c(2,2))
 plot(0:1, dbinom(x = 0:1, size = 1, prob = .2), type = "h",
 xlab = "X", ylab = "P[X = x]", main = "p = 0.2",
@@ -381,47 +431,120 @@ xlab = "X", ylab = "P[X = x]", main = "p = 0.9",
 ylim = c(0,1))
 ```
 
-### Modelo Bernoulli
+### Exemplo
 
-Dizemos que uma variável $X$ segue o modelo Bernoulli se atribui
-$0$ ou $1$ à ocorrência de fracasso ou sucesso, respectivamente.
+No lançamento de uma moeda, considere cara como o evento de sucesso.
+Qual a probabilidade de sair cara, sendo que $p = 1/2$?
 
-Sendo, $p$ a probabilidade de sucesso, $0 \leq p \leq 1$, sua função
-de probabilidade é dada por
-$$
-P(X = x) = p^x (1-p)^{1-x}, \quad x = 0,1.
-$$
+\[ X = \left\{
+  \begin{array}{ll}
+    1, & \quad \text{cara}\\
+    0, & \quad \text{coroa}
+\end{array} \right.\]
 
-**Exemplo 3.8** (livro): Sabe-se que a eficiência de uma vacina é de
-80%. Um grupo de três indivíduos é sorteado, dentre a população
-vacinada, e submetido a testes para averiguar se a imunização foi
-efetiva, evento representado por $I$. Determine o comportamento da VA
-número de indivíduos imunizados neste grupo.
+Temos que
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{ccc}
+    \hline
+    $X$ & $P[X=x]$ & $p = 1/2$ \\
+    \hline
+    0 & $1-p$ & $1/2$ \\
+    1 & $p$ & $1/2$ \\
+    \hline
+  \end{tabular}
+\end{table}
 
 ### Modelo Binomial
 
-Considere a repetição de $n$ ensaios de Bernoulli independentes
-e todos com a mesma probabilidade de sucesso $p$.
+**Definição:** Seja um experimento realizado dentro das seguintes
+condições:
 
-A VA que conta o número total de sucessos é denominada Binomial com
-parâmetros $n$ e $p$ e sua função de probabilidade é dada por
+i. São realizados $n$ "ensaios" de Bernoulli independentes
+ii. Cada ensaio só pode ter dois resultados possíveis: "sucesso" ou
+"fracasso"
+iii. A probabilidade $p$ de sucesso em cada ensaio é constante
+
+Vamos associar a VA $X$ o número de sucessos em $n$ ensaios de
+Bernoulli. Portanto $X$ poderá assumir os valores $0, 1, \ldots, n$.
+
+### Modelo binomial
+
+Vamos determinar a distribuição de probabilidade de $X$, através da
+probabilidade de um número genérico $x$ de sucessos.
+
+Suponha que ocorram sucessos (1) apenas nas $x$ primeiras provas, e
+fracassos (0) nas $n-x$ provas restantes
 $$
-P(X = k) = \dbinom{n}{k} p^k (1 - p)^{n-k}, \quad k = 0,1, \ldots, n,
+\underbrace{1,1,1,..., 1}_{x}, \underbrace{0,0,0, ..., 0}_{n-x}
+$$
+Como as provas são independentes, a probabilidade de ocorrência de $x$
+sucessos em $n$ tentativas é uma extensão do modelo de Bernoulli para
+$n$ ensaios, ou seja,
+$$
+\underbrace{p\cdot p\cdot p \cdots p}_{x} \cdot
+\underbrace{(1-p)\cdot (1-p)\cdot (1-p) \cdots (1-p)}_{n-x} =
+ p^x (1-p)^{n-x}
+$$
+
+### Modelo binomial
+
+Porém, o evento: "$x$ sucessos em $n$ provas" pode ocorrer de
+diferentes maneiras (ordens) distintas, todas com a mesma
+probabilidade.
+
+Como o número de ordens é o número de combinações de $n$ elementos
+tomados $x$ a $x$, então a probabilidade de ocorrerem $x$ sucessos em
+$n$ provas de Bernoulli será então a distribuição binomial, dada por
+$$
+P[X = x] = \binom{n}{x} p^x (1-p)^{n-x}, \quad \quad x = 0, 1, \ldots, n
 $$
 onde
 $$
-\dbinom{n}{k} = \frac{n!}{k!(n-k)!}.
+\binom{n}{x} = \frac{n!}{x!(n-x)!}
 $$
+é o **coeficiente binomial**, que dá o número total de
+combinações possíveis de $n$ elementos, com $x$ sucessos.
 
-Notação: $X \sim b(n, p)$.
+**Notação:** $X \sim \text{bin}(n,p)$
 
- Calculando probabilidades baseadas na Binomial.
-```{r }
-dbinom(3, prob = 0.4, size = 12)
-round(dbinom(0:12, prob = 0.4, size = 12),3)
+### Modelo binomial
+
+```{r, out.width='80%', fig.width=8, fig.height=6}
+par(mfrow=c(2,2))
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .2), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.2",
+     ylim = c(0,.5))
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .5), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.5",
+     ylim = c(0,.5))
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .7), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.7",
+     ylim = c(0,.5))
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .9), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.9",
+     ylim = c(0,.5))
 ```
 
-### Exemplo 3.9 (livro)
+### Modelo binomial
+
+É importante notar que as probabilidades são completamente
+caracterizadas pela informação dos **parâmetros**.
+
+Por exemplo, para calcular a probabilidade de 3 sucessos de uma $b(12,
+0.4)$ fazemos
+$$
+P[X = 3] = \binom{12}{3} 0.4^3 0.6^{9} =
+ \frac{12!}{3!9!} 0.4^3 0.6^{9} = 0.142
+$$
+Diversos programas computacionais fazem esse cálculo facilmente. Por
+exemplo, com o R
+```{r, comment=NA, echo=TRUE}
+round(dbinom(0:12, size = 12, prob = 0.4), 3)
+```
+
+### Exemplo 3.9
 
 O escore de um teste internacional de proficiência na língua
 inglesa varia de $0$ a $700$ pontos, com mais pontos indicando um
@@ -442,16 +565,20 @@ De um grande grupo de estudantes brasileiros que prestaram o último
 exame, escolhemos ao acaso $20$ deles. Qual é a probabilidade de no
 máximo $3$ atenderem ao requisito mínimo?
 
-### Exemplo 3.9 (livro)
+### Exemplo 3.10
 
 Um veterinário está estudando o índice de natalidade em porcos
-à inseminação artificial. Para tal, coletou informações sobre a
+sujeitos à inseminação artificial. Para tal, coletou informações sobre a
 variável número de filhotes nascidos vivos em cada uma das $100$
 inseminações realizadas com o mesmo reprodutor. A tabela a seguir
 apresenta os resultados.
 
-Número       & $1$ & $2$ & $3$ & $4$  & $5$ & $6$ & $7$ & $8$ & $9$ \\
-Freq. Obs.   & $1$ & $6$ & $7$ & $23$ & $26$& $21$ & $12$ & $3$ & $1$       \\
+```{r, results='asis'}
+obs <- c(1,6,7,23,26,21,12,3,1)
+tab <- cbind("Número" = 1:9,
+             "Freq. Obs." = obs)
+knitr::kable(t(tab))
+```
 
 O veterinário informa que $11$ ou mais filhotes nascidos vivos é uma
 ocorrência muito rara e pode ser desprezada em termos do modelo.
@@ -459,14 +586,23 @@ Ele sugeriu que a variável N: número de filhotes nascidos vivos,
 poderia ser ajustada pelo modelo Binomial com parâmetros $n = 10$ e
 $p = 0.5$. O que você acha da sugestão do veterinário?
 
-### Exemplo 3.9 (livro)
+### Exemplo 3.10
 
-- Usando o R temos.
+Usando o R temos:
 
-```{r }
-obs <- c(0,1,6,7,23,26,21,12,3,1,0)
-esp <- 100*dbinom(0:10, prob = 0.5, size = 10)
-cbind("Obs" = obs, "Esp" = round(esp, 1) )
+```{r, echo=TRUE}
+obs <- c(0, 1, 6, 7, 23, 26, 21, 12, 3, 1, 0)
+prob <- dbinom(0:10, size = 10, prob = 0.5)
+esp <- prob * 100
+cbind("Obs" = obs, "p" = round(prob, 2), "Esp" = round(esp, 2))
+```
+
+### Exemplo 3.10
+
+```{r, echo=TRUE}
+plot(0:10, obs, xlab = "Filhotes", ylab = "Frequência")
+points(0:10, esp, pch = 3)
+legend("topright", legend = c("Observado", "Esperado"), pch = c(1, 3))
 ```
 
 ## Outros modelos
