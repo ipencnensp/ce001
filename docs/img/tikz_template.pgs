@@ -4,6 +4,8 @@
 %\setbeamercovered{transparent}
 
 \usepackage{tikz}
+\usetikzlibrary{arrows, decorations.pathmorphing, backgrounds, fit,
+  positioning, calc, trees, plotmarks}
 %\usepackage{multicol}
 \setbeamertemplate{navigation symbols}{} % retira a barra de navegacao
 

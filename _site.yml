@@ -35,6 +35,8 @@ navbar:
         href: slides/01_Analise_Exploratoria.pdf
       - text: "Probabilidades [PDF]"
         href: slides/02_Probabilidades.pdf
+      - text: "Variáveis aleatórias discretas [PDF]"
+        href: slides/03_Variaveis_Discretas.pdf
   right:
     - text: GitHub
       icon: fa-github fa-lg
