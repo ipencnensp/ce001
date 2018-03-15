@@ -323,7 +323,9 @@ E os valores completos da função de distribuição são:
 <!-- ``` -->
 
 
-# Principais modelos discretos
+# Modelos discretos
+
+## Principais modelos
 
 ### Modelo Uniforme Discreto
 
@@ -348,6 +350,36 @@ Uma rifa tem 100 bilhetes numerados de 1 a 100. Tenho 5 bilhetes
 consecutivos numerados de 21 a 25 e meu colega tem outros 5
 bilhetes, com os números 1, 11, 29, 68 e 93. Quem tem maior
 possibilidade de ser sorteado?
+
+### Modelo Bernoulli
+
+**Definição:** Uma variável aleatória $X$ segue o modelo Bernoulli
+se assume apenas os valores 0 (``fracasso'') ou 1 (``sucesso''). Sua
+função de probabilidade é dada por
+$$
+P[X = x] = p^x (1-p)^{1-x}, \quad \quad x = 0, 1
+$$
+onde o parâmetro $0 \leq p \leq 1$ é a probabilidade de sucesso.
+
+**Notação:** $X \sim \text{Ber}(p)$
+
+### Modelo Bernoulli
+
+```{r}
+par(mfrow=c(2,2))
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .2), type = "h",
+xlab = "X", ylab = "P[X = x]", main = "p = 0.2",
+ylim = c(0,1))
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .5), type = "h",
+xlab = "X", ylab = "P[X = x]", main = "p = 0.5",
+ylim = c(0,1))
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .7), type = "h",
+xlab = "X", ylab = "P[X = x]", main = "p = 0.7",
+ylim = c(0,1))
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .9), type = "h",
+xlab = "X", ylab = "P[X = x]", main = "p = 0.9",
+ylim = c(0,1))
+```
 
 ### Modelo Bernoulli
 
@@ -391,119 +423,123 @@ round(dbinom(0:12, prob = 0.4, size = 12),3)
 
 ### Exemplo 3.9 (livro)
 
-- O escore de um teste internacional de proficiência na língua
+O escore de um teste internacional de proficiência na língua
 inglesa varia de $0$ a $700$ pontos, com mais pontos indicando um
 melhor desempenho. Informações, coletadas durante vários anos,
 permite estabelecer o seguinte modelo para o desempenho no teste:
-
 \begin{table}[]
 \centering
+\scriptsize
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
 Pontos & $[0,200)$ & $[200,300)$ & $[300,400)$ & $[400,500)$ & $[500,600)$ & $[600,700)$ \\ \hline
 $p_i$   & $0.06$   & $0.15$       & $0.16$       & $0.25$     & $0.28$   & $0.10$        \\ \hline
 \end{tabular}
 \end{table}
-
 Várias universidades americanas, exigem um escore mínimo de $600$
 pontos para aceitar candidatos de países de língua não inglesa.
 De um grande grupo de estudantes brasileiros que prestaram o último
 exame, escolhemos ao acaso $20$ deles. Qual é a probabilidade de no
 máximo $3$ atenderem ao requisito mínimo?
 
-# Exemplo $3.9$
-- Um veterinário está estudando o índice de natalidade em porcos
+### Exemplo 3.9 (livro)
+
+Um veterinário está estudando o índice de natalidade em porcos
 à inseminação artificial. Para tal, coletou informações sobre a
 variável número de filhotes nascidos vivos em cada uma das $100$
 inseminações realizadas com o mesmo reprodutor. A tabela a seguir
 apresenta os resultados.
+
 Número       & $1$ & $2$ & $3$ & $4$  & $5$ & $6$ & $7$ & $8$ & $9$ \\
 Freq. Obs.   & $1$ & $6$ & $7$ & $23$ & $26$& $21$ & $12$ & $3$ & $1$       \\
+
 O veterinário informa que $11$ ou mais filhotes nascidos vivos é uma
 ocorrência muito rara e pode ser desprezada em termos do modelo.
 Ele sugeriu que a variável N: número de filhotes nascidos vivos,
 poderia ser ajustada pelo modelo Binomial com parâmetros $n = 10$ e
 $p = 0.5$. O que você acha da sugestão do veterinário?
-<!-- -->
 
-<!-- -->
+### Exemplo 3.9 (livro)
 
-# Exemplo $3.9$
 - Usando o R temos.
+
 ```{r }
 obs <- c(0,1,6,7,23,26,21,12,3,1,0)
 esp <- 100*dbinom(0:10, prob = 0.5, size = 10)
 cbind("Obs" = obs, "Esp" = round(esp, 1) )
 ```
-<!-- -->
 
-<!-- -->
+## Outros modelos
 
-# Outros modelos discretos
-# Modelo Geométrico
+### Modelo Geométrico
+
 - Número de ensaios Bernoulli até o primeiro sucesso.
 - $X$ tem distribuição Geométrica de parâmetro $p$, se sua
-função de probabilidade tem a forma
-$$ P(X = k) = p(1-p)^k, \quad 0\leq p \leq 1, \quad \text{e} \quad k = 0,1,... .$$
-- Exemplo $3.11$: Uma linha de produção está sendo analisada
+função de probabilidade tem a forma $$ P(X = k) = p(1-p)^k, \quad 0\leq
+p \leq 1, \quad \text{e} \quad k = 0,1, \ldots .$$
+- Exemplo 3.11: Uma linha de produção está sendo analisada
 para efeito de controle da qualidade das peças produzidas. Tendo
 em vista o alto padrão requerido, a produção é interrompida para
 regulagem toda vez que uma peça defeituosa é observada. Se $0.01$
 é a probabilidade da peça ser defeituosa, estude o comportamento
 da variável $Q$, quantidade de peças boas produzidas antes da primeira
 defeituosa.
-<!-- -->
 
-<!-- -->
+### Exemplo $3.11$
 
-# Exemplo $3.11$
 - $ P(Q = k) = 0.01*0.99^k $
 - Usando o R temos
+
 ```{r }
 dgeom(x = 1, prob = 0.01)
 ```
-```{r eval = FALSE}
+
+```{r}
 x = c(0:50)
 dx = dgeom(x = x, prob = 0.01)
 plot(dx, type = "h")
 ```
-<!-- -->
 
-<!-- -->
+### Modelo Poisson
 
-# Modelo Poisson
 - $X$ tem distribuição Poisson com parâmetro $\lambda > 0$,
 se sua função de probabilidade é dada por
-$$ P(X = k) = \frac{\exp{-\lambda}\lambda^k}{k!}, \quad k = 0, 1, 2 .... $$
-- Notação $X \sim Po(\lambda)$.
-```{r eval = FALSE}
+$$ P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}, \quad k = 0, 1, 2,
+\ldots . $$
+- Notação: $X \sim Po(\lambda)$.
+```{r}
 x = c(0:20)
 dx = dpois(x = x, lambda = 5)
 plot(dx, type = "h")
 ```
-<!-- -->
 
-<!-- -->
+### Exemplo $3.12$
 
-# Exemplo $3.12$
-- A emissão de partículas radioativas têm sido modelada através de
+A emissão de partículas radioativas têm sido modelada através de
 uma distribuição de Poisson, com o valor do parâmetro dependendo da fonte
-utilizada. Suponha que o número de partículas alfa, emitidas por minuto,
+utilizada.
+
+Suponha que o número de partículas alfa, emitidas por minuto,
 seja uma variável aleatória seguindo o modelo Poisson com parâmetro $5$,
 isto é, a taxa média de ocorrência é de $5$ emissões a cada minuto.
+
 Calcule a probabilidade de haver mais de $2$ emissões em um minuto.
-P(A > 2) &=& \sum_{a = 3}^{\infty} P(A = a) = 1 - \sum_{a=0}^2 P(A = a) \\
-&=& 1 - \sum_{a =0}^2 \frac{\exp\{-5\}5^a}{a!} = 0.875
+
+### Exemplo $3.12$
+
+\begin{align*}
+P(A > 2) &= \sum_{a = 3}^{\infty} P(A = a) = 1 - \sum_{a=0}^2 P(A = a) \\
+&= 1 - \sum_{a =0}^2 \frac{e^{-5}5^a}{a!} = 0.875
+\end{align*}
+
 - Em R temos
 ```{r }
 1 - ppois(2, lambda = 5)
 ```
-<!-- -->
 
-<!-- -->
+### Exemplo $3.13$
 
-# Exemplo $3.13$
-- Engenheiros da companhia telefônica estudam se o modelo de Poisson
+Engenheiros da companhia telefônica estudam se o modelo de Poisson
 com taxa de ocorrência de $4.5$ chamadas por hora pode ser ajustado ao
 número $N$ de chamadas interestaduais que chegam por hora, a uma
 central telefônica, durante o período noturno. Os dados coletados
@@ -514,21 +550,19 @@ obs <- c(9,38,71,115,125,106,79,50,57)
 esp <- c(dpois(0:7, lambda = 4.5), 1 - ppois(7, lambda = 4.5))
 cbind("Obs" = obs, "Esp" = 650*esp)
 ```
-<!-- -->
 
-# Modelo hipergeométrico
-- Considere um conjunto de $n$ objetos dos quais $m$ são do tipo $I$
+### Modelo hipergeométrico
+
+ Considere um conjunto de $n$ objetos dos quais $m$ são do tipo $I$
 e $n-m$ são do tipo $II$. Para um sorteio de $r$ objetos $r < n$, feito
 ao acaso e sem reposição, defina $X$ como o número de objetos de tipo $I$
 selecionados. Diremos que a va $X$ segue o modelo Hipergeométrico e
 sua função de probabilidade é dada por
 $$ P(X = k) = \frac{\dbinom{m}{k} \dbinom{n-m}{r-k}}{\dbinom{n}{r}}, \quad
 k = \max(0, r-(n-m)), ..., \min(r,m).$$
-<!-- -->
 
-<!-- -->
+### Exemplo $3.14$
 
-# Exemplo $3.14$
 - Uma fábrica produz peças que são embaladas em caixas com $25$
 unidades. Para aceitar o lote enviado por essa fábrica, o controle de
 qualidade de uma empresa procede da seguinte forma: Sorteia uma caixa
@@ -536,12 +570,11 @@ do lote e, em seguida sorteia cinco peças, sem reposição, dessa mesma
 caixa. Se constatar no máximo duas defeituosas, aceita o lote fornecido
 pela fábrica. Se a caixa sorteada tivesse $4$ peças defeituosas, qual
 seria a probabilidade de rejeitar o lote?
-<!-- -->
-
-<!-- -->
 
 # Exercícios recomendados
+
+### Exercícios recomendados
+
 - Seção $3.1$ - $3,5$ e $6$.
 - Seção $3.2$ - $2,3,5$ e $6$.
 - Seção $3.3$ - $1,2,3,4,5$ e $6$.
-<!-- -->
