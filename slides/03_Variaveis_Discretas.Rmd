@@ -372,7 +372,6 @@ $$
 P[X = j] =  \frac{1}{k}, \quad j = 1, 2, \ldots, k.
 $$
 
-
 **Notação**: $X \sim \text{U}_D[1,k]$
 
 ### Modelo Uniforme Discreto
@@ -609,67 +608,120 @@ legend("topright", legend = c("Observado", "Esperado"), pch = c(1, 3))
 
 ### Modelo Geométrico
 
-- Número de ensaios Bernoulli até o primeiro sucesso.
-- $X$ tem distribuição Geométrica de parâmetro $p$, se sua
-função de probabilidade tem a forma $$ P(X = k) = p(1-p)^k, \quad 0\leq
-p \leq 1, \quad \text{e} \quad k = 0,1, \ldots .$$
-- Exemplo 3.11: Uma linha de produção está sendo analisada
-para efeito de controle da qualidade das peças produzidas. Tendo
-em vista o alto padrão requerido, a produção é interrompida para
-regulagem toda vez que uma peça defeituosa é observada. Se $0.01$
-é a probabilidade da peça ser defeituosa, estude o comportamento
-da variável $Q$, quantidade de peças boas produzidas antes da primeira
-defeituosa.
+**Definição:** Considere o número ($k$) de ensaios Bernoulli **até o
+primeiro sucesso**. Nesse caso, dizemos que a VA $X$ tem distribuição
+Geométrica de parâmetro $p$, e sua função de probabilidade tem a forma
+$$ P(X = k) = p(1-p)^k, \quad k = 0,1, \ldots .
+$$
+onde $0 \leq p \leq 1$ é a probabilidade de sucesso.
 
-### Exemplo $3.11$
+**Notação:** $X \sim \text{G}(p)$.
 
-- $ P(Q = k) = 0.01*0.99^k $
-- Usando o R temos
+### Modelo Geométrico
 
-```{r }
-dgeom(x = 1, prob = 0.01)
+```{r, out.width='80%', fig.width=8, fig.height=6}
+par(mfrow=c(2,2))
+plot(0:50, dgeom(x = 0:50, prob = .1), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.1")
+plot(0:50, dgeom(x = 0:50, prob = .3), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.3")
+plot(0:50, dgeom(x = 0:50, prob = .7), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.7")
+plot(0:50, dgeom(x = 0:50, prob = .9), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.9")
 ```
 
-```{r}
-x = c(0:50)
+### Exemplo 3.11
+
+Uma linha de produção está sendo analisada para efeito de controle da
+qualidade das peças produzidas. Tendo em vista o alto padrão requerido,
+a produção é interrompida para regulagem toda vez que uma peça
+defeituosa é observada. Se $0.01$ é a probabilidade da peça ser
+defeituosa, estude o comportamento da variável $Q$, quantidade de peças
+boas produzidas antes da primeira defeituosa.
+
+### Exemplo 3.11
+
+$P(Q = k) = 0.01 \times 0.99^k, \quad k = 0, 1, \ldots$
+
+Usando o R temos
+
+```{r, echo=TRUE}
+x = c(0:100)
 dx = dgeom(x = x, prob = 0.01)
-plot(dx, type = "h")
+plot(x, dx, type = "h", xlab = "X", ylab = "P[X = x]")
 ```
 
 ### Modelo Poisson
 
-- $X$ tem distribuição Poisson com parâmetro $\lambda > 0$,
-se sua função de probabilidade é dada por
-$$ P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}, \quad k = 0, 1, 2,
-\ldots . $$
-- Notação: $X \sim Po(\lambda)$.
-```{r}
-x = c(0:20)
-dx = dpois(x = x, lambda = 5)
-plot(dx, type = "h")
+**Definição:** Seja um experimento realizado nas seguintes
+condições:
+
+i. As ocorrências são independentes
+ii. As ocorrências são aleatórias
+iii. A variável aleatória $X$ é o número de ocorrências de um
+evento **ao longo de algum intervalo** (de tempo ou espaço)
+
+Denominamos esse experimento de **processo de Poisson**.
+
+Vamos associar a VA $X$ o número de ocorrências em um intervalo.
+Portanto $X$ poderá assumir os valores $0, 1, \ldots$ (sem limite
+superior).
+
+### Modelo Poisson
+
+Uma VA $X$ segue o modelo de Poisson se surge a partir de um
+processo de Poisson, e sua **função de probabilidade** for dada
+por
+$$
+P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}, \quad k = 0, 1, 2, \ldots .
+$$
+onde o parâmetro $\lambda > 0$ é a taxa média de ocorrências em um intervalo de
+tempo ou espaço.
+
+Notação: $X \sim Po(\lambda)$.
+
+### Modelo Poisson
+
+```{r, out.width='80%', fig.width=8, fig.height=6}
+par(mfrow=c(2,2))
+plot(0:30, dpois(x = 0:30, lambda = 1), type = "h",
+xlab = "X", ylab = "P[X = x]", main = expression(lambda == 1),
+ylim = c(0,.4))
+plot(0:30, dpois(x = 0:30, lambda = 5), type = "h",
+xlab = "X", ylab = "P[X = x]", main = expression(lambda == 5),
+ylim = c(0,.4))
+plot(0:30, dpois(x = 0:30, lambda = 10), type = "h",
+xlab = "X", ylab = "P[X = x]", main = expression(lambda == 10),
+ylim = c(0,.4))
+plot(0:30, dpois(x = 0:30, lambda = 15), type = "h",
+xlab = "X", ylab = "P[X = x]", main = expression(lambda == 15),
+ylim = c(0,.4))
 ```
 
-### Exemplo $3.12$
+### Exemplo 3.12
 
 A emissão de partículas radioativas têm sido modelada através de
 uma distribuição de Poisson, com o valor do parâmetro dependendo da fonte
 utilizada.
 
 Suponha que o número de partículas alfa, emitidas por minuto,
-seja uma variável aleatória seguindo o modelo Poisson com parâmetro $5$,
-isto é, a taxa média de ocorrência é de $5$ emissões a cada minuto.
+seja uma variável aleatória seguindo o modelo Poisson com parâmetro 5,
+isto é, a taxa média de ocorrência é de 5 emissões a cada minuto.
 
 Calcule a probabilidade de haver mais de $2$ emissões em um minuto.
 
-### Exemplo $3.12$
+### Exemplo 3.12
 
+Note que $P(A > 2) = 1 - P(A \leq 2)$, portanto
 \begin{align*}
-P(A > 2) &= \sum_{a = 3}^{\infty} P(A = a) = 1 - \sum_{a=0}^2 P(A = a) \\
+P(A > 2) &= \sum_{a = 3}^{\infty} P(A = a) = 1 - P(A \leq 2) \\
 &= 1 - \sum_{a =0}^2 \frac{e^{-5}5^a}{a!} = 0.875
 \end{align*}
 
-- Em R temos
-```{r }
+Em R temos
+
+```{r, echo=TRUE}
 1 - ppois(2, lambda = 5)
 ```
 
@@ -681,31 +733,99 @@ número $N$ de chamadas interestaduais que chegam por hora, a uma
 central telefônica, durante o período noturno. Os dados coletados
 referentes a $650$ períodos de uma hora, estão apresentados abaixo.
 Analise se esta suposição é razoável.
-```{r }
+
+```{r, results='asis'}
 obs <- c(9,38,71,115,125,106,79,50,57)
-esp <- c(dpois(0:7, lambda = 4.5), 1 - ppois(7, lambda = 4.5))
-cbind("Obs" = obs, "Esp" = 650*esp)
+tab <- cbind("Chamadas" = c(0:7, "8+"),
+             "Freq. Obs." = obs)
+knitr::kable(t(tab))
+```
+
+### Exemplo $3.13$
+
+Usando o R temos
+
+```{r, echo=TRUE}
+obs <- c(9, 38, 71, 115, 125, 106, 79, 50, 57)
+prob <- c(dpois(0:7, lambda = 4.5), 1 - ppois(7, lambda = 4.5))
+esp <- prob * 650
+cbind("Obs" = obs, "p" = round(prob, 2), "Esp" = round(esp, 2))
 ```
 
 ### Modelo hipergeométrico
 
- Considere um conjunto de $n$ objetos dos quais $m$ são do tipo $I$
-e $n-m$ são do tipo $II$. Para um sorteio de $r$ objetos $r < n$, feito
-ao acaso e sem reposição, defina $X$ como o número de objetos de tipo $I$
-selecionados. Diremos que a va $X$ segue o modelo Hipergeométrico e
-sua função de probabilidade é dada por
-$$ P(X = k) = \frac{\dbinom{m}{k} \dbinom{n-m}{r-k}}{\dbinom{n}{r}}, \quad
-k = \max(0, r-(n-m)), ..., \min(r,m).$$
+**Definição:** Considere um conjunto de $n$ objetos dos quais $m$ são do
+tipo $I$ e $n-m$ são do tipo $II$. Para um sorteio de $r$ objetos $r <
+n$, feito ao acaso e **sem reposição**, defina $X$ como o número de
+objetos de tipo $I$ selecionados.
 
-### Exemplo $3.14$
+Diremos que a VA $X$ segue o modelo Hipergeométrico e sua função de
+probabilidade é dada por
+$$
+P[X = k] = \frac{\dbinom{m}{k} \dbinom{n-m}{r-k}}{\dbinom{n}{r}},
+$$
+onde $k = \max{\{0, r - (n-m)\}} \leq k \leq \min{\{r, m\}}$.
 
-- Uma fábrica produz peças que são embaladas em caixas com $25$
-unidades. Para aceitar o lote enviado por essa fábrica, o controle de
-qualidade de uma empresa procede da seguinte forma: Sorteia uma caixa
-do lote e, em seguida sorteia cinco peças, sem reposição, dessa mesma
-caixa. Se constatar no máximo duas defeituosas, aceita o lote fornecido
-pela fábrica. Se a caixa sorteada tivesse $4$ peças defeituosas, qual
-seria a probabilidade de rejeitar o lote?
+**Notação:** $X \sim \text{HG}(m, n, r)$.
+
+### Exemplo
+
+<!-- Magalhães, pg 87 -->
+
+Considere que, num lote de 20 peças, existam 4 defeituosas.
+Selecionando-se 5 dessas peças, sem reposição, qual seria a
+probabilidade de 2 defeituosas terem sido escolhidas?
+
+### Exemplo
+
+Pelo enunciado, sabemos que $n = 20$, $m = 4$, $r = 5$. podemos calcular
+a probabilidade de $X = 2$ como
+
+\begin{align*}
+P[X = 2] &= \frac{\dbinom{m}{k} \dbinom{n-m}{r-k}}{\dbinom{n}{r}}
+  = \frac{\dbinom{4}{2} \dbinom{20-4}{5-2}}{\dbinom{20}{5}} = 0.217
+\end{align*}
+
+Usando o R temos
+
+```{r, echo=TRUE}
+## m = defeituosas, n = não defeituosas, k = tam. amostra
+dhyper(x = 2, m = 4, n = 16, k = 5)
+```
+
+### Modelo hipergeométrico - captura e recaptura
+
+Para determinar o tamanho de uma população, podemos usar o modelo
+hipergeométrico
+
+- Captura e marcação de $m$ animais
+- Após um tempo, amostram-se $r$ animais (sem reposição)
+- O número de animais marcados é contado
+
+Sendo $X$ a VA "número de animais marcados", então $X \sim \text{HG}(m,
+N, r)$, onde $N$ é o tamanho da população (desconhecido).
+
+Supondo que a amostra forneça $k_0$ animais marcados, podemos ter uma
+estimativa de $N$ com
+$$
+N_{est} = m \frac{r}{k_0}
+$$
+
+### Modelo hipergeométrico - captura e recaptura
+
+Suponha que você marcou 200 indivíduos de uma espécie de peixe em um
+lago. Algum tempo depois você capturou 56 indivíduos, dos quais 9
+estavam marcados. Qual o tamanho estimado da população?
+
+\begin{align*}
+N_{est} &= m \frac{r}{k_0} \\
+  &= 200 \cdot \frac{56}{9} \\
+  &= 1244,44 \approx 1244
+\end{align*}
+
+```{r, include=FALSE}
+200 * (56/9)
+```
 
 # Exercícios recomendados
 
@@ -714,3 +834,4 @@ seria a probabilidade de rejeitar o lote?
 - Seção $3.1$ - $3,5$ e $6$.
 - Seção $3.2$ - $2,3,5$ e $6$.
 - Seção $3.3$ - $1,2,3,4,5$ e $6$.
+- Extras: Seção 3.4 - 1, 9, 10, 14, 16, 19, 21, e 26.
