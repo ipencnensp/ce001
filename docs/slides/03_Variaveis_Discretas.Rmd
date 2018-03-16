@@ -263,11 +263,12 @@ print(xtable(dtab, digits = c(0, 0, 3, 3)),
 
 \column{.5\textwidth}
 
-Grafico de $F(x)$:
+Grafico de $F(X)$:
 
-```{r, out.width='90%'}
+```{r, out.width='99%', fig.width=5,fig.height=3.5}
+par(mar=c(3,3,1,1), mgp=c(2,0.7,0), las=1)
 plot(stepfun(x = 1:5, y = c(0,dtab[-6,3]), right = FALSE),
-     xlab = "x", ylab = "F(x)", main = "",
+     xlab = "X", ylab = "F(X)", main = "",
      pch = 19, col.vert = "gray")
 ```
 \endcols
@@ -349,7 +350,8 @@ print(xtable(dtab, digits = c(0, 0, 1)),
 })
 ```
 \column{.5\textwidth}
-```{r esperado, out.width='90%'}
+```{r esperado, out.width='99%', fig.width=5, fig.height=3.5}
+par(mar=c(3,3,1,1), mgp=c(2,0.7,0), las=1)
 plot(0:5, dtab[-7,1], xlab = "Casos", ylab = "Frequência",
      ylim = c(0, 8))
 points(0:5, dtab[-7,2], pch = 3)
@@ -376,11 +378,11 @@ $$
 
 ### Modelo Uniforme Discreto
 
-```{r, out.width='80%', fig.width=8, fig.height=6}
-par(mfrow=c(2,2))
+```{r, out.width='80%', fig.width=7, fig.height=5}
+par(mfrow=c(2,2), mar=c(3,3,2,1), mgp=c(2,0.7,0), las=1)
 plot(1:2, dunif(x = 1:2, min = 0, max = 2), type = "h",
      xlab = "X", ylab = "P[X = x]", main = "k = 2",
-     ylim = c(0,1))
+     ylim = c(0,1), axes=FALSE); box(); axis(1, 1:2); axis(2)
 plot(1:5, dunif(x = 1:5, min = 0, max = 5), type = "h",
      xlab = "X", ylab = "P[X = x]", main = "k = 5",
      ylim = c(0,1))
@@ -414,20 +416,20 @@ onde o parâmetro $0 \leq p \leq 1$ é a probabilidade de sucesso.
 
 ### Modelo Bernoulli
 
-```{r, out.width='80%', fig.width=8, fig.height=6}
-par(mfrow=c(2,2))
+```{r, out.width='99%', fig.width=7, fig.height=4}
+par(mfrow=c(2,2), mar=c(3,3,2,1), mgp=c(2,0.7,0), las=1)
 plot(0:1, dbinom(x = 0:1, size = 1, prob = .2), type = "h",
 xlab = "X", ylab = "P[X = x]", main = "p = 0.2",
-ylim = c(0,1))
+ylim = c(0,1), axes = FALSE); box(); axis(1,0:1); axis(2)
 plot(0:1, dbinom(x = 0:1, size = 1, prob = .5), type = "h",
 xlab = "X", ylab = "P[X = x]", main = "p = 0.5",
-ylim = c(0,1))
+ylim = c(0,1), axes = FALSE); box(); axis(1,0:1); axis(2)
 plot(0:1, dbinom(x = 0:1, size = 1, prob = .7), type = "h",
 xlab = "X", ylab = "P[X = x]", main = "p = 0.7",
-ylim = c(0,1))
+ylim = c(0,1), axes = FALSE); box(); axis(1,0:1); axis(2)
 plot(0:1, dbinom(x = 0:1, size = 1, prob = .9), type = "h",
 xlab = "X", ylab = "P[X = x]", main = "p = 0.9",
-ylim = c(0,1))
+ylim = c(0,1), axes = FALSE); box(); axis(1,0:1); axis(2)
 ```
 
 ### Exemplo
@@ -510,8 +512,8 @@ combinações possíveis de $n$ elementos, com $x$ sucessos.
 
 ### Modelo binomial
 
-```{r, out.width='80%', fig.width=8, fig.height=6}
-par(mfrow=c(2,2))
+```{r, out.width='90%', fig.width=7.5, fig.height=5}
+par(mfrow=c(2,2), mar=c(3,3,2,1), mgp=c(2,0.7,0), las=1)
 plot(0:10, dbinom(x = 0:10, size = 10, prob = .2), type = "h",
      xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.2",
      ylim = c(0,.5))
@@ -598,7 +600,8 @@ cbind("Obs" = obs, "p" = round(prob, 2), "Esp" = round(esp, 2))
 
 ### Exemplo 3.10
 
-```{r, echo=TRUE}
+```{r, echo=-1, out.width="80%", fig.width=7, fig.height=4}
+par(mar=c(4,4,1,1), mgp=c(2.5,1,0), las=1)
 plot(0:10, obs, xlab = "Filhotes", ylab = "Frequência")
 points(0:10, esp, pch = 3)
 legend("topright", legend = c("Observado", "Esperado"), pch = c(1, 3))
@@ -608,10 +611,12 @@ legend("topright", legend = c("Observado", "Esperado"), pch = c(1, 3))
 
 ### Modelo Geométrico
 
-**Definição:** Considere o número ($k$) de ensaios Bernoulli **até o
-primeiro sucesso**. Nesse caso, dizemos que a VA $X$ tem distribuição
-Geométrica de parâmetro $p$, e sua função de probabilidade tem a forma
-$$ P(X = k) = p(1-p)^k, \quad k = 0,1, \ldots .
+**Definição:** Considere o número ($k$) de ensaios Bernoulli **que
+precedem o primeiro sucesso**. Nesse caso, dizemos que a VA $X$ tem
+distribuição Geométrica de parâmetro $p$, e sua função de probabilidade
+tem a forma
+$$
+P(X = k) = p(1-p)^{k}, \quad k = 0, 1, 2, \ldots .
 $$
 onde $0 \leq p \leq 1$ é a probabilidade de sucesso.
 
@@ -619,8 +624,8 @@ onde $0 \leq p \leq 1$ é a probabilidade de sucesso.
 
 ### Modelo Geométrico
 
-```{r, out.width='80%', fig.width=8, fig.height=6}
-par(mfrow=c(2,2))
+```{r, out.width='90%', fig.width=7.5, fig.height=5}
+par(mfrow=c(2,2), mar=c(4,4,2,1), mgp=c(2.5,0.7,0), las=1)
 plot(0:50, dgeom(x = 0:50, prob = .1), type = "h",
      xlab = "X", ylab = "P[X = x]", main = "p = 0.1")
 plot(0:50, dgeom(x = 0:50, prob = .3), type = "h",
@@ -642,13 +647,14 @@ boas produzidas antes da primeira defeituosa.
 
 ### Exemplo 3.11
 
-$P(Q = k) = 0.01 \times 0.99^k, \quad k = 0, 1, \ldots$
+$P(Q = k) = 0.01 \times 0.99^{k}, \quad k = 0, 1, 2, \ldots$
 
 Usando o R temos
 
-```{r, echo=TRUE}
+```{r, echo=-3, fig.width=7.5, fig.height=3, out.width="90%"}
 x = c(0:100)
 dx = dgeom(x = x, prob = 0.01)
+par(mar=c(4,4,1,1), mgp=c(3,1,0), las=1)
 plot(x, dx, type = "h", xlab = "X", ylab = "P[X = x]")
 ```
 
@@ -683,8 +689,8 @@ Notação: $X \sim Po(\lambda)$.
 
 ### Modelo Poisson
 
-```{r, out.width='80%', fig.width=8, fig.height=6}
-par(mfrow=c(2,2))
+```{r, out.width='90%', fig.width=7.5, fig.height=5}
+par(mfrow=c(2,2), mar=c(4,4,2,1), mgp=c(3,1,0), las=1)
 plot(0:30, dpois(x = 0:30, lambda = 1), type = "h",
 xlab = "X", ylab = "P[X = x]", main = expression(lambda == 1),
 ylim = c(0,.4))

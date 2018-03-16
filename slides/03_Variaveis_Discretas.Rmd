@@ -600,7 +600,7 @@ cbind("Obs" = obs, "p" = round(prob, 2), "Esp" = round(esp, 2))
 
 ### Exemplo 3.10
 
-```{r, echo=TRUE, out.width="80%", fig.width=7, fig.height=4}
+```{r, echo=-1, out.width="80%", fig.width=7, fig.height=4}
 par(mar=c(4,4,1,1), mgp=c(2.5,1,0), las=1)
 plot(0:10, obs, xlab = "Filhotes", ylab = "Frequência")
 points(0:10, esp, pch = 3)
@@ -651,7 +651,7 @@ $P(Q = k) = 0.01 \times 0.99^{k}, \quad k = 0, 1, 2, \ldots$
 
 Usando o R temos
 
-```{r, echo=TRUE, fig.width=7.5, fig.height=3, out.width="90%"}
+```{r, echo=-3, fig.width=7.5, fig.height=3, out.width="90%"}
 x = c(0:100)
 dx = dgeom(x = x, prob = 0.01)
 par(mar=c(4,4,1,1), mgp=c(3,1,0), las=1)
