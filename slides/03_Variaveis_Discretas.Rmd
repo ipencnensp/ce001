@@ -647,7 +647,7 @@ boas produzidas antes da primeira defeituosa.
 
 ### Exemplo 3.11
 
-$P(Q = k) = 0.01 \times 0.99^{k-1}, \quad k = 1, 2, 3, \ldots$
+$P(Q = k) = 0.01 \times 0.99^{k}, \quad k = 0, 1, 2, \ldots$
 
 Usando o R temos
 
