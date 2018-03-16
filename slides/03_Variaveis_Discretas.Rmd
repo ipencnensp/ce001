@@ -611,10 +611,12 @@ legend("topright", legend = c("Observado", "Esperado"), pch = c(1, 3))
 
 ### Modelo Geométrico
 
-**Definição:** Considere o número ($k$) de ensaios Bernoulli **até o
-primeiro sucesso**. Nesse caso, dizemos que a VA $X$ tem distribuição
-Geométrica de parâmetro $p$, e sua função de probabilidade tem a forma
-$$ P(X = k) = p(1-p)^{k-1}, \quad k = 1, 2, 3, \ldots .
+**Definição:** Considere o número ($k$) de ensaios Bernoulli **que
+precedem o primeiro sucesso**. Nesse caso, dizemos que a VA $X$ tem
+distribuição Geométrica de parâmetro $p$, e sua função de probabilidade
+tem a forma
+$$
+P(X = k) = p(1-p)^{k}, \quad k = 0, 1, 2, \ldots .
 $$
 onde $0 \leq p \leq 1$ é a probabilidade de sucesso.
 
