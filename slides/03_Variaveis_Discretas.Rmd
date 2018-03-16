@@ -614,7 +614,7 @@ legend("topright", legend = c("Observado", "Esperado"), pch = c(1, 3))
 **Definição:** Considere o número ($k$) de ensaios Bernoulli **até o
 primeiro sucesso**. Nesse caso, dizemos que a VA $X$ tem distribuição
 Geométrica de parâmetro $p$, e sua função de probabilidade tem a forma
-$$ P(X = k) = p(1-p)^k, \quad k = 0,1, \ldots .
+$$ P(X = k) = p(1-p)^{k-1}, \quad k = 1, 2, 3, \ldots .
 $$
 onde $0 \leq p \leq 1$ é a probabilidade de sucesso.
 
@@ -645,7 +645,7 @@ boas produzidas antes da primeira defeituosa.
 
 ### Exemplo 3.11
 
-$P(Q = k) = 0.01 \times 0.99^k, \quad k = 0, 1, \ldots$
+$P(Q = k) = 0.01 \times 0.99^{k-1}, \quad k = 1, 2, 3, \ldots$
 
 Usando o R temos
 
