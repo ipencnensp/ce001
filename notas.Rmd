@@ -7,11 +7,16 @@ output:
 
 ```{r setup, include=FALSE, cache=FALSE}
 source("setup_knitr.R")
+mb <- read.csv2('notas-MB.csv')
 ```
 
 ## Escolha a aba de sua turma {.tabset}
 
 ### CE001-MB
+
+```{r notasmb}
+kable(mb)
+```
 
 ### CE001-N
 
