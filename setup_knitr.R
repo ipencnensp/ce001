@@ -1,7 +1,7 @@
 library(knitr)
 ## knitr options
 opts_chunk$set(
-    cache = TRUE,
+    ## cache = TRUE,
     tidy = FALSE,
     comment = NA,
     collapse = TRUE, ## colapsa chunks em R Markdown
@@ -10,6 +10,6 @@ opts_chunk$set(
     fig.align = "center",
     ## dpi = 80, ## aumentar o dpi para exibir maior.
     ## dev = "png",
-    fig.path = "figures/",
-    cache.path = "cache/"
+    ## cache.path = "cache/",
+    fig.path = "figures/"
     )

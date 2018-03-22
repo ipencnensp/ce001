@@ -7,7 +7,6 @@ output:
 
 ```{r setup, include=FALSE, cache=FALSE}
 source("setup_knitr.R")
-mb <- read.csv2('notas-MB.csv')
 ```
 
 ## Escolha a aba de sua turma {.tabset}
@@ -15,9 +14,23 @@ mb <- read.csv2('notas-MB.csv')
 ### CE001-MB
 
 ```{r notasmb}
-kable(mb)
+mb <- read.csv2('misc/notas-MB.csv')
+mb <- mb[order(mb$Matrícula), ]
+kable(mb, row.names = FALSE)
 ```
 
 ### CE001-N
 
+```{r notasn}
+n <- read.csv("misc/notas_ce001-N.csv")
+n <- n[order(n$Matrícula), ]
+kable(n, row.names = FALSE)
+```
+
 ### CE003-MN
+
+```{r notasmn}
+mn <- read.csv("misc/notas_ce003-MN.csv")
+mn <- mn[order(mn$Matrícula), ]
+kable(mn, row.names = FALSE)
+```

@@ -11,10 +11,10 @@ source("setup_knitr.R")
 
 [![Build Status](https://travis-ci.org/leg-ufpr/ce001.svg?branch=master)](https://travis-ci.org/leg-ufpr/ce001)
 
-<div class="alert alert-danger" role="alert">
-**AVISO:** a partir de hoje (14/03), as aulas da turma N (Biologia
-noturno) serão na sala **PH-18**.
-</div>
+<!-- <div class="alert alert-danger" role="alert"> -->
+<!-- **AVISO:** a partir de hoje (14/03), as aulas da turma N (Biologia -->
+<!-- noturno) serão na sala **PH-18**. -->
+<!-- </div> -->
 
 # Detalhes da oferta da disciplina
 
