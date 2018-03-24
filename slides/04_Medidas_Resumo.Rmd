@@ -30,13 +30,16 @@ library(xtable)
 ### Medidas de posição para um conjunto de dados
 
 Média:
+
 $$
-\bar{x}_{obs} = \frac{x_1 + x_2 ... x_n}{n} = \frac{\sum_{i=1}^n
+\bar{x}_{obs} = \frac{x_1 + x_2, \ldots, x_n}{n} = \frac{\sum_{i=1}^n
 x_i}{n}.
 $$
-$$\bar{x}_{obs} = \frac{n_1 x_1 + n_2 x_2 + ... n_k x_k}{n_1 + n_2 + ...
+
+$$\bar{x}_{obs} = \frac{n_1 x_1 + n_2 x_2 + \ldots + n_k x_k}{n_1 + n_2 + \ldots
 n_k} = \frac{\sum_{i=1}^k n_i x_i}{n}.
 $$
+
 - Mediana ($md_{obs}$): Valor que ocupa a posição central dos dados ordenados.
 - Moda ($mo_{obs}$): valor mais frequente.
 
@@ -48,9 +51,9 @@ uma construção, $10$ caixas de um lote tiveram o número de parafusos
 contados, fornecendo os valores $98$, $102$, $100$, $100$, $99$, $97$, $96$,
 $95$, $99$ e $100$. Calcular média, mediana e moda.
 
-- $ \bar{x}_{obs} = 98.6.$
-- $ md_{obs} = 99.$
-- $ mo_{obs} = 100.$
+- $\bar{x}_{obs} = 98.6.$
+- $md_{obs} = 99.$
+- $mo_{obs} = 100.$
 
 ### Exemplo $4.2$
 
@@ -65,6 +68,7 @@ soma dos custos dos parafusos e da embalagem.
 o número de vestibulates FUVEST (um por ano) que um mesmo estudande
 prestou. Assim, foi observado que $75$ estudantes prestaram vestibular
 FUVEST, uma única vez, e assim por diante. Os dados estão na tabela abaixo:
+
 \begin{table}
 \centering
 \begin{tabular}{ll}
@@ -76,6 +80,7 @@ FUVEST, uma única vez, e assim por diante. Os dados estão na tabela abaixo:
 4                       & 7                        \\ \hline
 \end{tabular}
 \end{table}
+
 - Suponha ainda que o interesse é estudar o gasto dos alunos associado
 com as despesas do vestibular. Para simplificar, suponha que se atribui para
 cada aluno, uma despesa fixa de $1300,00$ relativa a preparação e mais $50$
@@ -86,6 +91,7 @@ para cada vestibular prestado. Calcule as medidas de posição central.
 - Um estudante está procurando um estágio para o próximo ano.
 As companhias A e B têm programas de estágios e oferecem uma
 remuneração por $20$ horas semanais com as seguintes características.
+
 \begin{table}
 \centering
 \begin{tabular}{lll}
@@ -96,6 +102,7 @@ mediana     & $1.7$ & $1.9$ \\
 moda        & $1.5$ &  $1.9$ \\ \hline
 \end{tabular}
 \end{table}
+
 - Qual companhia você escolheria?
 
 # Medidas de posição para va
@@ -112,15 +119,27 @@ $$ P(X = mo) = \max(p_1, p_2, ..., p_k).$$
 ### Exemplo $4.5$
 
 - Conside a va $X$ com a seguinte função discreta de probabilidade:
-X    & -5  & 10  & 15  & 20  \\
-p\_i & 0.3 & 0.2 & 0.4 & 0.1
+
+\begin{table}
+\centering
+\begin{tabular}{l|llll}
+$X$    & -5  & 10  & 15  & 20  \\ \hline
+$p_i$ & 0.3 & 0.2 & 0.4 & 0.1 \\ \hline
+\end{tabular}
+\end{table}
+
 - Calcule as medidas de tendência central.
 
 ### Exemplo $4.6$
 
 - Conside uma va X com função de probabilidade dada por
-X    & 2  & 5  & 8  & 15 & 20  \\
+\begin{table}
+\centering
+\begin{tabular}{l|lllll}
+X    & 2  & 5  & 8  & 15 & 20  \\ \hline
 $p_i$ & 0.1 & 0.3 & 0.2 & 0.2 & 0.2
+\end{tabular}
+\end{table}
 - Calcule as medidas de posição para a va $Y = 5 X - 10$.
 - Veja resumo na Tabela $4.1$ pg. 100.
 
@@ -133,15 +152,16 @@ inglês, os alunos indicaram o número de outras línguas que tinham
 alguma familiaridade. Os resultados ordenados foram: $0,0,0,0,1,1,1,1,1,2,2$ e $4$.
 Calcule as medidas de posição central e avalie algumas medidas de dispersão.
 - Desvio mediano: $\frac{1}{n}\sum_{i=1}^n | x_i - md_{obs}|.$
-- Desvio médio: $\frac{1}{n}\sum_{i=1}^n \| x_i - \bar{x}_{obs}\|.$
+- Desvio médio: $\frac{1}{n}\sum_{i=1}^n | x_i - \bar{x}_{obs}|.$
 
 ### Variância e desvio-padrão em um conjunto de dados
 
-- Variância $ var_{obs} = \frac{1}{n}\sum_{i=1}^n(x_i - \bar{x}_obs)^2.$
-- Desvio-padrão $ dp_{obs} = \sqrt{var_{obs}}.$
+- Variância $var_{obs} = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x}_{obs})^2$
+- Desvio-padrão $dp_{obs} = \sqrt{var_{obs}}$.
 - Exemplo $4.8$: No Exemplo $4.1$, foram fornecidas as quantidades
 de parafusos em $10$ caixas de um lote. Calcule a variância e o desvio-padrão.
-```{r }
+
+```{r}
 obs <- c(98,102,100,100,99,97,96,95,99,100)
 n <- length(obs)
 media <- sum(obs)/n
@@ -164,7 +184,7 @@ variância de $D$.
 ### Variância de uma va
 
 - $Var(X) =  \sum_{i=1}^k (x_i - \mu)^2 p_i.$
-- $ Var(X) = E[(X - \mu)^2] = E(X^2) - E^2(X).$
+- $Var(X) = E[(X - \mu)^2] = E(X^2) - E^2(X).$
 - Ver Tabelas resumo $4.2$ e $4.3$ pg. 111.
 
 ### Exemplo $4.11$
@@ -173,12 +193,31 @@ variância de $D$.
 diferentes cujos tempos de recuperação (em dias) são modelados pelas
 variáveis $X_1$, $X_2$ e $X_3$. Admita suas funções de probabilidades
 são dadas por
-$X_1$ & 0  & 4  & 5  & 6 & 10  \\
+
+\begin{table}
+\centering
+\begin{tabular}{l|lllll}
+$X_1$ & 0  & 4  & 5  & 6 & 10  \\ \hline
 $p_i$ & 0.2 & 0.2 & 0.2 & 0.2 & 0.2
-$X_2$ & 1     & 5     & 9    \\
+\end{tabular}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{l|lll}
+$X_2$ & 1     & 5     & 9    \\ \hline
 $p_i$ & $1/3$ & $1/3$ & $1/3$
-$X_3$ & 4   & 5   & 6   \\
+\end{tabular}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{l|lll}
+$X_3$ & 4   & 5   & 6   \\ \hline
 $p_i$ & 0.3 & 0.4 & 0.3
+\end{tabular}
+\end{table}
+
 - Calcule as medidas de posição central e dispersão para cada va
 e decida sobre o método mais eficiente.
 
