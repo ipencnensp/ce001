@@ -1,6 +1,6 @@
 knitr::opts_chunk$set(comment = "#",
                       echo = FALSE,
-                      cache = TRUE,
+                      ## cache = TRUE,
                       tidy = FALSE,
                       fig.align = "center",
                       out.width = "60%",
