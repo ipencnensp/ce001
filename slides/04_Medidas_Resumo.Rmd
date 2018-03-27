@@ -29,12 +29,20 @@ op <- par(no.readonly = TRUE)
 
 ### Introdução
 
-Características importantes de qualquer conjunto de dados
+Características importantes de qualquer conjunto de dados 
+ou de uma variável aleatória
 
 - Centro
 - Variação
 - Distribuição
 - Valores atípicos
+
+\pause 
+
+Classificaremos as medidas descritivas em dois grupos 
+
+- de posição
+- de dispersão
 
 # Medidas de posição
 
@@ -42,71 +50,74 @@ Características importantes de qualquer conjunto de dados
 
 ### Definição
 
-É um valor no centro, ou meio, do conjunto de dados
+- medidas de posição central
+    - úteis para **resumo** e **análise** de dados
+        - Média, Mediana, Moda
 
-Ferramentas para **resumo** e **análise** de dados
-
-- Média
-- Mediana
-- Moda
+- outras medidas de posição
+    - extremos: mínimo, máximo
+    - quantis: 1o quartil, 3o quartil, percentil 5%, entre outras
 
 ### Moda
 
-A **moda** é o valor que ocorre com **maior frequência** em
-um conjunto de dados
+Valor **mais frequente** em um conjunto de dados
 
-Dependendo do conjunto de dados, ele pode ser
+- Dependendo do conjunto de dados, ele pode ser
+   - **Sem moda** quando nenhum valor se repete
+   - **Unimodal** quando existe apenas um valor repetido com maior frequência
+   - **Bimodal** quando existem dois valores com a mesma maior frequência
+   - **Multimodal** quando mais de dois valores se repetem com a mesma frequência
 
-- **Sem moda** quando nenhum valor se repete
-- **Unimodal** quando existe apenas um valor repetido com
-maior frequência
-- **Bimodal** quando existem dois valores com a mesma maior
-frequência
-- **Multimodal** quando mais de dois valores se repetem com a
-mesma frequência
+\pause 
+
+Valor com **maior probabilidade** de ocorrer numa **VA discreta**
+
+- Ex.: lançamento de duas moedas 
+    - $X$: número de caras, $X = \{0, 1, 2\}$
+    - $P(x)$ = $0.25$, $0.5$ e $0.25$, respectivamente
+    - moda: 1
 
 ### Mediana
 
-A **mediana** é uma medida de centro que é o **valor do meio**,
-quando os dados são arranjados de maneira **ordenada**
+O **valor do meio** da amostra **ordenada**
 
-É o valor cuja posição separa o conjunto de dados em duas partes
-iguais
+- Separa o conjunto de dados em duas partes iguais, 50% abaixo e 50% acima
 
-Quando as observações são ordenadas em ordem crescente, vamos denotar
-a menor observação por $x_{(1)}$, a segunda por $x_{(2)}$, e assim por
-diante, obtendo-se
+Observações ordenadas:  
 
+- a menor observação por $x_{(1)}$, a segunda por $x_{(2)}$, e assim por diante: 
 
 $$
 x_{(1)} \leq x_{(2)} \leq \, \cdots \, \leq x_{(n-1)} \leq x_{(n)}
 $$
 
-Estas observações odenadas são chamadas de **estatísticas de
-ordem**.
+As observações odenadas são chamadas de **estatísticas de ordem**
 
-### Média
+- $x_{(1)}$ é o mínimo da amostra
+- $x_{(n)}$ é o máximo da amostra
 
-A **média aritmética** de um conjunto de dados é a medida de
-tendência central encontrada pela soma de todos os valores, dividida
-pelo número total de elementos, ou seja,
+### Média dos dados brutos
+
+Divide-se a soma de todos os dados pelo número total deles:
 
 $$
 \bar{x}_{obs} = \frac{x_1 + x_2 + \cdots + x_n}{n} = \frac{\sum_{i=1}^n
 x_i}{n}.
 $$
 
-Se os dados estiverem organizados em uma tabela de frequência, a média
-pode ser obtida com
+
+## Média de dados agrupados
+
+soma dos produtos dos valores pelas respectivas frequencias e divide pela frequencia total
 
 $$
 \bar{x}_{obs} = \frac{n_1 x_1 + n_2 x_2 + \cdots + n_k x_k}{n_1 + n_2 +
 \cdots + n_k} = \frac{\sum_{i=1}^k n_i x_i}{n}.
 $$
 
-### Média
+## Exemplo: média de dados discretos agrupados
 
-Como exemplo, considere a tabela de frequência abaixo:
+Considere a tabela de frequência abaixo:
 
 \begin{table}[h]
 \centering
@@ -133,10 +144,9 @@ A média é calculada por:
   &= 1,65
 \end{align*}
 
-### Média
+### Exemplo: Média de dados agrupados em classes
 
-Para variáveis resumidas em classes de valores, podemos usar o **ponto
-médio** de cada classe. Por exemplo:
+Usar**ponto médio** de cada classe e respectivas frequencias 
 
 \begin{table}[h]
     \centering
@@ -167,8 +177,11 @@ Considerando os pontos médios de cada classe, a média é calculada por
 Suponha que parafusos a serem utilizados em tomadas elétricas
 são embalados em caixas rotuladas como contendo $100$ unidades. Em
 uma construção, $10$ caixas de um lote tiveram o número de parafusos
-contados, fornecendo os valores $98$, $102$, $100$, $100$, $99$, $97$, $96$,
-$95$, $99$ e $100$. Calcular média, mediana e moda.
+contados, fornecendo os valores
+
+$98$, $102$, $100$, $100$, $99$, $97$, $96$, $95$, $99$ e $100$ 
+
+Calcular média, mediana e moda.
 
 - $\bar{x}_{obs} = 98.6.$
 - $md_{obs} = 99.$
@@ -176,8 +189,8 @@ $95$, $99$ e $100$. Calcular média, mediana e moda.
 
 ### Média e mediana
 
-Para notar como a média é influenciada pela presença de valores
-extremos (se ao invés de 95, o valor fosse 45):
+Notar a influencia de valores extremos na média
+(se ao invés de 95, o valor fosse 45):
 
 \begin{center}
 \texttt{95 96 97 98 99 99 100 100 100 102} $\quad \Rightarrow \quad $
@@ -188,8 +201,7 @@ extremos (se ao invés de 95, o valor fosse 45):
   $\bar{x}_{obs} = 93,6$ e $Md = 99$
 \end{center}
 
-Nos casos onde se deseja comparar bases de dados diferentes, normalmente
-a mediana é mais indicada, por ser uma medida mais **robusta**,
+Devido a esse fato, a mediana é uma medida de posição central **robusta**,
 *não influenciada por valores extremos*.
 
 ### Média, mediana e moda
@@ -322,7 +334,7 @@ medida de tendência central.
 Por isso precisamos de medidas que resumam a **variabilidade** dos
 dados em relação à um valor central
 
-### Introdução
+### Exemplo: mesma média, diferente dispersão 
 
 ```{r, echo=FALSE, out.width='80%', fig.width=8, fig.height=6}
 par(mfrow=c(2,1), mar = c(4.1, 4.1, 3.1, 1.1))
@@ -376,39 +388,48 @@ Ferramentas para **resumo** e **análise** de dados:
 ### Amplitude
 
 A **amplitude** de um conjunto de dados é a diferença entre o
-maior e o menor valor.
+maior e o menor valor:
 $$
-\Delta = \max - \min
+\Delta = \max - \min = x_{(n)} - x_{(1)}
 $$
 
-Como a amplitude usa **apenas** os valores máximo e mínimo, é
-muito **sensível** a valores extremos.
 
-Para melhorar a medida de variabilidade, devemos considerar
-**todos os dados disponíveis**.
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{crr}
+      \hline
+      \textbf{Grupo} & \textbf{Notas} & $\Delta$ \\ \hline
+      A & 3, 4, 5, 6, 7 & 4 \\
+      B & 1, 3, 5, 7, 9 & 8\\
+      C & 5, 5, 5, 5, 5 & 0\\
+      D & 3, 5, 5, 7 & 4\\
+      E & 3, 5, 5, 6, 6 & 3\\
+      \hline
+    \end{tabular}
+\end{table}
 
-A melhor forma de se fazer isso é considerar o **desvio** de cada
-valor em relação à uma medida de posição (média ou mediana).
+- **apenas** usar máximo e mínimo torna **sensível** a valores extremos
+    - melhor medida de variabilidade: considerar **todos os dados disponíveis**
+    - **desvio** de cada valor em relação à uma medida de posição central (média ou mediana)
 
 ### Desvio médio e mediano
 
-Como queremos um **resumo** da variabilidade, devemos fazer a
-**média** dos desvios dos valores **absolutos**.
+Um **resumo** da variabilidade: **média** dos desvios **absolutos** 
 
-Se a medida de tendência central utilizada for a mediana, então temos o
-**desvio mediano**
+- **desvio mediano**: a **mediana** como medida de posição central
 $$
 \text{desvio mediano} = \frac{1}{n}\sum_{i=1}^n | x_i - md_{obs}|.
 $$
-Mas se a média for utilizada, então temos o **desvio médio**
+- **desvio médio**: a **média** como medida de posição central 
 $$
 \text{desvio médio} = \frac{1}{n}\sum_{i=1}^n | x_i - \bar{x}_{obs}|.
 $$
 
-### Desvio médio
+### Exemplo: Desvio médio
 
-Considere as notas do grupo A do exemplo acima ($\bar{x} = 5$). O desvio
-médio (DM) pode ser calculado da seguinte forma:
+Considere as notas do grupo A do exemplo acima ($\bar{x} = 5$) 
+
+O desvio médio (DM) pode ser calculado da seguinte forma:
 
 \begin{table}[htbp]
  \centering
@@ -429,18 +450,18 @@ médio (DM) pode ser calculado da seguinte forma:
 
 $\text{DM} = \frac{6}{5} = 1,2$
 
-Mas, o desvio médio é baseado em uma operação **não algébrica**
-(módulo), o que torna mais difícil o estudo de suas propriedades.
+O desvio médio é baseado em uma operação **não algébrica** 
+(módulo), o que torna mais difícil o estudo de suas propriedades 
 
 ### Variância e desvio-padrão de um conjunto de dados
 
-Uma alternativa melhor seria usar a **soma dos quadrados dos desvios**,
+Uma alternativa melhor é usar a **soma dos quadrados dos desvios**,
 que dá origem à **variância** de um conjunto de dados
 $$
 var_{obs} = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x}_{obs})^2
 $$
-Para manter as mesmas unidades dos dados originais, definimos o **desvio
-padrão** como
+Para manter a mesma unidade de medida dos dados originais, 
+definimos o **desvio padrão** como
 $$
 dp_{obs} = \sqrt{var_{obs}}
 $$
@@ -628,10 +649,19 @@ Fazer também: Exemplo $4.10$.
 
 ## Medidas de dispersão para VAs discretas
 
-### Variância de uma va
+### Variância de uma VA discreta
 
-- $Var(X) =  \sum_{i=1}^k (x_i - \mu)^2 p_i.$
-- $Var(X) = E[(X - \mu)^2] = E(X^2) - E^2(X).$
+Calcula o valor esperado: 
+ $\mu = E(X) = \sum_{i=1}^k x_i p_i$ 
+
+Multiplica o quadrado dos desvios em torno do valor esperado pela probabilidade e soma
+
+\[ Var(X) =  \sum_{i=1}^k (x_i - \mu)^2 p_i \]
+
+Alternativa, usar $(E(X))^2$ e $E(X^2) = \sum_{i=1}^k x_i^2 p_i$
+
+\[ Var(X) = E[(X - \mu)^2] = E(X^2) - E^2(X) \]
+
 - Ver Tabelas resumo $4.2$ e $4.3$ pg. 111.
 
 ### Exemplo $4.11$
