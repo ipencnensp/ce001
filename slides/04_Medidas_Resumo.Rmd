@@ -29,7 +29,7 @@ op <- par(no.readonly = TRUE)
 
 ### Introdução
 
-Características importantes de qualquer conjunto de dados 
+Características importantes de qualquer conjunto de dados
 ou de uma variável aleatória
 
 - Centro
@@ -37,9 +37,9 @@ ou de uma variável aleatória
 - Distribuição
 - Valores atípicos
 
-\pause 
+\pause
 
-Classificaremos as medidas descritivas em dois grupos 
+Classificaremos as medidas descritivas em dois grupos
 
 - de posição
 - de dispersão
@@ -56,7 +56,8 @@ Classificaremos as medidas descritivas em dois grupos
 
 - outras medidas de posição
     - extremos: mínimo, máximo
-    - quantis: 1o quartil, 3o quartil, percentil 5%, entre outras
+    - quantis: 1$^\circ$ quartil, 3$^\circ$ quartil, percentil 5%, entre
+      outras
 
 ### Moda
 
@@ -68,11 +69,11 @@ Valor **mais frequente** em um conjunto de dados
    - **Bimodal** quando existem dois valores com a mesma maior frequência
    - **Multimodal** quando mais de dois valores se repetem com a mesma frequência
 
-\pause 
+\pause
 
 Valor com **maior probabilidade** de ocorrer numa **VA discreta**
 
-- Ex.: lançamento de duas moedas 
+- Ex.: lançamento de duas moedas
     - $X$: número de caras, $X = \{0, 1, 2\}$
     - $P(x)$ = $0.25$, $0.5$ e $0.25$, respectivamente
     - moda: 1
@@ -83,10 +84,9 @@ O **valor do meio** da amostra **ordenada**
 
 - Separa o conjunto de dados em duas partes iguais, 50% abaixo e 50% acima
 
-Observações ordenadas:  
+Observações ordenadas:
 
-- a menor observação por $x_{(1)}$, a segunda por $x_{(2)}$, e assim por diante: 
-
+- a menor observação por $x_{(1)}$, a segunda por $x_{(2)}$, e assim por diante:
 $$
 x_{(1)} \leq x_{(2)} \leq \, \cdots \, \leq x_{(n-1)} \leq x_{(n)}
 $$
@@ -96,7 +96,7 @@ As observações odenadas são chamadas de **estatísticas de ordem**
 - $x_{(1)}$ é o mínimo da amostra
 - $x_{(n)}$ é o máximo da amostra
 
-### Média dos dados brutos
+### Média de dados brutos
 
 Divide-se a soma de todos os dados pelo número total deles:
 
@@ -105,17 +105,17 @@ $$
 x_i}{n}.
 $$
 
+### Média de dados agrupados
 
-## Média de dados agrupados
-
-soma dos produtos dos valores pelas respectivas frequencias e divide pela frequencia total
+Soma dos produtos dos valores pelas respectivas frequências e divide
+pela frequência total
 
 $$
 \bar{x}_{obs} = \frac{n_1 x_1 + n_2 x_2 + \cdots + n_k x_k}{n_1 + n_2 +
 \cdots + n_k} = \frac{\sum_{i=1}^k n_i x_i}{n}.
 $$
 
-## Exemplo: média de dados discretos agrupados
+### Exemplo: média de dados discretos agrupados
 
 Considere a tabela de frequência abaixo:
 
@@ -144,9 +144,9 @@ A média é calculada por:
   &= 1,65
 \end{align*}
 
-### Exemplo: Média de dados agrupados em classes
+### Exemplo: média de dados agrupados em classes
 
-Usar**ponto médio** de cada classe e respectivas frequencias 
+Usar **ponto médio** de cada classe e respectivas frequências
 
 \begin{table}[h]
     \centering
@@ -177,9 +177,9 @@ Considerando os pontos médios de cada classe, a média é calculada por
 Suponha que parafusos a serem utilizados em tomadas elétricas
 são embalados em caixas rotuladas como contendo $100$ unidades. Em
 uma construção, $10$ caixas de um lote tiveram o número de parafusos
-contados, fornecendo os valores
+contados, fornecendo os valores:
 
-$98$, $102$, $100$, $100$, $99$, $97$, $96$, $95$, $99$ e $100$ 
+$98$, $102$, $100$, $100$, $99$, $97$, $96$, $95$, $99$ e $100$
 
 Calcular média, mediana e moda.
 
@@ -189,7 +189,7 @@ Calcular média, mediana e moda.
 
 ### Média e mediana
 
-Notar a influencia de valores extremos na média
+Notar a influência de valores extremos na média
 (se ao invés de 95, o valor fosse 45):
 
 \begin{center}
@@ -201,8 +201,8 @@ Notar a influencia de valores extremos na média
   $\bar{x}_{obs} = 93,6$ e $Md = 99$
 \end{center}
 
-Devido a esse fato, a mediana é uma medida de posição central **robusta**,
-*não influenciada por valores extremos*.
+Devido a esse fato, a mediana é uma medida de posição central
+**robusta**, ou seja, *não influenciada por valores extremos*.
 
 ### Média, mediana e moda
 
@@ -255,11 +255,11 @@ $X$.
 \end{tabular}
 \end{table}
 
-Suponha ainda que o interesse é estudar o gasto dos alunos associado
-com as despesas do vestibular. Para simplificar, suponha que se atribui para
-cada aluno, uma despesa fixa de $1300,00$ relativa a preparação e mais $50$
-para cada vestibular prestado. Calcule as medidas de posição central
-para a variável $D$ (despesa com vestibular).
+Suponha ainda que o interesse é estudar o gasto dos alunos associado com
+as despesas do vestibular. Para simplificar, suponha que se atribui para
+cada aluno, uma despesa fixa de R\$ $1300,00$ relativa a preparação e
+mais R\$ $50$ para cada vestibular prestado. Calcule as medidas de
+posição central para a variável $D$ (despesa com vestibular).
 
 ## Medidas de posição para VAs discretas
 
@@ -271,7 +271,7 @@ feita através de sua **função de probabilidade**.
 Assim como fizemos para um conjunto de dados qualquer, podemos obter as
 medidas de posição para qualquer variável aleatória.
 
-Lembrando que os possíveis valores de uma VA $X$ sejam $x_1, x_2,
+Lembrando que se os possíveis valores de uma VA $X$ são $x_1, x_2,
 \ldots, x_n$, com correspondentes probabilidades $p_1, p_2, \ldots,
 p_k$, então as medidas de posição podem ser definidas a seguir.
 
@@ -292,7 +292,7 @@ $$
 
 ### Exemplo $4.5$
 
-Conside a VA $X$ com a seguinte função discreta de probabilidade:
+Considere a VA $X$ com a seguinte função discreta de probabilidade:
 
 \begin{table}
 \centering
@@ -306,7 +306,7 @@ Calcule as medidas de tendência central.
 
 ### Exemplo $4.6$
 
-Conside uma VA $X$ com função de probabilidade dada por
+Considere uma VA $X$ com função de probabilidade dada por
 
 \begin{table}
 \centering
@@ -332,9 +332,9 @@ Não é possível analisar um conjunto de dados apenas através de uma
 medida de tendência central.
 
 Por isso precisamos de medidas que resumam a **variabilidade** dos
-dados em relação à um valor central
+dados em relação à um valor central.
 
-### Exemplo: mesma média, diferente dispersão 
+### Exemplo: mesma média, diferente dispersão
 
 ```{r, echo=FALSE, out.width='80%', fig.width=8, fig.height=6}
 par(mfrow=c(2,1), mar = c(4.1, 4.1, 3.1, 1.1))
@@ -350,7 +350,7 @@ abline(v=100, col="red", lwd = 3)
 par(op)
 ```
 
-### Introdução
+### Exemplo
 
 <!-- Bussab, pg 37 -->
 Cinco grupos de alunos se submeteram a um teste, obtendo as seguintes
@@ -408,26 +408,28 @@ $$
     \end{tabular}
 \end{table}
 
-- **apenas** usar máximo e mínimo torna **sensível** a valores extremos
-    - melhor medida de variabilidade: considerar **todos os dados disponíveis**
-    - **desvio** de cada valor em relação à uma medida de posição central (média ou mediana)
+- **Apenas** usar máximo e mínimo torna **sensível** a valores extremos
+    - Melhor medida de variabilidade: considerar **todos os dados
+      disponíveis**
+    - **Desvio** de cada valor em relação à uma medida de posição
+      central (média ou mediana)
 
 ### Desvio médio e mediano
 
-Um **resumo** da variabilidade: **média** dos desvios **absolutos** 
+Um **resumo** da variabilidade: **média** dos desvios **absolutos**
 
-- **desvio mediano**: a **mediana** como medida de posição central
+- **Desvio mediano**: a **mediana** como medida de posição central
 $$
 \text{desvio mediano} = \frac{1}{n}\sum_{i=1}^n | x_i - md_{obs}|.
 $$
-- **desvio médio**: a **média** como medida de posição central 
+- **Desvio médio**: a **média** como medida de posição central
 $$
 \text{desvio médio} = \frac{1}{n}\sum_{i=1}^n | x_i - \bar{x}_{obs}|.
 $$
 
 ### Exemplo: Desvio médio
 
-Considere as notas do grupo A do exemplo acima ($\bar{x} = 5$) 
+Considere as notas do grupo A do exemplo acima ($\bar{x}_{obs} = 5$)
 
 O desvio médio (DM) pode ser calculado da seguinte forma:
 
@@ -448,10 +450,11 @@ O desvio médio (DM) pode ser calculado da seguinte forma:
  \end{tabular}
 \end{table}
 
-$\text{DM} = \frac{6}{5} = 1,2$
+$\text{DM} = \frac{1}{n}\sum_{i=1}^n | x_i - \bar{x}_{obs}| =
+\frac{6}{5} = 1,2$
 
-O desvio médio é baseado em uma operação **não algébrica** 
-(módulo), o que torna mais difícil o estudo de suas propriedades 
+O desvio médio é baseado em uma operação **não algébrica**
+(módulo), o que torna mais difícil o estudo de suas propriedades.
 
 ### Variância e desvio-padrão de um conjunto de dados
 
@@ -460,7 +463,7 @@ que dá origem à **variância** de um conjunto de dados
 $$
 var_{obs} = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x}_{obs})^2
 $$
-Para manter a mesma unidade de medida dos dados originais, 
+Para manter a mesma unidade de medida dos dados originais,
 definimos o **desvio padrão** como
 $$
 dp_{obs} = \sqrt{var_{obs}}
@@ -495,12 +498,12 @@ No exemplo anterior
 A variância é
 
 $var_{obs} = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x}_{obs})^2 =
- var_{obs} = \frac{10}{5} = 2.$
+ \frac{10}{5} = 2.$
 
 Ou, usando a fórmula alternativa
 
 $var_{obs} = \frac{1}{n}\sum_{i=1}^n x_i^2 - \bar{x}_{obs}^2 =
-  var_{obs} = \frac{135}{5} - 5^2 = 2.$
+  \frac{135}{5} - 5^2 = 2.$
 
 ### Coeficiente de variação
 
@@ -651,18 +654,20 @@ Fazer também: Exemplo $4.10$.
 
 ### Variância de uma VA discreta
 
-Calcula o valor esperado: 
- $\mu = E(X) = \sum_{i=1}^k x_i p_i$ 
+Calcula o valor esperado:
+ $\mu = E(X) = \sum_{i=1}^k x_i p_i$
 
 Multiplica o quadrado dos desvios em torno do valor esperado pela probabilidade e soma
 
 \[ Var(X) =  \sum_{i=1}^k (x_i - \mu)^2 p_i \]
 
-Alternativa, usar $(E(X))^2$ e $E(X^2) = \sum_{i=1}^k x_i^2 p_i$
+Alternativamente, podemos usar
 
-\[ Var(X) = E[(X - \mu)^2] = E(X^2) - E^2(X) \]
+\[ Var(X) = E[(X - \mu)^2] = E(X^2) - E(X)^2 \]
 
-- Ver Tabelas resumo $4.2$ e $4.3$ pg. 111.
+com $E(X^2) = \sum_{i=1}^k x_i^2 p_i$
+
+- Ver Tabelas resumo $4.2$ e $4.3$.
 
 ### Exemplo $4.11$
 
@@ -701,10 +706,10 @@ e decida sobre o método mais eficiente.
 ### Esperança e variância de modelos teóricos
 
 - Exemplo $4.14$: Seja $X$ com distribuição Bernoulli de parâmetro $p$. Calcule
-a esperança e a variancia de $X$.
-- Exemplo $4.15$: Seja $X$ com distribuição Binomial parâmetros $n$ e $p$.
-Calcule a esperança e a variancia de $X$.
-- Ver resultados da Tabela $4.4$ pg. 113.
+a esperança e a variância de $X$.
+- Exemplo $4.15$: Seja $X$ com distribuição Binomial de parâmetros $n$ e $p$.
+Calcule a esperança e a variância de $X$.
+- Ver resultados da Tabela $4.4$.
 
 # Exercícios recomendados
 
@@ -712,3 +717,4 @@ Calcule a esperança e a variancia de $X$.
 
 - Seção $4.2$ - $1,2,3,4$ e $6$.
 - Seção $4.3$ - $1,2,3,4,5$ e $6$.
+- Extras: Seção 4.4 - 2, 4, 7, 10 e 15.
