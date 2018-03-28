@@ -139,8 +139,8 @@ Considere a tabela de frequência abaixo:
 
 A média é calculada por:
 \begin{align*}
-\bar{x}_{obs} &= \frac{1}{20} \cdot (0 \cdot 4 + 1 \cdot 5 + \cdots + 5 \cdot 1)\\
-  &= \frac{1}{20} \cdot (33)\\
+\bar{x}_{obs} &= \frac{ 0 \cdot 4 + 1 \cdot 5 + 2 \cdot 7 + 3 \cdot 3 + 5 \cdot 1 }{4 + 5 + 7 + 3 + 1}\\
+  &= \frac{33}{20} \\
   &= 1,65
 \end{align*}
 
@@ -167,8 +167,8 @@ Usar **ponto médio** de cada classe e respectivas frequências
 \end{table}
 Considerando os pontos médios de cada classe, a média é calculada por
 \begin{align*}
-\bar{x}_{obs} &= \frac{1}{36} \cdot (6 \cdot 10 + 10 \cdot 12 + \cdots + 22 \cdot 1)\\
-  &= \frac{1}{36} \cdot (404)\\
+\bar{x}_{obs} &= \frac{ (6 \cdot 10 + 10 \cdot 12 + \cdots + 22 \cdot 1) }{10 + 12 + 8 + 5 + 1}\\
+  &= \frac{404}{36} \\
   &= 11,22
 \end{align*}
 
@@ -272,7 +272,7 @@ Assim como fizemos para um conjunto de dados qualquer, podemos obter as
 medidas de posição para qualquer variável aleatória.
 
 Lembrando que se os possíveis valores de uma VA $X$ são $x_1, x_2,
-\ldots, x_n$, com correspondentes probabilidades $p_1, p_2, \ldots,
+\ldots, x_k$, com correspondentes probabilidades $p_1, p_2, \ldots,
 p_k$, então as medidas de posição podem ser definidas a seguir.
 
 ### Medidas de posição para VAs discretas
@@ -515,12 +515,12 @@ $$
 É uma medida **adimensional**, e geralmente apresentada na forma de
 porcentagem.
 
-No exemplo anterior: $dp_{obs} = \sqrt{var_{obs}} = \sqrt{2} = 1,414$.
+No exemplo anterior: $dp_{obs} = \sqrt{var_{obs}} = \sqrt{2} = 1,414214$.
 
 Portanto:
 $$
-cv_{obs} = \frac{dp_{obs}}{\bar{x}_{obs}} = \frac{1,414}{5} = 0,283
-\approx 2,8\%
+cv_{obs} = \frac{dp_{obs}}{\bar{x}_{obs}} = \frac{1,414214}{5} = 0,2828427
+\approx 28,3\%
 $$
 
 ### Variância em tabelas de frequência
@@ -531,13 +531,13 @@ $X$, das quais $n_1$ são iguais a $x_1$, $n_2$ são iguais a $x_2$,
 por:
 
 $$
-var_{obs}(X) = \frac{1}{n} \sum_{i=1}^{n} n_i (x_i - \bar{x}_{obs})^2
+var_{obs}(X) = \frac{1}{n} \sum_{i=1}^{k} n_i (x_i - \bar{x}_{obs})^2
 $$
 
 Ou, pela fórmula alternativa:
 
 $$
-var_{obs}(X) = \frac{1}{n} \sum_{i=1}^{n} n_i x_{i}^{2} -
+var_{obs}(X) = \frac{1}{n} \sum_{i=1}^{k} n_i x_{i}^{2} -
 \bar{x}_{obs}^2
 $$
 
@@ -566,8 +566,8 @@ Como exemplo, considere a tabela de frequência abaixo ($\bar{x} = 1,65$):
 
 A variância pode ser calculada por:
 \begin{align*}
-var_{obs} =& \frac{1}{20} \cdot [4 \cdot 2,72 + 5 \cdot 0,42 + \cdots + 1 \cdot 11,22]\\
-  =& \frac{1}{20} \cdot (30,55)\\
+var_{obs} =& \frac{(4 \cdot 2,72 + 5 \cdot 0,42 + \cdots + 1 \cdot 11,22 ) } {4 + 5 + 7 + 3 + 1} \\
+  =& \frac{30,55}{20} \\
   =& 1,528
 \end{align*}
 
@@ -610,10 +610,9 @@ Considere a seguinte tabela de distribuição de frequência ($\bar{x} =
 Considerando os **pontos médios** de cada classe como os valores $x_i$,
 a variância pode ser calculada por
 \begin{align*}
- var_{obs} &= \frac{1}{36} \cdot [10 \cdot 27,272 + 12 \cdot 1,494 +
-           \cdots + 1 \cdot 116,160]\\
- &= \frac{1}{36} \cdot (698,22)\\
- &= 19,395
+ var_{obs} &= \frac{( 10 \cdot 27,272 + 12 \cdot 1,494 +
+           \cdots + 1 \cdot 116,160 ) } {10 + 12 + 8 + 5 + 1}\\
+ &= \frac{698,22}{36} = 19,395
 \end{align*}
 
 ```{r,  include=FALSE}
