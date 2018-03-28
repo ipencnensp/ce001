@@ -167,8 +167,8 @@ Usar **ponto médio** de cada classe e respectivas frequências
 \end{table}
 Considerando os pontos médios de cada classe, a média é calculada por
 \begin{align*}
-\bar{x}_{obs} &= \frac{ \cdot (6 \cdot 10 + 10 \cdot 12 + \cdots + 22 \cdot 1) }{10 + 12 + 8 + 5 + 1}\\
-  &= \frac{1}{36} \cdot (404)\\
+\bar{x}_{obs} &= \frac{ (6 \cdot 10 + 10 \cdot 12 + \cdots + 22 \cdot 1) }{10 + 12 + 8 + 5 + 1}\\
+  &= \frac{404}{36} \\
   &= 11,22
 \end{align*}
 
@@ -272,7 +272,7 @@ Assim como fizemos para um conjunto de dados qualquer, podemos obter as
 medidas de posição para qualquer variável aleatória.
 
 Lembrando que se os possíveis valores de uma VA $X$ são $x_1, x_2,
-\ldots, x_n$, com correspondentes probabilidades $p_1, p_2, \ldots,
+\ldots, x_k$, com correspondentes probabilidades $p_1, p_2, \ldots,
 p_k$, então as medidas de posição podem ser definidas a seguir.
 
 ### Medidas de posição para VAs discretas
@@ -519,7 +519,7 @@ No exemplo anterior: $dp_{obs} = \sqrt{var_{obs}} = \sqrt{2} = 1,414214$.
 
 Portanto:
 $$
-cv_{obs} = \frac{dp_{obs}}{\bar{x}_{obs}} = \frac{1,414}{5} = 0,2828427
+cv_{obs} = \frac{dp_{obs}}{\bar{x}_{obs}} = \frac{1,414214}{5} = 0,2828427
 \approx 28,3\%
 $$
 
@@ -567,7 +567,7 @@ Como exemplo, considere a tabela de frequência abaixo ($\bar{x} = 1,65$):
 A variância pode ser calculada por:
 \begin{align*}
 var_{obs} =& \frac{(4 \cdot 2,72 + 5 \cdot 0,42 + \cdots + 1 \cdot 11,22 ) } {4 + 5 + 7 + 3 + 1} \\
-  =& \frac{1}{20} \cdot (30,55)\\
+  =& \frac{30,55}{20} \\
   =& 1,528
 \end{align*}
 
@@ -612,8 +612,7 @@ a variância pode ser calculada por
 \begin{align*}
  var_{obs} &= \frac{( 10 \cdot 27,272 + 12 \cdot 1,494 +
            \cdots + 1 \cdot 116,160 ) } {10 + 12 + 8 + 5 + 1}\\
- &= \frac{1}{36} \cdot (698,22)\\
- &= 19,395
+ &= \frac{698,22}{36} = 19,395
 \end{align*}
 
 ```{r,  include=FALSE}
