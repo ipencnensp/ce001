@@ -22,7 +22,7 @@ output:
 ```{r setup, cache=FALSE, include=FALSE}
 source("setup_knitr_slides.R")
 library(xtable)
-library(knitr)
+## library(knitr)
 ## O pacote printr já configura o formato de saída de muitas funções
 ## como head(), table(), etc, sem a necessidade de usar a função
 ## knitr::kable(). Veja: https://yihui.name/printr
@@ -44,12 +44,37 @@ variável que foi representada por $X$, e o número de vestibulares prestados,
 variável representada por $Y$. Os dados obtidos estão na tabela
 abaixo.
 
-X & não & sim & não & não & não & sim & sim & não & sim & sim \\
-Y & 1   & 1   & 2   & 1   & 1   & 2   & 3   & 1   & 1   & 1   \\
-X & não & não & sim & não & sim & não & não & não & sim & não \\
-Y & 2   & 2   & 1   & 3   & 2   & 2   & 2   & 1   & 3   & 2   \\
+```{r}
+X <- c("não", "sim", "não", "não", "não", "sim", "sim", "não", "sim",
+       "sim", "não", "não", "sim", "não", "sim", "não", "não", "não",
+       "sim", "não")
+Y <- c(1, 1, 2, 1, 1, 2, 3, 1, 1, 1, 2, 2, 1, 3, 2, 2, 2, 1, 3, 2)
+
+rbind(X = X[1:10], Y = Y[1:10])
+rbind(X = X[11:20], Y = Y[11:20])
+```
+
+### Variáveis bidimensionais
 
 - Conjunta, marginal de $X$ e marginal de $Y$.
+
+```{r, results='asis'}
+addmargins(table(X, Y))
+## library(kableExtra)
+## knitr::kable(addmargins(table(X, Y)),
+##              format = "latex", booktabs = TRUE) %>%
+##     row_spec(2, hline_after = TRUE) %>%
+##     kable_styling(position = "center") %>%
+##     column_spec(4, border_left = TRUE)
+## addtorow <- list(
+##     list(0, 0),
+##     c("X", "Y")
+## )
+## print(xtable(addmargins(table(X, Y)), digits = 0,
+##              align = c("c|", "c", "c", "c", "|c")),
+##       hline.after = c(-1, 0, 2, 3),
+##       add.to.row = addtorow)
+```
 
 ### Exemplo $5.2$
 
