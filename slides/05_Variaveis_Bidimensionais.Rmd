@@ -278,7 +278,7 @@ o caso.
 
 ### Exemplo $5.7$
 
-Dentre os alunos do $1^{\circ}$ ano do ensino médio de uma certa escola,
+- Dentre os alunos do $1^{\circ}$ ano do ensino médio de uma certa escola,
 selecionou-se os quinze alunos com melhor desempenho, (nota acima de
 $7$) em inglês. Para esses alunos, foi construída a tabela abaixo com as
 notas de inglês $(I)$, português $(P)$ e matemática $(M)$:
@@ -289,6 +289,8 @@ P <- c(8,6,8,9,8,6,9,7,7,6,7,8,9,8,8)
 M <- c(5,6,7,5,5,5,6,4,7,6,5,5,6,5,5)
 rbind(I, P, M)
 ```
+
+- Obtenha as distribuições conjuntas e gráficos de dispersão.
 
 ### Exemplo 5.7 - Distribuições conjuntas
 
@@ -551,25 +553,32 @@ $$
 Cov(X, Y) = \sigma_{XY} = E(XY) - E(X)E(Y)
 $$
 
+#### Variância da soma de duas VAs
+
+$$
+Var(X + Y) = Var(X) + Var(Y) + 2 Cov(X,Y)
+$$
 
 ### Exemplo $5.14$
 
-- As variáveis $X$ e $Y$ têm a seguinte distribuição conjunta.
+- As variáveis $U$ e $V$ têm a seguinte distribuição conjunta.
 
 \begin{table}
 \centering
-\begin{tabular}{ccccccc}
-UV & 2   & 4   & 6   & 8   & 10   & $P(U = u)$ \\
-2   & 0.1 & 0   & 0   & 0   & 0    & 0.1  \\
-3   & 0   & 0.2 & 0   & 0.1 & 0    & 0.3  \\
-4   & 0   & 0   & 0.2 & 0   & 0    & 0.2  \\
-5   & 0   & 0.1 & 0   & 0.2 & 0    & 0.3  \\
-6   & 0   & 0   & 0   & 0   & 0    & 0.1  \\
-$P(V = v)$ & 0.1 & 0.3 & 0.2 & 0.3 & 0.1 $ 1 \\
+\begin{tabular}{l|lllll|l} \hline
+U/V & 2   & 4   & 6   & 8   & 10  & $P(U=u)$   \\
+\hline
+2  & 0.1 & 0   & 0   & 0   & 0   & 0.1 \\
+3  & 0   & 0.2 & 0   & 0.1 & 0   & 0.3 \\
+4  & 0   & 0   & 0.2 & 0   & 0   & 0.2 \\
+5  & 0   & 0.1 & 00  & 0.2 & 0   & 0.3 \\
+6  & 0   & 0   & 0   & 0   & 0.1 & 0.1 \\ \hline
+$P(V=v)$  & 0.1 & 0.3 & 0.2 & 0.3 & 0.1 & 1 \\
+\hline
 \end{tabular}
 \end{table}
 
-- Calcule a covariância entre $X$ e $Y$.
+- Calcule a covariância entre $U$ e $V$.
 
 ### Exemplo $5.14$
 
@@ -608,21 +617,66 @@ Cov(U,V) &= E(UV) - E(U)E(V) \\
 
 \endcols
 
-### Correlação de duas v.a
+### Correlação de duas VAs
 
-- Exemplo $5.15$ - Para os dados do exemplo $5.5$ calcule a
-covariância e a correlação.
+O **coeficiente de correlação** entre as VAs discretas $X$ e $Y$ é
+calculado por:
 
-X - Y & 0    & 1    & 2    \\
-0     & $1/10$ & $2/10$ & $2/10$ \\
-1     & $1/10$ & $1/10$ & $0$    \\
-2     & $1/10$ & $1/10$ & $1/10$ \\
+$$
+\rho_{XY} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y}
+$$
 
-### Resultados importantes
+- A divisão pelo produto dos desvios padrão serve para padronizar a
+  medida
+- Permite comparação entre quaisquer outras variáveis, pois $-1 \leq
+  \rho_{XY} \leq 1$
+- Valores mais próximos de $\pm 1$ indicam correlação forte
 
-- $ E(X + Y) = E(X) + E(Y).$
-- $ E(XY) = E(X)E(Y)$ se e somente se $X$ e $Y$ são independentes.
-- $Var(X + Y) = Var(X) + Var(Y) - 2Cov(X,Y).$
+### Exemplo $5.15$
+
+- Para os dados do exemplo $5.5$ calcule a covariância e a correlação.
+
+```{r}
+X <- c(0, 0, 0, 0, 1, 2, 1, 2, 2, 0)
+Y <- c(1, 2, 1, 0, 1, 0, 0, 1, 2, 2)
+rbind("Sub-região" = 1:10, X, Y)
+```
+
+### Exemplo $5.15$
+
+Anteriormente já obtivemos a conjunta e as marginais de $X$ e $Y$:
+
+```{r}
+tab <- addmargins(prop.table(table(X, Y)))
+dimnames(tab)[[1]][4] <- "P(Y=y)"
+dimnames(tab)[[2]][4] <- "P(X=x)"
+tab
+```
+
+A marginal de $XY$ é
+
+```{r}
+XY <- c(0,1,2,4)
+pXY <- c(.7,.1,.1,.1)
+rbind(XY, pXY)
+```
+
+### Exemplo $5.15$
+
+Com isso:
+$$E(X) = 0.8 \quad E(Y) = 1 \quad E(XY) = 0.7$$
+$$Var(X) = \sigma^2_X = 0.76 \quad Var(Y) = \sigma^2_Y = 0.6$$
+
+Assim, a covariância será:
+
+$$Cov(X,Y) = E(XY) - E(X)E(Y) = 0.7 - 0.8 \times 1 = -0.1$$
+
+E a correlação será:
+
+$$\rho_{XY} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y} =
+ \frac{-0.1}{\sqrt{0.76}\sqrt{0.6}} = -0.15$$
+
+# Exercícios
 
 ### Exercícios recomendados
 
