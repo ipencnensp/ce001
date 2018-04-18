@@ -1,0 +1,213 @@
+---
+title: "Variáveis aleatórias contínuas"
+short-title: "VAs contínuas"
+author: |
+  | Wagner H. Bonat
+  | Elias T. Krainski
+  | Fernando P. Mayer
+short-author: "WB, EK, FM"
+date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+short-date: "2018/1"
+institute: "Laboratório de Estatística e Geoinformação"
+short-institute: "LEG/DEST/UFPR"
+department: |
+  | Universidade Federal do Paraná
+  | Departamento de Estatística
+safe-columns: true
+fontfamily: inconsolata
+output:
+  legtheme::beamer_leg
+---
+
+```{r setup, cache=FALSE, include=FALSE}
+source("setup_knitr_slides.R")
+library(xtable)
+op <- par(no.readonly = TRUE)
+```
+
+# Variáveis aleatórias contínuas
+
+### Exemplo 6.1
+
+- Estudos anteriores revelam a existência de uma grande lençol
+de água no subsolo de uma região. No entanto, sua profundidade ainda
+não foi determinada, sabendo-se apenas que o lençol pode estar
+situado em qualquer ponto entre $20$ e $100$ metros.
+
+### Função densidade de probabilidade
+
+- Dizemos que $f(x)$ é uma função contínua de probabilidade ou
+função densidade de probabilidade para uma v.a. contínua $X$, se
+satisfaz duas condições:
+- $f(x) \geq 0$ para todo $x \in (-\infty, \infty)$;
+- A área definida por $f(x)$ é igual a $1$.
+- Usando cálculo diferencial e integral, (2) pode ser escrita
+como:     $$ \int_{-\infty}^{\infty} f(x) dx = 1$$
+- Para calcular probabilidade temos que para $a < b$,
+$$P(a \leq X \leq b) = \int_{a}^{b} f(x) dx,$$
+a integral, indica a área sob a função $f$ definida pelo intervalo
+$[a,b]$.
+
+### Exemplo 6.2
+
+- Arqueólogos estudaram uma certa região e estabeleceram um
+modelo teórico para a variável $C$, comprimento de fósseis da região
+(em cm). Suponha que C é uma variável aleatória contínua com a seguinte
+função densidade de probabilidade:
+
+$$
+f(c) =
+  \begin{cases}
+  \frac{1}{40}(\frac{c}{10} + 1) & \quad \text{se } 0 \leq c \leq 20 \\
+   0  & \quad \text{caso contrário}
+  \end{cases}
+$$
+
+- Exemplo 6.3 tarefa de casa.
+
+### Medidas de posição para va contínuas
+
+- O valor esperado ou média da v.a. contínua $X$ com função
+densidade $f(x)$, é dado pela expressão:
+$$E(X) = \mu = \int_{-\infty}^{\infty} x f(x) dx.$$
+- A mediana é o valor MD que tem a propriedade de
+$$P(X \geq Md) \geq 0.5 \quad \text{e} \quad P(X \leq Md) \geq 0.5.$$
+- A moda é o valor Mo tal que,
+$$f(Mo) = \max_{x} f(x).$$
+
+### Variância para v.a. contínuas
+
+- Para uma v.a. $X$ com densidade $f(x)$, a variância é dada
+por
+$$\sigma^2 = \int_{-\infty}^{\infty} (x - \mu)^2 f(x) dx.$$
+- Expressão alternativa
+$$\sigma^2 = E(X^2) - E^2(X).$$
+onde
+$$E(X^2) = \int_{-\infty}^{\infty} x^2 f(x) dx.$$
+
+### Exemplo 6.4
+
+- Para a variável C do exemplo 6.2 calcular $E(C)$ e $Var(C)$.
+
+# Principais modelos contínuos
+
+### Modelo Uniforme contínuo
+
+- Uma v.a. $X$ tem distribuição Uniforme contínua no intervalo
+$[a,b]$, $a < b$, se sua função densidade de probabilidade é dada por
+
+$$
+f(x) =
+  \begin{cases}
+  \frac{1}{b-a} & \quad \text{se } a \leq x \leq b \\
+   0  & \quad \text{caso contrário}
+  \end{cases}
+$$
+
+- Neste caso $E(X) = \frac{a+b}{2}$ e $Var(X) = \frac{(b-a)^2}{12}$.
+
+### Exemplo 6.5
+
+- Com o objetivo de verificar a resistência à pressão de água,
+os técnicos de qualidade de uma empresa inspecionam os tubos de
+PVC produzidos. Os tudos inspecionados têm 6 metros de comprimento
+e são submetidos a grandes pressões até o aparecimento do primeiro
+vazamento, cuja distância a uma das extremidades (fixada à priori)
+é anotada para fins de analise. Escolhe-se um tubo ao acaso para
+ser inspecionado. Queremos calcular a probabilidade de que o vazamento
+esteja, a no máximo 1 metro das extremidades.
+
+### Modelo Exponencial
+
+- Uma v.a. contínua $X$ assumindo valores não negativos, segue o
+modelo exponencial com parâmetro $\alpha > 0$ se sua densidade é
+dada por
+
+$$
+f(x) =
+  \begin{cases}
+  \alpha \exp^{-\alpha x} & \quad \text{se } x \geq 0 \\
+   0  & \quad \text{caso contrário}
+  \end{cases}
+$$
+
+- Neste caso $E(X) = \mu = \frac{1}{\alpha}$ e $Var(X) = \frac{1}{\alpha^2}$.
+- $P(a < X < b) = \int_{a}^{b} \alpha \exp^{\alpha x} dx = \exp^{-\alpha a} - \exp^{-\alpha b}.$
+
+### Exemplo 6.6
+
+- Uma indústria fabrica lâmpadas especiais que ficam em operação
+continuamente. A empresa oferece a seus clientes a garantia de reposição,
+caso a lâmpada dure menos de 50 horas. A vida útil dessas lâmpadas
+é modelada através da distribuição Exponencial com parâmetro $1/8000$.
+Determine a proporção de troca por defeito de fabricação.
+
+### Exemplo 6.7
+
+- O intervalo de tempo, em minutos, entre emissões consecutivas
+de uma fonte radioativa é uma variável aleatória com distribuição
+Exponencial de parâmetro $\alpha = 0,2$. Calcule a probabilidade
+de haver uma emissão em um intervalo inferior a 2 minutos.
+
+### Modelo Normal
+
+- Uma v.a. contínua $X$ tem distribuição Normal com parâmetros
+$\mu$ e $\sigma^2$, se sua função de densidade é dada por:
+$$f(x) =  \frac{1}{\sigma \sqrt{2\pi}} \exp^{-\frac{(x-\mu)^2}{2\sigma^2}},
+\quad \text{para} \quad -\infty , x < \infty.$$
+- Notação $X \sim N(\mu, \sigma^2)$.
+- $E(X) = \mu$ e $Var(X) = \sigma^2$.
+- $P(a \leq X \leq b) = \int_{a}^{b}\frac{1}{\sigma \sqrt{2\pi}} \exp^{-\frac{(x-\mu)^2}{2\sigma^2}}dx.$
+- Exemplo cálculo de probabilidade usando transformação Z.
+
+### Exemplo 6.8
+
+- Doentes sofrendo de certa moléstia são submetidos a um tratamento
+intensivo cujo tempo de cura foi modelado por uma densidade Normal
+de média $15$ e desvio padrão $2$ (em dias). Seja $X$ o tempo
+de cura e, portanto temos $X \sim N(15,4)$. Calcule a proporção
+de pacientes que demorão mais de $17$ dias para se recuperar.
+Calcular a probabilidade um paciente ao acaso demorar menos de $20$
+dias para se recuperar. Qual o número esperado de dias para recuperação?
+
+### Exemplo 6.9
+
+- Estudo do Sindicato dos Bancários indica que cerca de $30\%$
+dos funcionários de banco têm problemas de estresse, provenientes
+das condições de trabalho. Numa amostra de $200$ bancários, qual
+seria a probabilidade de pelo menos $50$ com essa doença?
+
+### Exemplo 6.10
+
+- Um serviço de fiscalização é criado para averiguar se garrafas
+de um certo refrigerante contém, de fato, o volume especificado pelo
+fabricante. Para tanto, $10$ garrafas do produto são compradas no
+varejo, em várias regiões da cidade. Cada uma dessas garrafas é esvaziada
+e o volume de seu conteúdo, que denotaremos por V é aferido.
+Uma vez obtidos os $10$ valores, a média aritmética M é calculada
+e, se $M < 290$ mililitros (ml), a companhia é multada. Estudos
+na linha de produção do fabricante mostraram que variações sempre
+ocorrem, mesmo se as especificações forem seguidas. Por essa razão,
+considera-se o volume do conteúdo das garrafas como seguindo o modelo Normal,
+com média $\mu = 300$ ml e desvio-padrão $\sigma = 25$ ml. Gostaríamos
+de calcular qual é a probabilidade de que o fabricante seja multado
+injustamente.
+
+### Exemplo 6.11
+
+- Uma corretora negocia títulos na Bolsa de Valores e utiliza
+um modelo probabilístico para avaliar seus lucros. Suas aplicações
+financeiras de compra e venda atingem três áreas: agricultura,
+indústria e comércio. Admita que o seguinte modelo representa o
+comportamento do lucro diário da corretora (em milhares):
+$$L = 2 L_A + 5 L_I + 3 L_C,$$
+onde $L_A$, $L_I$ e $L_C$ representam, os lucros diários nos setores
+de agricultura, indústria e comércio. As distribuições de probabilidades
+dessas variáveis aleatórias são $L_A \sim N(3,4)$, $L_I \sim N(6,9)$
+e $L_C \sim N(4,16)$. Supondo independência entre os três setores,
+qual será a probabilidade de um lucro diário acima de 50 mil.
+
+### Exercícios recomendados
+
+- Seção $6.1$ - $1,2,3,4$ e $5$.
+- Seção $6.2$ - $1$ a $9$.
