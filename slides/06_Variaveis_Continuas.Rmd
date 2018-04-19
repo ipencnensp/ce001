@@ -398,6 +398,76 @@ x < \infty$ é igual a 1.
 <!-- - $P(a \leq X \leq b) = \int_{a}^{b}\frac{1}{\sigma \sqrt{2\pi}} \exp^{-\frac{(x-\mu)^2}{2\sigma^2}}dx.$ -->
 <!-- - Exemplo cálculo de probabilidade usando transformação Z. -->
 
+### Modelo normal
+
+Para obter uma probabilidade do modelo normal, devemos calcular a área
+entre os pontos $a$ e $b$, ou seja,
+$$
+P[a < X < b] = \int_a^b \frac{1}{\sqrt{2\pi}\sigma} \exp\left[-\frac{1}{2}
+\left( \frac{x - \mu}{\sigma}\right)^2\right] dx
+$$
+No entanto, a função da distribuição normal não possui forma
+fechada, portanto o cálculo de probabilidades não pode ser feito
+diretamente pela integral, apenas por aproximações numéricas.
+
+Para contornar esse problema, os valores de probabilidade são
+obtidos para uma distribuição normal padrão ($Z$) com $\mu = 0$ e
+$\sigma^2 = 1$,
+$$
+Z = \frac{X - \mu}{\sigma} \sim \text{N}(0,1)
+$$
+que é o escore $Z$ (número de desvios-padrões da média $\mu$). A
+vantagem é que podemos fazer uma única tabela com as integrais
+aproximadas de $Z$, ao invés de uma tabela para cada par
+$(\mu,\sigma^2)$.
+
+### Modelo normal
+
+Se $Z \sim \text{N}(0,1)$, então sua fdp é
+$$
+f(z) = \frac{1}{\sqrt{2\pi}} \exp\left[-\frac{1}{2} (z)^2 \right]
+$$
+Para se obter a probabilidade de $Z$ estar entre $a$ e $b$,
+$$
+P[a < Z < b] = \int_a^b \frac{1}{\sqrt{2\pi}} \exp\left[-\frac{1}{2}
+(z)^2 \right] dz
+$$
+As integrais (áreas) para valores de $Z$ entre 0,00 e 3,99 estão na
+tabela. Portanto, para qualquer valor de $X$ entre $a$ e $b$, podemos
+calcular a probabilidade correspondente através da transformação,
+$$
+P[a < X < b] = P\left[\frac{a - \mu}{\sigma} < Z < \frac{b
+- \mu}{\sigma}\right]
+$$
+
+### Modelo normal
+
+```{r, out.width="80%"}
+x <- seq(70, 130, length = 100)
+mu <- 100
+sigma <- 5
+fx <- dnorm(x = x, mean = mu, sd = sigma)
+xaxis <- seq(70, 130, 10)
+zaxis <- (xaxis - mu)/sigma
+par(cex.axis = 1.2, cex.lab = 1.2, mar = c(10.1,4.1,4.1,2.1))
+plot(x, fx, type = "l", xlab = "X", ylab = "f(X)",
+     main = expression(list(mu == 100, sigma^2 == 25)))
+axis(1, line = 5, at = xaxis, labels = zaxis)
+mtext("Z", side = 1, line = 8, cex = 1.2)
+```
+
+### Modelo normal
+
+**Exemplo de uso da tabela**
+
+- Calcule as probabilidades (áreas):
+  - $P(0 < Z < 2)$
+  - $P(Z > 2)$
+  - $P(Z < -2)$
+  - $P(2,0 < Z < 2,5)$
+  - $P(-2,61 < Z < 2,43)$
+  - $P(Z > -1,63)$
+
 ### Exemplo 6.8
 
 - Doentes sofrendo de certa moléstia são submetidos a um tratamento
@@ -408,12 +478,16 @@ de pacientes que demorão mais de $17$ dias para se recuperar.
 Calcular a probabilidade um paciente ao acaso demorar menos de $20$
 dias para se recuperar. Qual o número esperado de dias para recuperação?
 
+### Normal como aproximação da binomial
+
 ### Exemplo 6.9
 
 - Estudo do Sindicato dos Bancários indica que cerca de $30\%$
 dos funcionários de banco têm problemas de estresse, provenientes
 das condições de trabalho. Numa amostra de $200$ bancários, qual
 seria a probabilidade de pelo menos $50$ com essa doença?
+
+### Combinação linear de Normais independentes
 
 ### Exemplo 6.10
 
