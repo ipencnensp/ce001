@@ -27,75 +27,202 @@ op <- par(no.readonly = TRUE)
 
 # Variáveis aleatórias contínuas
 
-### Exemplo 6.1
+## Introdução
 
-- Estudos anteriores revelam a existência de uma grande lençol
-de água no subsolo de uma região. No entanto, sua profundidade ainda
-não foi determinada, sabendo-se apenas que o lençol pode estar
-situado em qualquer ponto entre $20$ e $100$ metros.
+### Variáveis aleatórias
+
+Em probabilidade, uma função $X$ que associa a cada evento do espaço
+amostral um número real $X(\omega) \in \mathbb{R}$, é
+denominada uma **variável aleatória** (VA).
+
+Uma variável aleatória pode ser classificada como **discreta** ou
+**contínua**, dependendo do domínio dos valores de $X$.
+
+Exemplo: o número de alunos em uma sala é uma variável aleatória
+(discreta), denotada por $X$ (maiúsculo). Uma observação dessa
+variável é denotada pela respectiva letra minúscula, *e.g.*, $x = 50$
+alunos.
+
+Em geral, denotamos a probabilidade de uma V.A. $X$ assumir determinado
+valor $x$ como
+$$
+P[X] \quad \text{ou} \quad P[X = x]
+$$
+
+### Distribuições de probabilidade
+
+Existem diversos *modelos probabilísticos* que
+procuram descrever vários tipos de variáveis aleatórias: são as
+**distribuições de probabilidade de variáveis aleatórias**
+(discretas ou contínuas).
+
+A distribuição de probabilidades de uma VA $X$ é, portanto, uma
+descrição das probabilidades associadas com os possíveis valores de
+$X$. Os valores que $X$ assume determinam o **suporte** (S) da VA.
+
+- **Variáveis discretas** $\rightarrow$ suporte em um conjunto
+de valores enumeráveis (finitos ou infinitos)
+- **Variáveis contínuas** $\rightarrow$ suporte em um conjunto
+não enumerável de valores
+
+### Distribuições de probabilidade
+
+Denomina-se de **distribuição de probabilidade** de alguma variável
+aleatória, a **regra** geral que define a
+
+- **função de probabilidade** (fp) (V.A.s discretas), ou a
+- **função densidade de probabilidade** (fdp) (V.A.s contínuas)
+
+para a variável de interesse.
+
+Existem muitas distribuições de probabilidade, mas algumas merecem
+destaque por sua importância prática.
+
+Estas distribuições também são chamadas de **modelos probabilísticos**.
+
+### Variáveis aleatórias contínuas
+
+Uma V.A. é classificada como contínua se assume valores em qualquer
+intervalo dos números reais, ou seja, um conjunto de valores não
+enumerável. Dessa forma, não é possível atribuir probabilidades para um
+ponto específico, apenas para intervalos da reta.
+
+Exemplos:
+
+- Peso de animais
+- Tempo de falha de um equipamento eletrônico
+- Altura da maré em uma hora específica
+- Salinidade da água do mar
+- Retorno financeiro de um investimento
+
+## Variáveis aleatórias contínuas
 
 ### Função densidade de probabilidade
 
-- Dizemos que $f(x)$ é uma função contínua de probabilidade ou
-função densidade de probabilidade para uma v.a. contínua $X$, se
-satisfaz duas condições:
-- $f(x) \geq 0$ para todo $x \in (-\infty, \infty)$;
-- A área definida por $f(x)$ é igual a $1$.
-- Usando cálculo diferencial e integral, (2) pode ser escrita
-como:     $$ \int_{-\infty}^{\infty} f(x) dx = 1$$
-- Para calcular probabilidade temos que para $a < b$,
-$$P(a \leq X \leq b) = \int_{a}^{b} f(x) dx,$$
-a integral, indica a área sob a função $f$ definida pelo intervalo
-$[a,b]$.
+Não podemos atribuir probabilidades à valores específicos, pois há uma
+quantidade **não enumerável** (infinita) de valores em um ponto.
 
-### Exemplo 6.2
+Atribuimos probabilidades à intervalos de valores, por meio de uma
+**função**. Portanto, as probabilidades são representadas por
+áreas.
 
-- Arqueólogos estudaram uma certa região e estabeleceram um
-modelo teórico para a variável $C$, comprimento de fósseis da região
-(em cm). Suponha que C é uma variável aleatória contínua com a seguinte
-função densidade de probabilidade:
+```{r, out.width="55%", fig.width=6, fig.height=5}
+x <- rnorm(1000, 50, 5)
+MASS::truehist(x, xlim = c(30,70),
+               xlab = "X", ylab = "Densidade"); box()
+lines(density(x))
+```
+
+### Função densidade de probabilidade
+
+A **função densidade de probabilidade** (fdp) atribui probabilidades à
+intervalos de valores do tipo $[a,b]$, e é definida por
+$$
+P[a < x < b] = \int_{a}^{b} f(x) dx
+$$
+com as seguintes propriedades:
+
+i. É uma função não negativa $$f(x) \geq 0$$
+ii. A área total sob a curva deve ser igual a 1
+  $$\int_{-\infty}^{+\infty} f(x) dx = 1$$
+
+### Função densidade de probabilidade
+
+**Observações:**
+
+- $P[X=x] = 0$, portanto: $$P[a \leq X \leq b] = P[a < X \leq b] = P[a
+  \leq X < b] = P[a < X < b]$$
+- Qualquer função $f(\cdot)$ que seja não negativa e cuja área total sob
+a curva seja igual à unidade caracterizará uma VA contínua.
+- $f(x)$ **não** representa a probabilidade de ocorrência de algum
+evento. A área sob a curva entre dois pontos é que fornecerá a
+probabilidade.
+
+### Exemplo
+
+Seja a função:
 
 $$
-f(c) =
-  \begin{cases}
-  \frac{1}{40}(\frac{c}{10} + 1) & \quad \text{se } 0 \leq c \leq 20 \\
-   0  & \quad \text{caso contrário}
-  \end{cases}
+f(x)=
+\begin{cases}
+1,5 x^2, & \text{se } -1 \leq x \leq 1 \\
+0,              & \text{caso contrário}
+\end{cases}
 $$
 
-- Exemplo 6.3 tarefa de casa.
+- Verifique se essa função é uma fdp.
+- Calcule:
+    - $P[X > 0]$
+    - $P[X > 0,5]$
+    - $P[-0,5 \leq X \leq 0,5]$
+    - $P[X < -2]$
+    - $P[X < 0,5]$
+    - $P[X < 0 \cup X > 0,5]$
 
-### Medidas de posição para va contínuas
+```{r, include=FALSE}
+x <- seq(-1, 1, length = 100)
+fx <- 1.5 * x^2
+plot(x, fx, type = "l")
+```
 
-- O valor esperado ou média da v.a. contínua $X$ com função
+<!-- ### Exemplo 6.2 -->
+
+<!-- - Arqueólogos estudaram uma certa região e estabeleceram um -->
+<!-- modelo teórico para a variável $C$, comprimento de fósseis da região -->
+<!-- (em cm). Suponha que C é uma variável aleatória contínua com a seguinte -->
+<!-- função densidade de probabilidade: -->
+
+<!-- $$ -->
+<!-- f(c) = -->
+<!--   \begin{cases} -->
+<!--   \frac{1}{40}(\frac{c}{10} + 1) & \quad \text{se } 0 \leq c \leq 20 \\ -->
+<!--    0  & \quad \text{caso contrário} -->
+<!--   \end{cases} -->
+<!-- $$ -->
+
+<!-- - Exemplo 6.3 tarefa de casa. -->
+
+### Medidas de posição para VAs contínuas
+
+- O valor esperado (ou média) da VA contínua $X$ com função
 densidade $f(x)$, é dado pela expressão:
-$$E(X) = \mu = \int_{-\infty}^{\infty} x f(x) dx.$$
-- A mediana é o valor MD que tem a propriedade de
+$$E(X) = \mu = \int_{-\infty}^{\infty} x\, f(x) dx.$$
+- A mediana é o valor $Md$ que tem a propriedade de
 $$P(X \geq Md) \geq 0.5 \quad \text{e} \quad P(X \leq Md) \geq 0.5.$$
-- A moda é o valor Mo tal que,
+- A moda é o valor $Mo$ tal que,
 $$f(Mo) = \max_{x} f(x).$$
 
-### Variância para v.a. contínuas
+### Variância para VAs contínuas
 
-- Para uma v.a. $X$ com densidade $f(x)$, a variância é dada
+- Para uma VA $X$ com densidade $f(x)$, a variância é dada
 por
-$$\sigma^2 = \int_{-\infty}^{\infty} (x - \mu)^2 f(x) dx.$$
+$$Var(X) = \sigma^2 = \int_{-\infty}^{\infty} (x - \mu)^2 \, f(x) dx.$$
 - Expressão alternativa
-$$\sigma^2 = E(X^2) - E^2(X).$$
+$$Var(X) = \sigma^2 = E(X^2) - E^2(X).$$
 onde
-$$E(X^2) = \int_{-\infty}^{\infty} x^2 f(x) dx.$$
+$$E(X^2) = \int_{-\infty}^{\infty} x^2 \, f(x) dx.$$
 
-### Exemplo 6.4
+### Exemplo
 
-- Para a variável C do exemplo 6.2 calcular $E(C)$ e $Var(C)$.
+Seja a função:
+
+$$
+f(x)=
+\begin{cases}
+1,5 x^2, & \text{se } -1 \leq x \leq 1 \\
+0,              & \text{caso contrário}
+\end{cases}
+$$
+
+Calcule $E(X)$, $Var(X)$, $DP(X)$.
 
 # Principais modelos contínuos
 
 ### Modelo Uniforme contínuo
 
-- Uma v.a. $X$ tem distribuição Uniforme contínua no intervalo
-$[a,b]$, $a < b$, se sua função densidade de probabilidade é dada por
-
+**Definição:** uma VA $X$ tem distribuição Uniforme contínua no
+intervalo $[a,b]$, $a < b$, se sua função densidade de probabilidade é
+dada por
 $$
 f(x) =
   \begin{cases}
@@ -104,7 +231,36 @@ f(x) =
   \end{cases}
 $$
 
-- Neste caso $E(X) = \frac{a+b}{2}$ e $Var(X) = \frac{(b-a)^2}{12}$.
+**Notação:** $X \sim U(a,b)$
+
+**Esperança e variância:** $E(X) = \frac{a+b}{2}$ e $Var(X) =
+\frac{(b-a)^2}{12}$.
+
+### Modelo Uniforme contínuo
+
+```{r, out.width='99%', fig.width=7, fig.height=4}
+par(mfrow=c(2,2), mar=c(3,4,2,1), mgp=c(2,0.5,0), las=1)
+plot(0:1, dunif(x = 0:1, min = 0, max = 1), type = "l",
+     xlab = "x", ylab = "f(x)", main = "a = 0, b = 1",
+     ylim = c(0,1), axes = TRUE)
+segments(0, 0, 0, 1, lty = 2)
+segments(1, 0, 1, 1, lty = 2)
+plot(-1:1, dunif(x = -1:1, min = -1, max = 1), type = "l",
+     xlab = "x", ylab = "f(x)", main = "a = -1, b = 1",
+     ylim = c(0,1), axes = TRUE)
+segments(-1, 0, -1, .5, lty = 2)
+segments(1, 0, 1, .5, lty = 2)
+plot(10:20, dunif(x = 10:20, min = 10, max = 20), type = "l",
+     xlab = "x", ylab = "f(x)", main = "a = 10, b = 20",
+     ylim = c(0,.2), axes = TRUE)
+segments(10, 0, 10, .1, lty = 2)
+segments(20, 0, 20, .1, lty = 2)
+plot(-10:10, dunif(x = -10:10, min = -10, max = 10), type = "l",
+     xlab = "x", ylab = "f(x)", main = "a = -10, b = 10",
+     ylim = c(0,.1), axes = TRUE)
+segments(-10, 0, -10, .05, lty = 2)
+segments(10, 0, 10, .05, lty = 2)
+```
 
 ### Exemplo 6.5
 
@@ -119,20 +275,42 @@ esteja, a no máximo 1 metro das extremidades.
 
 ### Modelo Exponencial
 
-- Uma v.a. contínua $X$ assumindo valores não negativos, segue o
-modelo exponencial com parâmetro $\alpha > 0$ se sua densidade é
+**Definição:** uma VA contínua $X$ assumindo valores não negativos,
+segue o modelo exponencial com parâmetro $\alpha > 0$ se sua densidade é
 dada por
-
 $$
 f(x) =
   \begin{cases}
-  \alpha \exp^{-\alpha x} & \quad \text{se } x \geq 0 \\
+  \alpha e^{-\alpha x} & \quad \text{se } x \geq 0 \\
    0  & \quad \text{caso contrário}
   \end{cases}
 $$
 
-- Neste caso $E(X) = \mu = \frac{1}{\alpha}$ e $Var(X) = \frac{1}{\alpha^2}$.
-- $P(a < X < b) = \int_{a}^{b} \alpha \exp^{\alpha x} dx = \exp^{-\alpha a} - \exp^{-\alpha b}.$
+**Notação:** $X \sim \text{exp}(\alpha)$
+
+**Esperança e variância:** $E(X) = \mu = \frac{1}{\alpha}$ e $Var(X) =
+\frac{1}{\alpha^2}$.
+
+**Obs.:** $P(a < X < b) = \int_{a}^{b} \alpha e^{-\alpha x} \, dx =
+e^{-\alpha a} - e^{-\alpha b}.$
+
+### Modelo exponencial
+
+```{r, out.width='99%', fig.width=7, fig.height=4}
+par(mfrow=c(2,2), mar=c(3,4,2,1), mgp=c(2,0.5,0), las=1)
+plot(0:30, dexp(x = 0:30, rate = 0.2), type = "l",
+     xlab = "x", ylab = "f(x)", main = expression(alpha == 0.2),
+     ylim = c(0,.2), axes = TRUE)
+plot(0:30, dexp(x = 0:30, rate = 0.5), type = "l",
+     xlab = "x", ylab = "f(x)", main = expression(alpha == 0.5),
+     ylim = c(0,.5), axes = TRUE)
+plot(0:30, dexp(x = 0:30, rate = 1), type = "l",
+     xlab = "x", ylab = "f(x)", main = expression(alpha == 1),
+     ylim = c(0,1), axes = TRUE)
+plot(0:30, dexp(x = 0:30, rate = 2), type = "l",
+     xlab = "x", ylab = "f(x)", main = expression(alpha == 2),
+     ylim = c(0,2), axes = TRUE)
+```
 
 ### Exemplo 6.6
 
@@ -151,14 +329,74 @@ de haver uma emissão em um intervalo inferior a 2 minutos.
 
 ### Modelo Normal
 
-- Uma v.a. contínua $X$ tem distribuição Normal com parâmetros
-$\mu$ e $\sigma^2$, se sua função de densidade é dada por:
-$$f(x) =  \frac{1}{\sigma \sqrt{2\pi}} \exp^{-\frac{(x-\mu)^2}{2\sigma^2}},
-\quad \text{para} \quad -\infty , x < \infty.$$
-- Notação $X \sim N(\mu, \sigma^2)$.
-- $E(X) = \mu$ e $Var(X) = \sigma^2$.
-- $P(a \leq X \leq b) = \int_{a}^{b}\frac{1}{\sigma \sqrt{2\pi}} \exp^{-\frac{(x-\mu)^2}{2\sigma^2}}dx.$
-- Exemplo cálculo de probabilidade usando transformação Z.
+**Definição:** Dizemos que uma VA $X$ segue o modelo normal se sua fdp é
+a seguinte
+$$
+f(x) = \frac{1}{\sqrt{2\pi}\sigma} \exp\left[-\frac{1}{2} \left( \frac{x -
+\mu}{\sigma}\right)^2\right], \quad -\infty < x < \infty
+$$
+onde $\mu \in \mathbb{R}$ é a média da população, $\sigma \in
+\mathbb{R}^+$ é o desvio-padrão populacional.
+
+**Notação:** $X \sim \text{N}(\mu, \sigma^2)$
+
+**Esperança e variância:** $E(X) = \mu$ e $Var(X) = \sigma^2$
+
+### Modelo Normal
+
+```{r, out.width='99%', fig.width=7, fig.height=4}
+par(mfrow=c(2,2), mar=c(3,4,2,1), mgp=c(2,0.5,0), las=1)
+plot(seq(10, 90, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(10, 90, length=100), mean = 50, sd = 5),
+     main = expression(list(mu == 50, sigma^2 == 25)))
+plot(seq(10, 90, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(10, 90, length=100), mean = 50, sd = 10),
+     main = expression(list(mu == 50, sigma^2 == 100)))
+plot(seq(70, 130, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(70, 130, length=100), mean = 100, sd = 5),
+     main = expression(list(mu == 100, sigma^2 == 25)))
+plot(seq(170, 230, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(170, 230, length=100), mean = 200, sd = 5),
+     main = expression(list(mu == 200, sigma^2 == 25)))
+par(mfrow=c(1,1))
+```
+
+### Modelo normal
+
+Característcas da curva normal:
+
+- É **simétrica** em relação à $\mu$
+- O ponto máximo (moda) de $f(x)$ é o ponto $x=\mu$
+- Os pontos de inflexão da função são $\mu-\sigma$ e $\mu+\sigma$
+- A área total sob a curva é 1 ou 100\%
+- A curva é **assintótica** em relação ao eixo $x$
+
+### Modelo normal
+
+Para qualquer VA normal $X$, valem as seguintes relações:
+\begin{align*}
+&P[X > \mu] = P[X < \mu] \\
+&P[\mu - \sigma < X < \mu + \sigma] \approxeq 0,6827 \\
+&P[\mu - 2\sigma < X < \mu + 2\sigma] \approxeq 0,9545 \\
+&P[\mu - 3\sigma < X < \mu + 3\sigma] \approxeq 0,9973
+\end{align*}
+Portanto, $6\sigma$ é frequentemente referida como a **largura** de uma
+distribuição normal.
+
+Métodos mais avançados de integração podem ser utilizados para mostrar
+que a área sob a função densidade de probabilidade normal de $-\infty <
+x < \infty$ é igual a 1.
+
+<!-- ### Modelo Normal -->
+
+<!-- - Uma v.a. contínua $X$ tem distribuição Normal com parâmetros -->
+<!-- $\mu$ e $\sigma^2$, se sua função de densidade é dada por: -->
+<!-- $$f(x) =  \frac{1}{\sigma \sqrt{2\pi}} \exp^{-\frac{(x-\mu)^2}{2\sigma^2}}, -->
+<!-- \quad \text{para} \quad -\infty , x < \infty.$$ -->
+<!-- - Notação $X \sim N(\mu, \sigma^2)$. -->
+<!-- - $E(X) = \mu$ e $Var(X) = \sigma^2$. -->
+<!-- - $P(a \leq X \leq b) = \int_{a}^{b}\frac{1}{\sigma \sqrt{2\pi}} \exp^{-\frac{(x-\mu)^2}{2\sigma^2}}dx.$ -->
+<!-- - Exemplo cálculo de probabilidade usando transformação Z. -->
 
 ### Exemplo 6.8
 
