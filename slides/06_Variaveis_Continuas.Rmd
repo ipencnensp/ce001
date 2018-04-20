@@ -515,10 +515,11 @@ menos de $20$ dias para se recuperar.
 
 Se $X \sim \text{Bin}(n,p)$ então $E(X) = np$ e $Var(X) = np(1-p)$.
 
-Para $n \to \infty$, podemos aproximar a binomial pela normal, usando
+Podemos aproximar a binomial pela normal, usando
 $$
-Y \sim \text{N}(\mu = np, \sigma^2 = np(1-p))
+Y \sim \text{N}(\mu = np, \sigma^2 = np(1-p)),
 $$
+em geral, quando $np \geq 5$ e $np(1-p) \geq 5$.
 
 ### Exemplo 6.11
 
