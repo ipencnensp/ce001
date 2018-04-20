@@ -3,9 +3,9 @@ title: "Variáveis aleatórias contínuas"
 short-title: "VAs contínuas"
 author: |
   | Wagner H. Bonat
-  | Elias T. Krainski
   | Fernando P. Mayer
-short-author: "WB, EK, FM"
+  | Elias T. Krainski
+short-author: "WB, FM, EK"
 date: "`r format(Sys.Date(), '%d/%m/%Y')`"
 short-date: "2018/1"
 institute: "Laboratório de Estatística e Geoinformação"
@@ -540,10 +540,12 @@ que é difícil de calcular sem computador.
 Mas $E(X) = np = 60$ e $Var(X) = np(1-p) = 42$. Assim, temos $Y \sim
 \text{N}(60, 42)$, de modo que
 \begin{align*}
-P(X \geq 50) \approx P(Y \geq 50) &= P\left(\frac{Y-60}{\sqrt{42}} \geq
-\frac{50-60}{\sqrt{42}}\right) \\
- &= P(Z \geq -1.54) = 0.9382
+P(X \geq 50) \approx P(Y \geq 50-1/2) &= P\left(\frac{Y-60}{\sqrt{42}} \geq
+\frac{49.5-60}{\sqrt{42}}\right) \\
+ &= P(Z \geq -1.62) = 0.9382
 \end{align*}
+
+- o fator $1/2$ é o fator de correção de continuidade
 
 Usando o R:
 
@@ -554,7 +556,7 @@ Usando o R:
 ## Cálculo exato pela binomial
 pbinom(49, size = 200, prob = 0.3, lower.tail = FALSE)
 ## Aproximação pela Normal
-pnorm(50, mean = 60, sd = sqrt(42), lower.tail = FALSE)
+pnorm(49.5, mean = 60, sd = sqrt(42), lower.tail = FALSE)
 ```
 
 ### Exemplo 6.11

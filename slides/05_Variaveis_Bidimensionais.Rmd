@@ -3,9 +3,9 @@ title: "Variáveis bidimensionais"
 short-title: "Variáveis bidimensionais"
 author: |
   | Wagner H. Bonat
-  | Elias T. Krainski
   | Fernando P. Mayer
-short-author: "WB, EK, FM"
+  | Elias T. Krainski
+short-author: "WB, FM, EK"
 date: "`r format(Sys.Date(), '%d/%m/%Y')`"
 short-date: "2018/1"
 institute: "Laboratório de Estatística e Geoinformação"
