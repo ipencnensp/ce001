@@ -14,7 +14,7 @@ library(viridis)
 
 ## Escolha a aba de sua turma {.tabset}
 
-### CE001-data1
+### CE001-MB
 
 ```{r notasmb}
 mb <- read.csv2('misc/notas-MB.csv')
