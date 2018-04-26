@@ -29,9 +29,8 @@ data1 <- rbind(mb[which(rowSums(!is.na(mb[,2:ncol(mb)]))>0),],
 ns <- ncol(data1)-1
 na <- nrow(data1)
 data1$Total <- rowSums(data1[,2:(ns+1)], na.rm=TRUE)
-data1$Aluno <- substring(data1$Mat, 8)
-data1 <- data1[order(data1$Aluno),]
-angle <- 90 -360*(1:na-0.5)/na
+data1$Aluno <- factor(substring(data1$Mat, 6))##, substring(data1$Mat, 6)[order(data1$Total, decreasing = TRUE)])
+angle <- 90 -360*(rank(data1$Aluno)-0.5)/na
 data1$angle <- ifelse(angle<(-90), angle + 180, angle)
 data <- data.frame(
   Aluno=rep(data1$Aluno, ns), 
@@ -39,7 +38,7 @@ data <- data.frame(
   Nota=unlist(data1[,2:(ns+1)]))
 p = ggplot(data) +      
   # Add the stacked bar
-  geom_bar(aes(x=as.factor(Aluno), y=Nota, fill=Etapa), stat="identity", alpha=0.5) +
+  geom_bar(aes(x=Aluno, y=Nota, fill=Etapa), stat="identity", alpha=0.5) +
   scale_fill_viridis(discrete=TRUE) +
   ##geom_abline(slope=0, intercept=0:ns*70, col=c('gray'))+
   geom_abline(slope=0, intercept=c(ns*c(40,70), 7*70), col=c('red', 'green', 'blue'))+
@@ -74,9 +73,8 @@ data1 <- rbind(n[which(rowSums(!is.na(n[,2:ncol(n)]))>0),],
 ns <- ncol(data1)-1
 na <- nrow(data1)
 data1$Total <- rowSums(data1[,2:(ns+1)], na.rm=TRUE)
-data1$Aluno <- substring(data1$Mat, 8)
-data1 <- data1[order(data1$Aluno),]
-angle <- 90 -360*(1:na-0.5)/na
+data1$Aluno <- factor(substring(data1$Mat, 6))##, substring(data1$Mat, 6)[order(data1$Total, decreasing = TRUE)])
+angle <- 90 -360*(rank(data1$Aluno)-0.5)/na
 data1$angle <- ifelse(angle<(-90), angle + 180, angle)
 data <- data.frame(
   Aluno=rep(data1$Aluno, ns), 
@@ -84,7 +82,7 @@ data <- data.frame(
   Nota=unlist(data1[,2:(ns+1)]))
 p = ggplot(data) +      
   # Add the stacked bar
-  geom_bar(aes(x=as.factor(Aluno), y=Nota, fill=Etapa), stat="identity", alpha=0.5) +
+  geom_bar(aes(x=Aluno, y=Nota, fill=Etapa), stat="identity", alpha=0.5) +
   scale_fill_viridis(discrete=TRUE) +
   ##geom_abline(slope=0, intercept=0:ns*70, col=c('gray'))+
   geom_abline(slope=0, intercept=c(ns*c(40,70), 7*70), col=c('red', 'green', 'blue'))+
@@ -118,9 +116,8 @@ data1 <- rbind(mn[which(rowSums(!is.na(mn[,2:ncol(mn)]))>0),],
 ns <- ncol(data1)-1
 na <- nrow(data1)
 data1$Total <- rowSums(data1[,2:(ns+1)], na.rm=TRUE)
-data1$Aluno <- substring(data1$Mat, 8)
-data1 <- data1[order(data1$Aluno),]
-angle <- 90 -360*(1:na-0.5)/na
+data1$Aluno <- factor(substring(data1$Mat, 6))##, substring(data1$Mat, 6)[order(data1$Total, decreasing = TRUE)])
+angle <- 90 -360*(rank(data1$Aluno)-0.5)/na
 data1$angle <- ifelse(angle<(-90), angle + 180, angle)
 data <- data.frame(
   Aluno=rep(data1$Aluno, ns), 
@@ -128,7 +125,7 @@ data <- data.frame(
   Nota=unlist(data1[,2:(ns+1)]))
 p = ggplot(data) +      
   # Add the stacked bar
-  geom_bar(aes(x=as.factor(Aluno), y=Nota, fill=Etapa), stat="identity", alpha=0.5) +
+  geom_bar(aes(x=Aluno, y=Nota, fill=Etapa), stat="identity", alpha=0.5) +
   scale_fill_viridis(discrete=TRUE) +
   ##geom_abline(slope=0, intercept=0:ns*70, col=c('gray'))+
   geom_abline(slope=0, intercept=c(ns*c(40,70), 7*70), col=c('red', 'green', 'blue'))+

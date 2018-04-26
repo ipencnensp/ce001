@@ -550,7 +550,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">84</td>
 <td align="right">84</td>
 <td align="right">65</td>
-<td align="right">NA</td>
+<td align="right">94</td>
 <td align="right">80</td>
 </tr>
 <tr class="even">
@@ -632,9 +632,8 @@ kable(mb, row.names = FALSE)</code></pre>
 ns &lt;- ncol(data1)-1
 na &lt;- nrow(data1)
 data1$Total &lt;- rowSums(data1[,2:(ns+1)], na.rm=TRUE)
-data1$Aluno &lt;- substring(data1$Mat, 8)
-data1 &lt;- data1[order(data1$Aluno),]
-angle &lt;- 90 -360*(1:na-0.5)/na
+data1$Aluno &lt;- factor(substring(data1$Mat, 6))##, substring(data1$Mat, 6)[order(data1$Total, decreasing = TRUE)])
+angle &lt;- 90 -360*(rank(data1$Aluno)-0.5)/na
 data1$angle &lt;- ifelse(angle&lt;(-90), angle + 180, angle)
 data &lt;- data.frame(
   Aluno=rep(data1$Aluno, ns), 
@@ -642,7 +641,7 @@ data &lt;- data.frame(
   Nota=unlist(data1[,2:(ns+1)]))
 p = ggplot(data) +      
   # Add the stacked bar
-  geom_bar(aes(x=as.factor(Aluno), y=Nota, fill=Etapa), stat=&quot;identity&quot;, alpha=0.5) +
+  geom_bar(aes(x=Aluno, y=Nota, fill=Etapa), stat=&quot;identity&quot;, alpha=0.5) +
   scale_fill_viridis(discrete=TRUE) +
   ##geom_abline(slope=0, intercept=0:ns*70, col=c(&#39;gray&#39;))+
   geom_abline(slope=0, intercept=c(ns*c(40,70), 7*70), col=c(&#39;red&#39;, &#39;green&#39;, &#39;blue&#39;))+
@@ -660,7 +659,7 @@ p = ggplot(data) +
   coord_polar()  
   ##geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+15, label=Aluno), color=&quot;black&quot;, fontface=&quot;bold&quot;,alpha=0.6, size=4, inherit.aes = FALSE, angle=90) 
 p
-Warning: Removed 23 rows containing missing values (position_stack).</code></pre>
+Warning: Removed 22 rows containing missing values (position_stack).</code></pre>
 <p><img src="figures/plotmb-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="ce001-n" class="section level3">
@@ -1027,9 +1026,8 @@ kable(n, row.names = FALSE)</code></pre>
 ns &lt;- ncol(data1)-1
 na &lt;- nrow(data1)
 data1$Total &lt;- rowSums(data1[,2:(ns+1)], na.rm=TRUE)
-data1$Aluno &lt;- substring(data1$Mat, 8)
-data1 &lt;- data1[order(data1$Aluno),]
-angle &lt;- 90 -360*(1:na-0.5)/na
+data1$Aluno &lt;- factor(substring(data1$Mat, 6))##, substring(data1$Mat, 6)[order(data1$Total, decreasing = TRUE)])
+angle &lt;- 90 -360*(rank(data1$Aluno)-0.5)/na
 data1$angle &lt;- ifelse(angle&lt;(-90), angle + 180, angle)
 data &lt;- data.frame(
   Aluno=rep(data1$Aluno, ns), 
@@ -1037,7 +1035,7 @@ data &lt;- data.frame(
   Nota=unlist(data1[,2:(ns+1)]))
 p = ggplot(data) +      
   # Add the stacked bar
-  geom_bar(aes(x=as.factor(Aluno), y=Nota, fill=Etapa), stat=&quot;identity&quot;, alpha=0.5) +
+  geom_bar(aes(x=Aluno, y=Nota, fill=Etapa), stat=&quot;identity&quot;, alpha=0.5) +
   scale_fill_viridis(discrete=TRUE) +
   ##geom_abline(slope=0, intercept=0:ns*70, col=c(&#39;gray&#39;))+
   geom_abline(slope=0, intercept=c(ns*c(40,70), 7*70), col=c(&#39;red&#39;, &#39;green&#39;, &#39;blue&#39;))+
@@ -1338,9 +1336,8 @@ kable(mn, row.names = FALSE)</code></pre>
 ns &lt;- ncol(data1)-1
 na &lt;- nrow(data1)
 data1$Total &lt;- rowSums(data1[,2:(ns+1)], na.rm=TRUE)
-data1$Aluno &lt;- substring(data1$Mat, 8)
-data1 &lt;- data1[order(data1$Aluno),]
-angle &lt;- 90 -360*(1:na-0.5)/na
+data1$Aluno &lt;- factor(substring(data1$Mat, 6))##, substring(data1$Mat, 6)[order(data1$Total, decreasing = TRUE)])
+angle &lt;- 90 -360*(rank(data1$Aluno)-0.5)/na
 data1$angle &lt;- ifelse(angle&lt;(-90), angle + 180, angle)
 data &lt;- data.frame(
   Aluno=rep(data1$Aluno, ns), 
@@ -1348,7 +1345,7 @@ data &lt;- data.frame(
   Nota=unlist(data1[,2:(ns+1)]))
 p = ggplot(data) +      
   # Add the stacked bar
-  geom_bar(aes(x=as.factor(Aluno), y=Nota, fill=Etapa), stat=&quot;identity&quot;, alpha=0.5) +
+  geom_bar(aes(x=Aluno, y=Nota, fill=Etapa), stat=&quot;identity&quot;, alpha=0.5) +
   scale_fill_viridis(discrete=TRUE) +
   ##geom_abline(slope=0, intercept=0:ns*70, col=c(&#39;gray&#39;))+
   geom_abline(slope=0, intercept=c(ns*c(40,70), 7*70), col=c(&#39;red&#39;, &#39;green&#39;, &#39;blue&#39;))+
