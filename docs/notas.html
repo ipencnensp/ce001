@@ -272,8 +272,8 @@ $(document).ready(function () {
 
 <div id="escolha-a-aba-de-sua-turma" class="section level2 tabset">
 <h2>Escolha a aba de sua turma</h2>
-<div id="ce001-mb" class="section level3">
-<h3>CE001-MB</h3>
+<div id="ce001-data1" class="section level3">
+<h3>CE001-data1</h3>
 <pre class="r"><code>mb &lt;- read.csv2(&#39;misc/notas-MB.csv&#39;)
 mb &lt;- mb[order(mb$Matrícula), ]
 kable(mb, row.names = FALSE)</code></pre>
@@ -627,6 +627,39 @@ kable(mb, row.names = FALSE)</code></pre>
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>data1 &lt;- mb
+ns &lt;- ncol(data1)-1
+na &lt;- nrow(data1)
+data1$Total &lt;- rowSums(data1[,2:(ns+1)], na.rm=TRUE)
+data1$Aluno &lt;- substring(data1$Mat, 8)
+data1 &lt;- data1[order(data1$Aluno),]
+angle &lt;- 90 -360*(1:na-0.5)/na
+data1$angle &lt;- ifelse(angle&lt;(-90), angle + 180, angle)
+data &lt;- data.frame(
+  Aluno=rep(data1$Aluno, ns), 
+  Etapa=rep(paste0(&#39;E&#39;, 1:ns), each=na), 
+  Nota=unlist(data1[,2:(ns+1)]))
+p = ggplot(data) +      
+  # Add the stacked bar
+  geom_bar(aes(x=as.factor(Aluno), y=Nota, fill=Etapa), stat=&quot;identity&quot;, alpha=0.5) +
+  scale_fill_viridis(discrete=TRUE) +
+  geom_segment(aes(x = 0, y = 7*70, xend = na+1, yend = 7*70), colour = &quot;blue&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### numero necessario de pontos em 7 sabatinas
+  geom_segment(aes(x = 0, y = ns*70, xend = na+1, yend = ns*70), colour = &quot;green&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 70
+  geom_segment(aes(x = 0, y = ns*40, xend = na+1, yend = ns*40), colour = &quot;red&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 40
+  annotate(&quot;text&quot;, x = rep(1/2, ns+1), y = 70*0:ns, label = sprintf(&#39;%02d&#39;, 70*0:ns) , color=&quot;brown&quot;, size=3 , angle=0, fontface=&quot;bold&quot;, hjust=1) +
+  theme_minimal() +
+  theme(
+    legend.position = &quot;none&quot;,
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    panel.grid = element_blank(),
+    plot.margin = unit(rep(-1,4), &quot;cm&quot;) 
+  ) +
+  geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+50, label=Aluno), color=&quot;black&quot;, fontface=&quot;bold&quot;,alpha=0.6, size=3, angle=data1$angle, inherit.aes = FALSE ) +
+  coord_polar()  
+p
+Warning: Removed 29 rows containing missing values (position_stack).</code></pre>
+<p><img src="figures/plotmb-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="ce001-n" class="section level3">
 <h3>CE001-N</h3>
@@ -987,6 +1020,39 @@ kable(n, row.names = FALSE)</code></pre>
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>data1 &lt;- n
+ns &lt;- ncol(data1)-1
+na &lt;- nrow(data1)
+data1$Total &lt;- rowSums(data1[,2:(ns+1)], na.rm=TRUE)
+data1$Aluno &lt;- substring(data1$Mat, 8)
+data1 &lt;- data1[order(data1$Aluno),]
+angle &lt;- 90 -360*(1:na-0.5)/na
+data1$angle &lt;- ifelse(angle&lt;(-90), angle + 180, angle)
+data &lt;- data.frame(
+  Aluno=rep(data1$Aluno, ns), 
+  Etapa=rep(paste0(&#39;E&#39;, 1:ns), each=na), 
+  Nota=unlist(data1[,2:(ns+1)]))
+p = ggplot(data) +      
+  # Add the stacked bar
+  geom_bar(aes(x=as.factor(Aluno), y=Nota, fill=Etapa), stat=&quot;identity&quot;, alpha=0.5) +
+  scale_fill_viridis(discrete=TRUE) +
+  geom_segment(aes(x = 0, y = 7*70, xend = na+1, yend = 7*70), colour = &quot;blue&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### numero necessario de pontos em 7 sabatinas
+  geom_segment(aes(x = 0, y = ns*70, xend = na+1, yend = ns*70), colour = &quot;green&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 70
+  geom_segment(aes(x = 0, y = ns*40, xend = na+1, yend = ns*40), colour = &quot;red&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 40
+  annotate(&quot;text&quot;, x = rep(1/2, ns+1), y = 70*0:ns, label = sprintf(&#39;%02d&#39;, 70*0:ns) , color=&quot;brown&quot;, size=3 , angle=0, fontface=&quot;bold&quot;, hjust=1) +
+  theme_minimal() +
+  theme(
+    legend.position = &quot;none&quot;,
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    panel.grid = element_blank(),
+    plot.margin = unit(rep(-1,4), &quot;cm&quot;) 
+  ) +
+  geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+50, label=Aluno), color=&quot;black&quot;, fontface=&quot;bold&quot;,alpha=0.6, size=3, angle=data1$angle, inherit.aes = FALSE ) +
+  coord_polar()  
+p
+Warning: Removed 27 rows containing missing values (position_stack).</code></pre>
+<p><img src="figures/plotn-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="ce003-mn" class="section level3">
 <h3>CE003-MN</h3>
@@ -1263,6 +1329,39 @@ kable(mn, row.names = FALSE)</code></pre>
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>data1 &lt;- mn
+ns &lt;- ncol(data1)-1
+na &lt;- nrow(data1)
+data1$Total &lt;- rowSums(data1[,2:(ns+1)], na.rm=TRUE)
+data1$Aluno &lt;- substring(data1$Mat, 8)
+data1 &lt;- data1[order(data1$Aluno),]
+angle &lt;- 90 -360*(1:na-0.5)/na
+data1$angle &lt;- ifelse(angle&lt;(-90), angle + 180, angle)
+data &lt;- data.frame(
+  Aluno=rep(data1$Aluno, ns), 
+  Etapa=rep(paste0(&#39;E&#39;, 1:ns), each=na), 
+  Nota=unlist(data1[,2:(ns+1)]))
+p = ggplot(data) +      
+  # Add the stacked bar
+  geom_bar(aes(x=as.factor(Aluno), y=Nota, fill=Etapa), stat=&quot;identity&quot;, alpha=0.5) +
+  scale_fill_viridis(discrete=TRUE) +
+  geom_segment(aes(x = 0, y = 7*70, xend = na+1, yend = 7*70), colour = &quot;blue&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### numero necessario de pontos em 7 sabatinas
+  geom_segment(aes(x = 0, y = ns*70, xend = na+1, yend = ns*70), colour = &quot;green&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 70
+  geom_segment(aes(x = 0, y = ns*40, xend = na+1, yend = ns*40), colour = &quot;red&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 40
+  annotate(&quot;text&quot;, x = rep(1/2, ns+1), y = 70*0:ns, label = sprintf(&#39;%02d&#39;, 70*0:ns) , color=&quot;brown&quot;, size=3 , angle=0, fontface=&quot;bold&quot;, hjust=1) +
+  theme_minimal() +
+  theme(
+    legend.position = &quot;none&quot;,
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    panel.grid = element_blank(),
+    plot.margin = unit(rep(-1,4), &quot;cm&quot;) 
+  ) +
+  geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+50, label=Aluno), color=&quot;black&quot;, fontface=&quot;bold&quot;,alpha=0.6, size=3, angle=data1$angle, inherit.aes = FALSE ) +
+  coord_polar()  
+p
+Warning: Removed 55 rows containing missing values (position_stack).</code></pre>
+<p><img src="figures/plotmn-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 
