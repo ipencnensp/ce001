@@ -627,7 +627,8 @@ kable(mb, row.names = FALSE)</code></pre>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>data1 &lt;- mb
+<pre class="r"><code>data1 &lt;- rbind(mb[which(rowSums(!is.na(mb[,2:ncol(mb)]))&gt;0),], 
+               data.frame(Matrícula=&#39;&#39;, mb[1,-1]*0))
 ns &lt;- ncol(data1)-1
 na &lt;- nrow(data1)
 data1$Total &lt;- rowSums(data1[,2:(ns+1)], na.rm=TRUE)
@@ -643,22 +644,23 @@ p = ggplot(data) +
   # Add the stacked bar
   geom_bar(aes(x=as.factor(Aluno), y=Nota, fill=Etapa), stat=&quot;identity&quot;, alpha=0.5) +
   scale_fill_viridis(discrete=TRUE) +
-  geom_segment(aes(x = 0, y = 7*70, xend = na+1, yend = 7*70), colour = &quot;blue&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### numero necessario de pontos em 7 sabatinas
-  geom_segment(aes(x = 0, y = ns*70, xend = na+1, yend = ns*70), colour = &quot;green&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 70
-  geom_segment(aes(x = 0, y = ns*40, xend = na+1, yend = ns*40), colour = &quot;red&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 40
-  annotate(&quot;text&quot;, x = rep(1/2, ns+1), y = 70*0:ns, label = sprintf(&#39;%02d&#39;, 70*0:ns) , color=&quot;brown&quot;, size=3 , angle=0, fontface=&quot;bold&quot;, hjust=1) +
+  ##geom_abline(slope=0, intercept=0:ns*70, col=c(&#39;gray&#39;))+
+  geom_abline(slope=0, intercept=c(ns*c(40,70), 7*70), col=c(&#39;red&#39;, &#39;green&#39;, &#39;blue&#39;))+
+##  annotate(&quot;text&quot;, x = rep(1.5, ns+1), y = 70*0:ns, label = sprintf(&#39;%02d&#39;, 70*0:ns) , color=&quot;brown&quot;, size=3, hjust=1, angle=45) +
+  annotate(&quot;text&quot;, x = 1, y = c(ns*c(40,70), 7*70), label = sprintf(&#39;%02d&#39;, c(ns*c(40,70), 7*70)), color=c(&#39;red&#39;,&#39;green&#39;,&#39;blue&#39;), size=4 , angle=45, hjust=0.5) +
   theme_minimal() +
   theme(
     legend.position = &quot;none&quot;,
     axis.text = element_blank(),
     axis.title = element_blank(),
     panel.grid = element_blank(),
-    plot.margin = unit(rep(-1,4), &quot;cm&quot;) 
+    plot.margin = unit(rep(0,4), &quot;cm&quot;) 
   ) +
   geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+50, label=Aluno), color=&quot;black&quot;, fontface=&quot;bold&quot;,alpha=0.6, size=3, angle=data1$angle, inherit.aes = FALSE ) +
   coord_polar()  
+  ##geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+15, label=Aluno), color=&quot;black&quot;, fontface=&quot;bold&quot;,alpha=0.6, size=4, inherit.aes = FALSE, angle=90) 
 p
-Warning: Removed 29 rows containing missing values (position_stack).</code></pre>
+Warning: Removed 23 rows containing missing values (position_stack).</code></pre>
 <p><img src="figures/plotmb-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="ce001-n" class="section level3">
@@ -1020,7 +1022,8 @@ kable(n, row.names = FALSE)</code></pre>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>data1 &lt;- n
+<pre class="r"><code>data1 &lt;- rbind(n[which(rowSums(!is.na(n[,2:ncol(n)]))&gt;0),], 
+               data.frame(Matrícula=&#39;&#39;, n[1,-1]*0))
 ns &lt;- ncol(data1)-1
 na &lt;- nrow(data1)
 data1$Total &lt;- rowSums(data1[,2:(ns+1)], na.rm=TRUE)
@@ -1036,23 +1039,21 @@ p = ggplot(data) +
   # Add the stacked bar
   geom_bar(aes(x=as.factor(Aluno), y=Nota, fill=Etapa), stat=&quot;identity&quot;, alpha=0.5) +
   scale_fill_viridis(discrete=TRUE) +
-  geom_segment(aes(x = 0, y = 7*70, xend = na+1, yend = 7*70), colour = &quot;blue&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### numero necessario de pontos em 7 sabatinas
-  geom_segment(aes(x = 0, y = ns*70, xend = na+1, yend = ns*70), colour = &quot;green&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 70
-  geom_segment(aes(x = 0, y = ns*40, xend = na+1, yend = ns*40), colour = &quot;red&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 40
-  annotate(&quot;text&quot;, x = rep(1/2, ns+1), y = 70*0:ns, label = sprintf(&#39;%02d&#39;, 70*0:ns) , color=&quot;brown&quot;, size=3 , angle=0, fontface=&quot;bold&quot;, hjust=1) +
+  ##geom_abline(slope=0, intercept=0:ns*70, col=c(&#39;gray&#39;))+
+  geom_abline(slope=0, intercept=c(ns*c(40,70), 7*70), col=c(&#39;red&#39;, &#39;green&#39;, &#39;blue&#39;))+
+##  annotate(&quot;text&quot;, x = rep(1.5, ns+1), y = 70*0:ns, label = sprintf(&#39;%02d&#39;, 70*0:ns) , color=&quot;brown&quot;, size=3, hjust=1, angle=45) +
+  annotate(&quot;text&quot;, x = 1, y = c(ns*c(40,70), 7*70), label = sprintf(&#39;%02d&#39;, c(ns*c(40,70), 7*70)), color=c(&#39;red&#39;,&#39;green&#39;,&#39;blue&#39;), size=4 , angle=45, hjust=0.5) +
   theme_minimal() +
   theme(
     legend.position = &quot;none&quot;,
     axis.text = element_blank(),
     axis.title = element_blank(),
     panel.grid = element_blank(),
-    plot.margin = unit(rep(-1,4), &quot;cm&quot;) 
+    plot.margin = unit(rep(0,4), &quot;cm&quot;) 
   ) +
   geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+50, label=Aluno), color=&quot;black&quot;, fontface=&quot;bold&quot;,alpha=0.6, size=3, angle=data1$angle, inherit.aes = FALSE ) +
   coord_polar()  
-p
-Warning: Removed 27 rows containing missing values (position_stack).</code></pre>
-<p><img src="figures/plotn-1.png" width="100%" style="display: block; margin: auto;" /></p>
+  ##geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+15, label=Aluno), color=&quot;black&quot;, fontface=&quot;bold&quot;,alpha=0.6, size=4, inherit.aes = FALSE, angle=90) </code></pre>
 </div>
 <div id="ce003-mn" class="section level3">
 <h3>CE003-MN</h3>
@@ -1329,7 +1330,8 @@ kable(mn, row.names = FALSE)</code></pre>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>data1 &lt;- mn
+<pre class="r"><code>data1 &lt;- rbind(mn[which(rowSums(!is.na(mn[,2:ncol(mn)]))&gt;0),], 
+               data.frame(Matrícula=&#39;&#39;, mn[1,-1]*0))
 ns &lt;- ncol(data1)-1
 na &lt;- nrow(data1)
 data1$Total &lt;- rowSums(data1[,2:(ns+1)], na.rm=TRUE)
@@ -1345,23 +1347,21 @@ p = ggplot(data) +
   # Add the stacked bar
   geom_bar(aes(x=as.factor(Aluno), y=Nota, fill=Etapa), stat=&quot;identity&quot;, alpha=0.5) +
   scale_fill_viridis(discrete=TRUE) +
-  geom_segment(aes(x = 0, y = 7*70, xend = na+1, yend = 7*70), colour = &quot;blue&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### numero necessario de pontos em 7 sabatinas
-  geom_segment(aes(x = 0, y = ns*70, xend = na+1, yend = ns*70), colour = &quot;green&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 70
-  geom_segment(aes(x = 0, y = ns*40, xend = na+1, yend = ns*40), colour = &quot;red&quot;, alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 40
-  annotate(&quot;text&quot;, x = rep(1/2, ns+1), y = 70*0:ns, label = sprintf(&#39;%02d&#39;, 70*0:ns) , color=&quot;brown&quot;, size=3 , angle=0, fontface=&quot;bold&quot;, hjust=1) +
+  ##geom_abline(slope=0, intercept=0:ns*70, col=c(&#39;gray&#39;))+
+  geom_abline(slope=0, intercept=c(ns*c(40,70), 7*70), col=c(&#39;red&#39;, &#39;green&#39;, &#39;blue&#39;))+
+##  annotate(&quot;text&quot;, x = rep(1.5, ns+1), y = 70*0:ns, label = sprintf(&#39;%02d&#39;, 70*0:ns) , color=&quot;brown&quot;, size=3, hjust=1, angle=45) +
+  annotate(&quot;text&quot;, x = 1, y = c(ns*c(40,70), 7*70), label = sprintf(&#39;%02d&#39;, c(ns*c(40,70), 7*70)), color=c(&#39;red&#39;,&#39;green&#39;,&#39;blue&#39;), size=4 , angle=45, hjust=0.5) +
   theme_minimal() +
   theme(
     legend.position = &quot;none&quot;,
     axis.text = element_blank(),
     axis.title = element_blank(),
     panel.grid = element_blank(),
-    plot.margin = unit(rep(-1,4), &quot;cm&quot;) 
+    plot.margin = unit(rep(0,4), &quot;cm&quot;) 
   ) +
   geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+50, label=Aluno), color=&quot;black&quot;, fontface=&quot;bold&quot;,alpha=0.6, size=3, angle=data1$angle, inherit.aes = FALSE ) +
   coord_polar()  
-p
-Warning: Removed 55 rows containing missing values (position_stack).</code></pre>
-<p><img src="figures/plotmn-1.png" width="100%" style="display: block; margin: auto;" /></p>
+  ##geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+15, label=Aluno), color=&quot;black&quot;, fontface=&quot;bold&quot;,alpha=0.6, size=4, inherit.aes = FALSE, angle=90) </code></pre>
 </div>
 </div>
 
