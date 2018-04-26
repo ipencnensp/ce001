@@ -7,17 +7,56 @@ output:
 
 ```{r setup, include=FALSE, cache=FALSE}
 source("setup_knitr.R")
+library(ggplot2)
+library(tidyverse)
+library(viridis)
 ```
 
 ## Escolha a aba de sua turma {.tabset}
 
-### CE001-MB
+### CE001-data1
 
 ```{r notasmb}
 mb <- read.csv2('misc/notas-MB.csv')
 mb <- mb[order(mb$Matrícula), ]
 kable(mb, row.names = FALSE)
 ```
+
+
+```{r plotmb, out.width = '100%'}
+data1 <- mb
+ns <- ncol(data1)-1
+na <- nrow(data1)
+data1$Total <- rowSums(data1[,2:(ns+1)], na.rm=TRUE)
+data1$Aluno <- substring(data1$Mat, 8)
+data1 <- data1[order(data1$Aluno),]
+angle <- 90 -360*(1:na-0.5)/na
+data1$angle <- ifelse(angle<(-90), angle + 180, angle)
+data <- data.frame(
+  Aluno=rep(data1$Aluno, ns), 
+  Etapa=rep(paste0('E', 1:ns), each=na), 
+  Nota=unlist(data1[,2:(ns+1)]))
+p = ggplot(data) +      
+  # Add the stacked bar
+  geom_bar(aes(x=as.factor(Aluno), y=Nota, fill=Etapa), stat="identity", alpha=0.5) +
+  scale_fill_viridis(discrete=TRUE) +
+  geom_segment(aes(x = 0, y = 7*70, xend = na+1, yend = 7*70), colour = "blue", alpha=1, size=0.3 , inherit.aes = FALSE ) + ### numero necessario de pontos em 7 sabatinas
+  geom_segment(aes(x = 0, y = ns*70, xend = na+1, yend = ns*70), colour = "green", alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 70
+  geom_segment(aes(x = 0, y = ns*40, xend = na+1, yend = ns*40), colour = "red", alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 40
+  annotate("text", x = rep(1/2, ns+1), y = 70*0:ns, label = sprintf('%02d', 70*0:ns) , color="brown", size=3 , angle=0, fontface="bold", hjust=1) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    panel.grid = element_blank(),
+    plot.margin = unit(rep(-1,4), "cm") 
+  ) +
+  geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+50, label=Aluno), color="black", fontface="bold",alpha=0.6, size=3, angle=data1$angle, inherit.aes = FALSE ) +
+  coord_polar()  
+p
+```
+
 
 ### CE001-N
 
@@ -27,10 +66,78 @@ n <- n[order(n$Matrícula), ]
 kable(n, row.names = FALSE)
 ```
 
+```{r plotn, out.width = '100%'}
+data1 <- n
+ns <- ncol(data1)-1
+na <- nrow(data1)
+data1$Total <- rowSums(data1[,2:(ns+1)], na.rm=TRUE)
+data1$Aluno <- substring(data1$Mat, 8)
+data1 <- data1[order(data1$Aluno),]
+angle <- 90 -360*(1:na-0.5)/na
+data1$angle <- ifelse(angle<(-90), angle + 180, angle)
+data <- data.frame(
+  Aluno=rep(data1$Aluno, ns), 
+  Etapa=rep(paste0('E', 1:ns), each=na), 
+  Nota=unlist(data1[,2:(ns+1)]))
+p = ggplot(data) +      
+  # Add the stacked bar
+  geom_bar(aes(x=as.factor(Aluno), y=Nota, fill=Etapa), stat="identity", alpha=0.5) +
+  scale_fill_viridis(discrete=TRUE) +
+  geom_segment(aes(x = 0, y = 7*70, xend = na+1, yend = 7*70), colour = "blue", alpha=1, size=0.3 , inherit.aes = FALSE ) + ### numero necessario de pontos em 7 sabatinas
+  geom_segment(aes(x = 0, y = ns*70, xend = na+1, yend = ns*70), colour = "green", alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 70
+  geom_segment(aes(x = 0, y = ns*40, xend = na+1, yend = ns*40), colour = "red", alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 40
+  annotate("text", x = rep(1/2, ns+1), y = 70*0:ns, label = sprintf('%02d', 70*0:ns) , color="brown", size=3 , angle=0, fontface="bold", hjust=1) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    panel.grid = element_blank(),
+    plot.margin = unit(rep(-1,4), "cm") 
+  ) +
+  geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+50, label=Aluno), color="black", fontface="bold",alpha=0.6, size=3, angle=data1$angle, inherit.aes = FALSE ) +
+  coord_polar()  
+p
+```
+
 ### CE003-MN
 
 ```{r notasmn}
 mn <- read.csv("misc/notas_ce003-MN.csv")
 mn <- mn[order(mn$Matrícula), ]
 kable(mn, row.names = FALSE)
+```
+
+```{r plotmn, out.width = '100%'}
+data1 <- mn
+ns <- ncol(data1)-1
+na <- nrow(data1)
+data1$Total <- rowSums(data1[,2:(ns+1)], na.rm=TRUE)
+data1$Aluno <- substring(data1$Mat, 8)
+data1 <- data1[order(data1$Aluno),]
+angle <- 90 -360*(1:na-0.5)/na
+data1$angle <- ifelse(angle<(-90), angle + 180, angle)
+data <- data.frame(
+  Aluno=rep(data1$Aluno, ns), 
+  Etapa=rep(paste0('E', 1:ns), each=na), 
+  Nota=unlist(data1[,2:(ns+1)]))
+p = ggplot(data) +      
+  # Add the stacked bar
+  geom_bar(aes(x=as.factor(Aluno), y=Nota, fill=Etapa), stat="identity", alpha=0.5) +
+  scale_fill_viridis(discrete=TRUE) +
+  geom_segment(aes(x = 0, y = 7*70, xend = na+1, yend = 7*70), colour = "blue", alpha=1, size=0.3 , inherit.aes = FALSE ) + ### numero necessario de pontos em 7 sabatinas
+  geom_segment(aes(x = 0, y = ns*70, xend = na+1, yend = ns*70), colour = "green", alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 70
+  geom_segment(aes(x = 0, y = ns*40, xend = na+1, yend = ns*40), colour = "red", alpha=1, size=0.3 , inherit.aes = FALSE ) + ### linha na media igual 40
+  annotate("text", x = rep(1/2, ns+1), y = 70*0:ns, label = sprintf('%02d', 70*0:ns) , color="brown", size=3 , angle=0, fontface="bold", hjust=1) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    panel.grid = element_blank(),
+    plot.margin = unit(rep(-1,4), "cm") 
+  ) +
+  geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+50, label=Aluno), color="black", fontface="bold",alpha=0.6, size=3, angle=data1$angle, inherit.aes = FALSE ) +
+  coord_polar()  
+p
 ```
