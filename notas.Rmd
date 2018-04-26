@@ -101,6 +101,7 @@ p = ggplot(data) +
   geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+50, label=Aluno), color="black", fontface="bold",alpha=0.6, size=3, angle=data1$angle, inherit.aes = FALSE ) +
   coord_polar()  
   ##geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+15, label=Aluno), color="black", fontface="bold",alpha=0.6, size=4, inherit.aes = FALSE, angle=90) 
+p
 ```
 
 ### CE003-MN
@@ -144,4 +145,5 @@ p = ggplot(data) +
   geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+50, label=Aluno), color="black", fontface="bold",alpha=0.6, size=3, angle=data1$angle, inherit.aes = FALSE ) +
   coord_polar()  
   ##geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+15, label=Aluno), color="black", fontface="bold",alpha=0.6, size=4, inherit.aes = FALSE, angle=90) 
+p
 ```
