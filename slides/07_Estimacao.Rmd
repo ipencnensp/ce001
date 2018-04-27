@@ -1,0 +1,86 @@
+---
+title: "Estimação"
+short-title: "Estimação"
+author: |
+  | Wagner H. Bonat
+  | Fernando P. Mayer
+  | Elias T. Krainski
+short-author: "WB, FM, EK"
+date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+short-date: "2018/1"
+institute: "Laboratório de Estatística e Geoinformação"
+short-institute: "LEG/DEST/UFPR"
+department: |
+  | Universidade Federal do Paraná
+  | Departamento de Estatística
+safe-columns: true
+fontfamily: inconsolata
+output:
+  legtheme::beamer_leg
+---
+
+```{r setup, cache=FALSE, include=FALSE}
+source("setup_knitr_slides.R")
+library(xtable)
+op <- par(no.readonly = TRUE)
+```
+
+# Inferência estatística - Estimação
+
+### Parâmetros, Estimadores e Estimativas
+
+- Def. 7.1 - Parâmetro: Quantidade da população, em geral,
+desconhecidas, sobre as quais temos interesse e, usualmente
+representadas por letras gregas tais como $\theta$, $\mu$ e $\sigma$.
+- Def. 7.2 - Estimador e estimativa: Função dos elementos da
+amostra, construída com a finalidade de representar, ou estimar,
+um parâmetro de interesse na população. Em geral, denotado por
+símbolos com com acentro circunflexo: $\hat{\theta}$, $\hat{\mu}$
+e $\hat{\sigma}$. Aos valores numéricos assumidos pelos estimadores
+denominamos estimativas pontuais ou simplesmente estimativas.
+
+### Propriedades de estimadores
+
+- Def. 7.3 - Vício: Um estimador $\hat{\theta}$ é não viciado
+ou não viesado para um parâmetro $\theta$ se $E(\hat{\theta}) = \theta$.
+Um estimador é não viciado se o seu valor esperado coincide com o
+parâmetro de interesse.
+- Def. 7.4 - Consistência: Um estimador $\hat{\theta}$ é consistente,
+se, à medida que o tamanho da amostra aumenta, seu valor esperado
+converge para o parâmetro de interesse e sua variância converge
+para zero. Ou seja, $\hat{\theta}$ é consistente se as duas propriedades
+seguintes são satisfeitas:
+- $\lim_{n \to \infty} E(\hat{\theta}) = \theta.$ \\
+- $\lim_{n \to \infty} Var(\hat{\theta}) = 0.$
+- Def. 7.5 - Eficiência: Dado dois estimadores $\hat{\theta}_1$
+e $\hat{\theta}_2$, não viciados para um parâmetro $\theta$, dizemos
+que $\hat{\theta}_1$ é mais eficiente do que $\hat{\theta}_2$ se
+$Var(\hat{\theta}_1) < Var(\hat{\theta}_2)$.
+
+
+### Teorema Central do Limite
+
+- Suponha uma amostra aleatória simples de tamanho $n$ retirada
+de uma população com média $\mu$ e variância $\sigma^2$. Note que
+o modelo da variável aleatória não é especificado. Representado
+tal amostra por $n$ variáveis aleatórias independentes
+$X_1, X_2, ..., X_n$ e, denotando sua média por $\bar{X}$, temos
+que
+$$ \frac{\bar{X} - \mu}{ \sigma / \sqrt{n}} \to Z,$$
+com $Z \sim N(0,1)$.
+
+
+### Estimação Intervalar
+
+- Intervalo de confiança para $\mu$ com coeficiente de confiança
+$\gamma$.
+$$ IC(\mu, \gamma) = \bar{X} - z_{\gamma/2} \frac{\sigma}{\sqrt{n}};
+\bar{X} + z_{\gamma/2} \frac{\sigma}{\sqrt{n}}.$$
+- Intervalo de confiança para $p$ com coeficiente de confiança
+$$ IC(\mu, \gamma) = \hat{p} - z_{\gamma/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n} };
+\hat{p} + z_{\gamma/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n} }.$$
+
+### Exercícios recomendados
+
+- Seção $7.2$ - $1$ a $5$.
+- Seção $7.4$ - $1$ a $5$.
