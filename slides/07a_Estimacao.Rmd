@@ -545,3 +545,275 @@ $$
 \text{EP}(\bar{X}) = \sqrt{\text{Var}(\bar{X})} =
 \sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}
 $$
+
+# Distribuições amostrais
+
+## Introdução
+
+### Distribuições amostrais
+
+De maneira geral, uma amostra de tamaho $n$ será descrita pelos
+valores $x_1, x_2, \ldots, x_n$ das variáveis aleatórias $X_1, X_2,
+..., X_n$ $\Rightarrow$ **Amostra Aleatória**
+
+No caso de uma Amostragem Aleatória Simples (AAS) **com
+reposição**, $X_1, X_2, \ldots, X_n$ serão
+variáveis aleatórias **independentes e identicamentes
+distribuídas** (iid) com função de probabilidade (fp) ou função
+densidade de probabilidade (fdp) conjunta dada por
+$$
+f(x_1, x_2, \ldots, x_n, \boldsymbol{\theta}) =
+f(x_1,\boldsymbol{\theta}) \cdot f(x_2,\boldsymbol{\theta}) \cdots
+f(x_n,\boldsymbol{\theta}) = \prod_{i=1}^{n} f(x_i,\boldsymbol{\theta})
+$$
+Onde o mesmo valor do parâmetro $\boldsymbol{\theta}$ é utilizado em
+cada um dos termos no produto.
+
+### Distribuições amostrais
+
+Quando uma amostra $X_1, X_2, \ldots, X_n$ é obtida, geralmente
+estamos interessados em um resumo destes valores, que pode ser
+expresso matematicamente pela estatística $T(x_1, x_2, \ldots, x_n)$.
+
+Dessa forma, $Y = T(x_1, x_2, \ldots, x_n)$ **é também uma variável
+aleatória**. Se $Y$ é uma VA, então ela possui uma **distribuição de
+probabilidade**.
+
+Uma vez que a distribuição de $Y$ é derivada da amostra $X_1, X_2,
+\ldots, X_n$, vamos denominá-la de **distribuição amostral** de $Y$.
+
+### Distribuições amostrais
+
+#### Distribuições amostrais
+A distribuição de probabilidade de uma estatística $Y = T(x_1, x_2,
+\ldots, x_n)$ é denominada de **distribuição amostral** de
+$Y$. Assim, uma estatística também é uma variável aleatória, pois
+seus valores mudam conforme a amostra aleatória.
+
+####
+**Exemplo**: duas estatísticas comumente utilizadas para o
+resumo de uma amostra aleatória são a **média amostral** $\bar{x}$, e
+a **proporção amostral** $\hat{p}$. Cada uma delas também possui uma
+distribuição amostral.
+
+## Distribuição amostral da média
+
+### Distribuição amostral da média
+
+Para estudarmos a distribuição amostral da estatística $\bar{X}$,
+considere uma população identificada pela VA $X$, com parâmetros
+$$
+\text{E}(X) = \mu = \text{média} \qquad \qquad \text{Var}(X) = \sigma^2 =
+\text{variância}
+$$
+supostamente conhecidos. Em seguida, realizamos os seguintes passos:
+
+1. Retiramos $m$ amostras aleatórias (AAS com reposição) de tamanho
+$n$ dessa população
+2. Para cada uma das $m$ amostras, calculamos a média amostral
+$\bar{x}$
+3. Verificamos a distribuição das $m$ médias amostrais e estudamos
+suas propriedades
+
+### Exemplo 7.13
+
+Seja $X \sim \text{N}(10,16)$, como se comporta $\bar{X}$ para $n = 10,
+30, 50, 100$?
+
+```{r, results='hide', out.width='70%', fig.width=7, fig.height=5}
+m <- 1000
+nval <- c(10, 30, 50, 100)
+set.seed(1)
+th1 <- sapply(nval,
+              function(n){
+    replicate(m, mean(rnorm(n, mean = 10, sd = 4)))
+})
+str(th1)
+th1 <- stack(as.data.frame(th1))
+levels(th1$ind) <- as.character(nval)
+th1$ind <- as.numeric(as.character(th1$ind))
+densityplot(~values, data = th1, groups = ind, plot.points = FALSE,
+            auto.key = list(columns = 4), n = 1000,
+            xlab = "Médias", ylab = "Densidade")
+```
+
+### Distribuição amostral da média
+
+Através do estudo da distribuição da média amostral chegamos em um dos
+resultados mais importantes da inferência estatística.
+
+#### Distribuição amostral da média
+- $\text{E}(\bar{X}) = \mu_{\bar{X}} = \mu$
+- $\text{Var}(\bar{X}) = \sigma^2_{\bar{X}} = \sigma^2/n$
+
+####
+Portanto, se
+$$X \sim \text{N}(\mu, \sigma^2) \quad \text{então} \quad
+\bar{X} \sim \text{N}(\mu_{\bar{X}}, \sigma^2_{\bar{x}})$$
+mas, como
+$$\mu_{\bar{X}} = \mu \quad \text{e} \quad \sigma^2_{\bar{X}} =
+\sigma^2/n$$
+então, a **distribuição amostral** da média amostral $\bar{X}$ é
+$$\bar{X} \sim \text{N}\left(\mu, \frac{\sigma^2}{n} \right)$$
+
+### Distribuição amostral da média
+
+Pode-se mostrar que, para amostras suficientemente grandes, **a média
+amostral $\bar{X}$ converge para o verdadeiro valor da média
+populacional $\mu$** (é um **estimador não viesado** de $\mu$).
+
+Além disso, a variância das médias amostrais $\sigma^2_{\bar{X}}$
+tende a diminuir conforme $n \rightarrow \infty$ (é um estimador
+**consistente**).
+
+Estes resultados sugerem que, quando o tamanho da amostra aumenta,
+\begin{center}
+\underline{independente do formato da distribuição da população
+original},
+\end{center}
+**a distribuição amostral de $\bar{X}$ aproxima-se
+cada vez mais de uma distribuição Normal**, um resultado fundamental
+na teoria de probabilidade conhecido como **Teorema Central do Limite**.
+
+### Distribuição amostral da média
+
+#### Teorema Central do Limite (TCL)
+Para amostras aleatórias simples $(X_1, X_2, \ldots, X_n)$,
+retiradas de uma população com média $\mu$ e variância $\sigma^2$, a
+distribuição amostral da média $\bar{X}$, terá forma dada por
+$$
+Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}}
+$$
+no limite quando $n \to \infty$, onde $Z \sim \text{N}(0,1)$.
+
+- Se a população for normal, então $\bar{X}$ terá distribuição
+*exata* normal.
+- A rapidez da convergência para a normal depende da distribuição
+da população da qual as amostras foram geradas.
+
+### Distribuição amostral da média
+
+```{r, results='hide'}
+##======================================================================
+## Script Teorema do Limite Central - TLC
+##======================================================================
+
+set.seed(2014)
+## Grafico de convergência de 4 distribuições de acordo com o TLC
+# Normal(500, 1000)
+norm <- rnorm(500, mean = 500, sd = 100)
+# Uniforme[200,800]
+unif <- runif(500, min = 200, max = 800)
+# Exponencial(1)
+expo <- rexp(500, rate = 1)
+# Poisson(2)
+pois <- rpois(500, lambda = 2)
+# n amostral
+n <- c(5, 25, 100)
+# m = número de amostras aleatórias de tamanho n
+m <- 500
+# vetor temporario para receber os valores de média
+temp <- numeric(m)
+
+## Limites para cada distribuicao
+xlim.norm <- c(150, 800)
+xlim.unif <- c(200, 800)
+xlim.expo <- c(0, 6)
+xlim.pois <- c(0, 7)
+
+pdf("../img/dist_amostrais.pdf", width = 8, height = 8)
+par(mfrow = c(4, 4))
+# Distribuição Normal
+hist(norm, freq = TRUE, main = "População - N = 500",
+     include.lowest = TRUE, right = FALSE, ylab = "Frequência",
+     col = "lightgray", xlab = "Normal", xlim = xlim.norm)
+for(i in 1:3){
+    for(j in 1:m){
+        temp[j] <- mean(sample(norm, size = n[i], replace = TRUE))
+    }
+    hist(temp, freq = TRUE, main = paste("n = ", n[i]),
+         include.lowest = TRUE, right = FALSE, ylab = "Frequência",
+         xlab = "Médias amostrais", xlim = xlim.norm)
+}
+# Distribuição Uniforme
+hist(unif, freq = TRUE, main = "População - N = 500",
+     include.lowest = TRUE, right = FALSE, xlim = xlim.unif,
+     col = "lightgray", xlab = "Uniforme", ylab = "Frequência")
+for(i in 1:3){
+    for(j in 1:m){
+        temp[j] <- mean(sample(unif, size = n[i], replace = TRUE))
+    }
+    hist(temp, freq = TRUE, main = paste("n = ", n[i]),
+         include.lowest = TRUE, right = FALSE, ylab = "Frequência",
+         xlab = "Médias amostrais", xlim = xlim.unif)
+}
+# Distribuição Exponencial
+hist(expo, freq = TRUE, main = "População - N = 500",
+     include.lowest = TRUE, right = FALSE, xlim = xlim.expo,
+     col = "lightgray", xlab = "Exponencial", ylab = "Frequência")
+for(i in 1:3){
+    for(j in 1:m){
+        temp[j] <- mean(sample(expo, size = n[i], replace = TRUE))
+    }
+    hist(temp, freq = TRUE, main = paste("n = ", n[i]),
+         include.lowest = TRUE, right = FALSE, ylab = "Frequência",
+         xlab = "Médias amostrais", xlim = xlim.expo)
+}
+# Distribuição Poisson
+hist(pois, freq = TRUE, main = "População - N = 500",
+     include.lowest = TRUE, right = FALSE, xlim = xlim.pois,
+     col = "lightgray", xlab = "Poisson", ylab = "Frequência")
+for(i in 1:3){
+    for(j in 1:m){
+        temp[j] <- mean(sample(pois, size = n[i], replace = TRUE))
+    }
+    hist(temp, freq = TRUE, main = paste("n = ", n[i]),
+         include.lowest = TRUE, right = FALSE, ylab = "Frequência",
+         xlab = "Médias amostrais", xlim = xlim.pois)
+}
+par(mfrow = c(1, 1))
+dev.off()
+```
+
+Ver figura [dist_amostrais.pdf](../img/dist_amostrais.pdf)
+
+### Distribuição amostral da média
+
+Em palavras, o teorema garante que que para $n$ grande, a distribuição
+da média amostral, devidamente padronizada, **se comporta segundo um
+modelo normal** com média 0 e variância 1.
+
+Pelo teorema, temos que quanto maior o tamanho da amostra, **melhor é a
+aproximação**.
+
+Estudos envolvendo simulações mostram que, em muitos casos, **valores de
+$n$ ao redor de 30** fornecem aproximações bastante boas para as
+aplicações práticas.
+
+### Distribuição amostral da média
+
+Quando calculamos a probabilidade de um valor estar em um determinado
+intervalo de valores, podemos usar o modelo Normal, como vimos
+anteriormente.
+
+No entanto, quando temos uma **amostra**, e queremos calcular
+probabilidades associadas à **média amostral** (a probabilidade
+da média amostral estar em um determinado intervalo de valores),
+precisamos necessariamente usar os resultados do TCL.
+
+### Distribuição amostral da média
+
+**Exemplo:** Uma máquina de empacotamento que abastece pacotes de
+feijão apresenta distribuição normal com média de 500 g e
+desvio-padrão de 22 g. De acordo com as normas de defesa do
+consumidor, os pacotes de feijão não podem ter peso inferior a 2% do
+estabelecido na embalagem.
+
+a. Determine a probabilidade de **um pacote** selecionado
+aleatoriamente ter a peso inferior a 490 g.
+b. Determine a proabilidade de **20 pacotes** selecionados
+aleatoriamente terem peso médio inferior a 490 g.
+c. Como podemos interpretar os resultados dos itens anteriores?
+O que é mais indicado para se tomar uma decisão sobre o
+funcionamento da máquina: selecionar um pacote ou uma amostra de
+pacotes?
