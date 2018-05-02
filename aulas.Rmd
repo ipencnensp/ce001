@@ -45,20 +45,22 @@ cat(paste0("- **", datas1, " (Qua)", "**:\n", "- **",
 - **20/04 (Sex)**: (6) Variáveis aleatórias contínuas.
 - **25/04 (Qua)**: Exercícios.
 - **27/04 (Sex)**: Sabatina 6.
-- **02/05 (Qua)**: (7) Inferência estatística - estimação.
+- **02/05 (Qua)**: (7) Inferência estatística - estimação (A):
+  propriedades e distribuições amostrais.
 - **04/05 (Sex)**: Exercícios.
 - **09/05 (Qua)**: Sabatina 7.
-- **11/05 (Sex)**: (8) Inferência estatística - testes de hipótese.
+- **11/05 (Sex)**: (7) Inferência estatística - estimação (B): estimação
+  por intervalo.
 - **16/05 (Qua)**: Exercícios.
 - **18/05 (Sex)**: Sabatina 8.
 - **23/05 (Qua)**: [RBRAS](http://www.rbras.org.br/rbras63). Não haverá aula.
 - **25/05 (Sex)**: [RBRAS](http://www.rbras.org.br/rbras63). Não haverá aula.
 - **30/05 (Qua)**: Não haverá aula.
 - **01/06 (Sex)**: **Recesso de feriado.**
-- **06/06 (Qua)**: (9) Tópicos especiais I.
+- **06/06 (Qua)**: (8) Inferência estatística - testes de hipótese.
 - **08/06 (Sex)**: Exercícios.
 - **13/06 (Qua)**: Sabatina 9.
-- **15/06 (Sex)**: (9) Tópicos especiais II.
+- **15/06 (Sex)**: (9) Tópicos especiais.
 - **20/06 (Qua)**: Exercícios.
 - **22/06 (Sex)**: Sabatina 10.
 
