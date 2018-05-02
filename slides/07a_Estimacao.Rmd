@@ -646,7 +646,6 @@ resultados mais importantes da inferência estatística.
 - $\text{E}(\bar{X}) = \mu_{\bar{X}} = \mu$
 - $\text{Var}(\bar{X}) = \sigma^2_{\bar{X}} = \sigma^2/n$
 
-####
 Portanto, se
 $$X \sim \text{N}(\mu, \sigma^2) \quad \text{então} \quad
 \bar{X} \sim \text{N}(\mu_{\bar{X}}, \sigma^2_{\bar{x}})$$
@@ -817,3 +816,166 @@ c. Como podemos interpretar os resultados dos itens anteriores?
 O que é mais indicado para se tomar uma decisão sobre o
 funcionamento da máquina: selecionar um pacote ou uma amostra de
 pacotes?
+
+## Distribuição amostral da proporção
+
+### Distribuição amostral da proporção
+
+Muitas vezes, o interesse é conhecer uma **proporção**, e não a
+média de uma população.
+
+Suponha que uma amostra de tamanho $n$ foi obtida de uma população, e
+que $x \leq n$ observações nessa amostra pertençam a uma classe de
+interesse (ex.: pessoas do sexo masculino).
+
+Dessa forma, a proporção amostral
+$$
+\hat{p} = \frac{x}{n} = \frac{\text{número de sucessos}}{\text{total de
+tentativas}}
+$$
+é o ``melhor estimador'' para a proporção populacional $p$.
+
+Note que $n$ e $p$ são os parâmetros de uma **distribuição
+binomial**.
+
+### Distribuição amostral da proporção
+
+**Exemplo**: em 5 lançamentos de uma moeda considere que o evento
+"cara" (C) seja o sucesso ("sucesso" = 1; "fracasso" = 0). Um possível
+resultado seria o conjunto \{C, C, R, R, C\}. A proporção
+amostral seria
+$$
+\hat{p} = \frac{x}{n} = \frac{\text{número de sucessos}}{\text{total de
+tentativas}} = \frac{3}{5} = 0,6
+$$
+
+**Exemplo**: em uma amostra de 2500 eleitores de uma cidade, 1784
+deles eram favoráveis à reeleição do atual prefeito. A proporção
+amostral é então
+$$
+\hat{p} = \frac{x}{n} = \frac{\text{número de sucessos}}{\text{total de
+tentativas}} = \frac{1784}{2500} = 0,7136
+$$
+
+### Distribuição amostral de uma proporção
+
+A distribuição amostral de uma **proporção** é a distribuição das
+proporções de todas as possíveis amostras de tamanho $n$ retiradas de
+uma população.
+
+**Exemplo**:
+
+- Uma moeda é lançada $n=10, 30, 50, 100$ vezes, e a proporção de caras
+é registrada
+- Esse processo é repetido $m = 1000$ vezes
+
+Com isso, concluimos que:
+
+- A média das proporções para $n \to \infty$ tende para a
+verdadeira proporção populacional $p = 0,5$
+- A **distribuição amostral** das proporções segue
+aproximadamente uma **distribuição normal**
+
+### Distribuição amostral de uma proporção
+
+```{r, results='hide', out.width='70%', fig.width=7, fig.height=5}
+m <- 1000
+nval <- c(10, 30, 50, 100)
+set.seed(1)
+th1 <- sapply(nval,
+              function(n){
+    replicate(m, sum(sample(c(0,1), size = n, replace = TRUE))/n)
+})
+str(th1)
+th1 <- stack(as.data.frame(th1))
+levels(th1$ind) <- as.character(nval)
+th1$ind <- as.numeric(as.character(th1$ind))
+densityplot(~values, data = th1, groups = ind, plot.points = FALSE,
+            auto.key = list(columns = 4), n = 1000,
+            xlab = "Proporções", ylab = "Densidade")
+```
+
+### Distribuição amostral de uma proporção
+
+Através do estudo da distribuição amostral da proporção, chegamos aos
+seguintes resultados
+
+- $\text{E}(\hat{p}) = \mu_{\hat{p}} = p$
+- $\text{Var}(\hat{p}) = \sigma^{2}_{\hat{p}} = \frac{p(1-p)}{n}$
+
+Ou seja, $\hat{p}$ é um estimador **não viciado** e
+**consistente** para $p$.
+
+Assim, a **distribuição amostral** de $\hat{p}$ será
+$$
+\hat{p} \sim \text{N} \left( p, \frac{p(1-p)}{n} \right)
+$$
+
+### Distribuição amostral de uma proporção
+
+Note que o **erro padrão** de $\hat{p}$ será
+$$
+\text{EP}(\hat{p}) = \sqrt{\text{Var}(\hat{p})} = \sqrt{\frac{p(1-p)}{n}}
+$$
+Assim, usando o TCL, podemos mostrar que a quantidade
+$$
+Z = \frac{\hat{p} - p}{\sqrt{\frac{p(1-p)}{n}}} \, \sim \, \text{N}(0,1)
+$$
+segue uma distribuição **normal padrão** com média 0 e variância
+1.
+
+Quando não conhecemos $p$, usamos $\hat{p} = x/n$ como estimativa para
+calcular o erro padrão.
+
+### Exemplo 7.17
+
+Suponha que a proporção de peças fora da especificação em um lote é de
+40%. Uma amostra de 30 peças foi selecionada. Qual é a probabilidade da
+proporção de peças defeituosas ser menor do que 0,5?
+
+\pause
+
+$X \sim \text{Bin}(30, 0.4)$. Assim:
+\begin{align*}
+P(\hat{p} < 0.5) &= P(X/30 < 0.5) = P(X < 15) \\
+ &= \sum_{x=0}^{14} \binom{30}{x} 0.4^x 0.6^{30-x}
+\end{align*}
+
+Usando o R:
+
+\setlength{\topsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\partopsep}{1pt}
+```{r, echo=TRUE}
+pbinom(14, size = 30, prob = 0.4)
+```
+
+### Exemplo 7.17
+
+Considerando a aproximação pela Normal, temos
+$$
+\hat{p} \sim \text{N} \left( 0.4, \frac{0.4(1-0.4)}{30} \right)
+$$
+Assim,
+\begin{align*}
+P(\hat{p} < 0.5) &\approx P \left( \frac{\hat{p} - p}{\sqrt{\frac{p(1-p)}{n}}}
+< \frac{0.5 - 0.4}{\sqrt{\frac{0.4(1-0.4)}{30}}} \right) \\
+ &= P(Z < 1,12) = 0.8686
+\end{align*}
+Usando o R:
+
+\setlength{\topsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\partopsep}{1pt}
+```{r, echo=TRUE}
+pnorm(1.12)
+```
+
+# Exercícios
+
+### Exercícios recomendados
+
+- Seção 7.1 - 1 a 3
+- Seção 7.2 - 1 a 5
+- Seção 7.3 - 1 a 7
+- Seção 7.5 - 1 a 5, 9 a 12
