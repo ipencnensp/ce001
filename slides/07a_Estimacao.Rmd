@@ -441,24 +441,6 @@ $$\lim_{n \to \infty} \text{E}[\hat{\theta}] = \theta$$
 e
 $$\lim_{n \to \infty} \text{Var}[\hat{\theta}] = 0$$
 
-### Propriedades dos estimadores: 3. Eficiência
-
-#### Eficiência relativa
-Sejam $\hat{\theta}_1 = T_1(\mathbf{X})$ e $\hat{\theta}_2 =
-T_2(\mathbf{X})$ dois estimadores pontuais **não viciados** para
-$\theta$. A eficiência relativa de $\hat{\theta}_1$ em relação a
-$\hat{\theta}_2$ é
-$$\text{ER}[\hat{\theta}_1, \hat{\theta}_2] =
-\frac{\text{Var}[\hat{\theta}_1]}{\text{Var}[\hat{\theta}_2]}$$
-
-####
-Se:
-
-- $\text{ER}[\hat{\theta}_1, \hat{\theta}_2] > 1$ $\Rightarrow$
-$\hat\theta_2$ é mais eficiente
-- $\text{ER}[\hat{\theta}_1, \hat{\theta}_2] < 1$ $\Rightarrow$
-$\hat\theta_1$ é mais eficiente
-
 ### Propriedades dos estimadores
 
 **Exemplo**: média amostral $\bar{x} = \frac{1}{n} \sum_{i=1}^{n}
@@ -496,6 +478,24 @@ $$
 \bar{x})^2 \right] = \sigma^2
 $$
 que é então um estimador **não viciado** para $\sigma^2$.
+
+### Propriedades dos estimadores: 3. Eficiência
+
+#### Eficiência relativa
+Sejam $\hat{\theta}_1 = T_1(\mathbf{X})$ e $\hat{\theta}_2 =
+T_2(\mathbf{X})$ dois estimadores pontuais **não viciados** para
+$\theta$. A eficiência relativa de $\hat{\theta}_1$ em relação a
+$\hat{\theta}_2$ é
+$$\text{ER}[\hat{\theta}_1, \hat{\theta}_2] =
+\frac{\text{Var}[\hat{\theta}_1]}{\text{Var}[\hat{\theta}_2]}$$
+
+####
+Se:
+
+- $\text{ER}[\hat{\theta}_1, \hat{\theta}_2] > 1$ $\Rightarrow$
+$\hat\theta_2$ é mais eficiente
+- $\text{ER}[\hat{\theta}_1, \hat{\theta}_2] < 1$ $\Rightarrow$
+$\hat\theta_1$ é mais eficiente
 
 ### Exemplo 7.11
 
