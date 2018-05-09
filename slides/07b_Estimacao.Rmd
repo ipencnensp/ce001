@@ -60,7 +60,7 @@ Os **intervalos de confiança** são obtidos a partir da
 
 - A amostra é uma **amostra aleatória simples**. (Todas as
 amostras de mesmo tamanho tem a mesma probabilidade de serem selecionadas)
-- O valor do desvio-padrão populacionalm $\sigma$, é conhecido
+- O valor do desvio padrão populacional $\sigma$, é conhecido
 - Uma ou ambas das seguintes condições são satisfeitas:
   - A população é normalmente distribuída
   - A amostra possui $n > 30$
@@ -125,13 +125,13 @@ curve(dnorm, from = -4, to = 4, axes = FALSE,
       xlab = "z", ylab = "f(z)", yaxs = "i")
 axis(1, at = c(-1.96, 0, 1.96),
      labels = c(expression(-z[gamma/2]), "0", expression(z[gamma/2])))
-box()
 cord.x <- c(-1.96, seq(-1.96, 1.96, 0.01), 1.96)
 cord.y <- c(0, dnorm(seq(-1.96, 1.96, 0.01)), 0)
 polygon(x = cord.x, y = cord.y, col = "lightgray", border = NA)
 segments(x0 = 0, y0 = 0, x1 = 0, y1 = dnorm(0))
 text(x = -0.9, y = 0.1, labels = expression(frac(symbol(gamma), 2)))
 text(x = 0.9, y = 0.1, labels = expression(frac(symbol(gamma), 2)))
+box()
 ```
 
 ### Coeficiente de confiança $\gamma$
@@ -355,3 +355,100 @@ igual a 2 unidades, com níveis de confiança de
    - $(i)\ 90\% \quad (ii)\ 95\%$
 d) Compare as estimativas do item anterior e analise o impacto
 do nível de confiança para a determinação do tamanho amostral.
+
+# Intervalos de confiança para a média: $\sigma$ desconhecido
+
+## IC para a média: $\sigma$ desconhecido
+
+### Estimativa da variância amostral
+
+Na maioria das situações práticas, não sabemos o verdadeiro valor do
+desvio padrão populacional $\sigma$.
+
+Se o desvio padrão é desconhecido, ele precisa ser estimado.
+
+Sendo $(X_1, \ldots, X_n)$ VAs onde $X \sim \text{N}(\mu, \sigma^2)$,
+vimos que o "melhor" estimador para $\sigma^2$ é a variância amostral
+$$
+S^2 = \frac{1}{n-1} (\sum_{i=1}^{n} X_i - n\bar{X}^2)
+$$
+que é não viciada e consistente para $\sigma^2$.
+
+### A distribuição $t$ de Student
+
+Definindo a variável padronizada
+$$
+T = \frac{\bar{X} - \mu}{\sqrt{S^2/n}} = \frac{\bar{X} - \mu}{S/\sqrt{n}}
+$$
+o denominador $S^2$ fará com que a função densidade de $T$ seja
+diferente da Normal.
+
+Essa nova densidade é denominada **$t$ de Student**, e seu parâmetro é
+denominado **graus de liberdade**. Assim:
+$$
+T = \frac{\bar{X} - \mu}{S/\sqrt{n}} \, \sim \, t(n-1)
+$$
+
+### Características da distribuição $t$
+
+- É simétrica com média $t=0$ (assim como $z=0$)
+- É diferente para tamanhos de amostra diferentes
+- Possui maior área nas caudas e menor área no centro (quando
+comparada com a distribuição normal) $\rightarrow$ para incorporar a
+incerteza
+- O desvio padrão da distribuição $t$ varia com o tamanho da
+amostra (ao contrário da distribuição $z$ onde $\sigma=1$)
+   - $n$ $\downarrow$ \quad $\sigma$ $\uparrow$
+   - $n$ $\uparrow$ \quad $\sigma$ $\downarrow$
+- Á medida que o $n$ amostral aumenta, a distribuição $t$ se
+aproxima cada vez mais de uma distribuição normal padrão $Z$
+   - Por isso, para amostras grandes ($n>30$) o resultado das duas
+   é similar
+
+### Características da distribuição $t$
+
+```{r, out.width='80%', fig.width=7, fig.height=6}
+set.seed(201409)
+z <- density(rnorm(1e+6))
+t1 <- density(rt(1e+06, df = 4))
+t2 <- density(rt(1e+06, df = 9))
+t3 <- density(rt(1e+06, df = 19))
+plot(z, type = "l", xlim = c(-5, 5), ylim = c(0, .45), lwd = 1,
+     xlab = "", ylab = "Densidade", main = "")
+lines(t1, col = 2)
+lines(t2, col = 3)
+lines(t3, col = 4)
+legend("topright", legend = c("Z", "t(4)", "t(9)", "t(19)"),
+       col = 1:4, lty = 1)
+```
+
+### Encontrando valores críticos de $t$
+
+Com a definição do **nível de confiança** e sabendo o tamanho da
+amostra $n$, sabemos então o valor de $\gamma$ e dos gl, e devemos
+encontrar o **valor crítico** de $t_{\gamma/2}$. Usando
+como exemplo $\gamma = 0,95$ e uma amostra de $n=7$
+
+- Temos que $n=7 \Rightarrow gl = n-1 = 6$
+- Na tabela da distribuição $t$ de Student procure a linha
+correspondente aos gl, e  coluna correspondente ao valor de
+$1 - \gamma = 1 - 0,95 = 0,05 = 5\%$
+- O valor de $t_{\gamma/2}$ será determinado pelos valores
+correspondentes **no corpo da tabela**. Nesse caso,
+$t_{\gamma/2} = 2,447$ é o valor crítico procurado.
+
+### Encontrando valores críticos de $t$
+
+```{r, out.width='80%'}
+curve(dt(x, df = 30), from = -4, to = 4, axes = FALSE,
+      xlab = "t", ylab = "f(t)", yaxs = "i")
+axis(1, at = c(-1.96, 0, 1.96),
+     labels = c(expression(-t[gamma/2]), "0", expression(t[gamma/2])))
+cord.x <- c(-1.96, seq(-1.96, 1.96, 0.01), 1.96)
+cord.y <- c(0, dt(seq(-1.96, 1.96, 0.01), df = 30), 0)
+polygon(x = cord.x, y = cord.y, col = "lightgray", border = NA)
+segments(x0 = 0, y0 = 0, x1 = 0, y1 = dnorm(0))
+text(x = -0.9, y = 0.1, labels = expression(frac(symbol(gamma), 2)))
+text(x = 0.9, y = 0.1, labels = expression(frac(symbol(gamma), 2)))
+box()
+```
