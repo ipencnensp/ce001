@@ -370,7 +370,7 @@ Se o desvio padrão é desconhecido, ele precisa ser estimado.
 Sendo $(X_1, \ldots, X_n)$ VAs onde $X \sim \text{N}(\mu, \sigma^2)$,
 vimos que o "melhor" estimador para $\sigma^2$ é a variância amostral
 $$
-S^2 = \frac{1}{n-1} (\sum_{i=1}^{n} X_i - n\bar{X}^2)
+S^2 = \frac{1}{n-1} (\sum_{i=1}^{n} X_i^2 - n\bar{X}^2)
 $$
 que é não viciada e consistente para $\sigma^2$.
 
@@ -384,7 +384,7 @@ o denominador $S^2$ fará com que a função densidade de $T$ seja
 diferente da Normal.
 
 Essa nova densidade é denominada **$t$ de Student**, e seu parâmetro é
-denominado **graus de liberdade**. Assim:
+denominado **graus de liberdade**, que nesse caso é $n-1$. Assim:
 $$
 T = \frac{\bar{X} - \mu}{S/\sqrt{n}} \, \sim \, t(n-1)
 $$
@@ -400,7 +400,7 @@ incerteza
 amostra (ao contrário da distribuição $z$ onde $\sigma=1$)
    - $n$ $\downarrow$ \quad $\sigma$ $\uparrow$
    - $n$ $\uparrow$ \quad $\sigma$ $\downarrow$
-- Á medida que o $n$ amostral aumenta, a distribuição $t$ se
+- A medida que o $n$ amostral aumenta, a distribuição $t$ se
 aproxima cada vez mais de uma distribuição normal padrão $Z$
    - Por isso, para amostras grandes ($n>30$) o resultado das duas
    é similar
@@ -452,3 +452,125 @@ text(x = -0.9, y = 0.1, labels = expression(frac(symbol(gamma), 2)))
 text(x = 0.9, y = 0.1, labels = expression(frac(symbol(gamma), 2)))
 box()
 ```
+
+### Intervalo de confiança
+
+Com estas definições, podemos construir um **intervalo de
+confiança** para $\mu$, com **coeficiente de confiança** $\gamma$, e
+$\sigma$ desconhecido:
+$$
+\text{IC}(\mu, \gamma) = \left[ \bar{X} - t_{\gamma/2} \cdot
+  \left(\frac{S}{\sqrt{n}}\right) ; \bar{X} + t_{\gamma/2} \cdot
+  \left(\frac{S}{\sqrt{n}}\right)  \right]
+$$
+
+Outras notações:
+$$\bar{x} - e < \mu < \bar{x} + e$$
+$$\bar{x} \pm e$$
+$$[\bar{x} - e; \bar{x} + e]$$
+
+### Procedimentos gerais para a construção de intervalos de confiança
+
+1. Verifique se as suposições necessárias estão satisfeitas
+   - Temos uma AAS
+   - Temos uma estimativa de $s$
+   - A população tem distribuição normal ou $n>30$
+2. Determine o nível de confiança $\gamma$, e encontre o valor crítico
+  $t_{\gamma/2}$
+3. Calcule a margem de erro $e = t_{\gamma/2} \cdot (\sigma/\sqrt{n})$
+4. Calcule $\text{IC}(\mu, \gamma)$
+
+### Exemplo
+
+Em um teste da eficácia do alho na dieta para a redução do
+colesterol, 49 pessoas foram avaliadas e seus níveis de colesterol
+foram medidos antes e depois do tratamento. As **mudanças** nos
+níveis de colesterol apresentaram média de 0,4 e desvio-padrão de
+21.
+
+a) Para um nível de confiança de 95\%, calcule o intevalo para a
+verdadeira média das mudanças no nível de colesterol
+b) O que o intervalo de confiança sugere sobre a eficácia do uso do
+alho na dieta para a redução do colesterol?
+c) Resolva o mesmo exemplo supondo que o $\sigma = s$ é conhecido (ou
+seja, usando a distribuição $Z$). Compare os dois métodos.
+
+## Determinação do tamanho amostral
+
+### Determinação do tamanho amostral
+
+Se $\sigma$ for desconhecido?
+
+- Estime o valor de $\sigma$ com base em algum estudo feito
+anteriormente
+- Faça uma amostra piloto e estime o desvio padrão amostral $s$, e
+use-o como uma aproximação para o desvio-padrão populacional $\sigma$
+- Use a **regra empírica** da amplitude para dados com
+distribuição (aproximadamente) normal
+
+### Regra empírica para uma distribuição normal
+
+```{r, out.width='90%', fig.width=8, fig.height=6}
+curve(dnorm, from = -4, to = 4, axes = FALSE,
+      xlab = "x", ylab = "f(x)", yaxs = "i",
+      ylim = c(0, 0.5))
+axis(1, at = c(-3, -2, -1, 0, 1, 2, 3),
+     labels = c(expression(mu - 3 %.% sigma),
+                expression(mu - 2 %.% sigma), expression(mu - sigma),
+                expression(mu),
+                expression(mu + sigma), expression(mu + 2 %.% sigma),
+                expression(mu + 3 %.% sigma)))
+cord.x <- c(-3, seq(-3, 3, 0.01), 3)
+cord.y <- c(0, dnorm(seq(-3, 3, 0.01)), 0)
+polygon(x = cord.x, y = cord.y, col = "lightgray", border = NA)
+segments(x0 = 0, y0 = 0, x1 = 0, y1 = dnorm(0))
+segments(x0 = 1, y0 = 0, x1 = 1, y1 = dnorm(1), lty = 2)
+segments(x0 = 2, y0 = 0, x1 = 2, y1 = dnorm(2), lty = 2)
+segments(x0 = 3, y0 = 0, x1 = 3, y1 = dnorm(3), lty = 2)
+segments(x0 = -1, y0 = 0, x1 = -1, y1 = dnorm(-1), lty = 2)
+segments(x0 = -2, y0 = 0, x1 = -2, y1 = dnorm(-2), lty = 2)
+segments(x0 = -3, y0 = 0, x1 = -3, y1 = dnorm(-3), lty = 2)
+text(x = 0.5, y = 0.15, labels = round(pnorm(1) - pnorm(0), 2))
+text(x = -0.5, y = 0.15, labels = round(pnorm(0) - pnorm(-1), 2))
+text(x = 1.5, y = 0.05, labels = round(pnorm(2) - pnorm(1), 2))
+text(x = -1.5, y = 0.05, labels = round(pnorm(-1) - pnorm(-2), 2))
+text(x = 1.5, y = 0.05, labels = round(pnorm(2) - pnorm(1), 2))
+text(x = -1.5, y = 0.05, labels = round(pnorm(-1) - pnorm(-2), 2))
+text(x = 2.35, y = 0.01, labels = round(pnorm(3) - pnorm(2), 2))
+text(x = -2.35, y = 0.01, labels = round(pnorm(-2) - pnorm(-3), 2))
+segments(x0 = -1, y0 = 0.41, x1 = 1, y1 = 0.41)
+text(x = 0, y = 0.41,
+     labels = paste0(round((pnorm(1) - pnorm(-1))*100, 1), "%"),
+     pos = 3, offset = 0.1)
+segments(x0 = -2, y0 = 0.44, x1 = 2, y1 = 0.44)
+text(x = 0, y = 0.44,
+     labels = paste0(round((pnorm(2) - pnorm(-2))*100, 1), "%"),
+     pos = 3, offset = 0.1)
+segments(x0 = -3, y0 = 0.47, x1 = 3, y1 = 0.47)
+text(x = 0, y = 0.47,
+     labels = paste0(round((pnorm(3) - pnorm(-3))*100, 1), "%"),
+     pos = 3, offset = 0.1)
+box()
+```
+
+### Regra empírica para uma distribuição normal
+
+Define-se **valores usuais** aqueles que são típicos e não muito
+extremos.
+
+Como sabemos que em uma distribuição (aproximadamente) normal,
+aproximadamente 95\% dos dados encontram-se a 2 desvios-padrões acima e
+abaixo da média, temos que
+\begin{align*}
+4\sigma &= (\max - \min) \\
+\sigma &= \frac{(\max - \min)}{4}
+\end{align*}
+pode ser utilizado como uma estimatva para $\sigma$.
+
+### Exemplo
+
+Um professor deseja estimar o salário médio de professores
+do ensino médio de uma cidade. Quantos professores devem ser
+selecionados para termos 90% de confiança que a média amostral esteja
+a menos de R\$30,00 da média populacional? Sabe-se apenas que os
+salários variam entre R\$800,00 e R\$1.200,00.
