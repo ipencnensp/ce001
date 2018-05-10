@@ -477,7 +477,7 @@ $$[\bar{x} - e; \bar{x} + e]$$
    - A população tem distribuição normal ou $n>30$
 2. Determine o nível de confiança $\gamma$, e encontre o valor crítico
   $t_{\gamma/2}$
-3. Calcule a margem de erro $e = t_{\gamma/2} \cdot (\sigma/\sqrt{n})$
+3. Calcule a margem de erro $e = t_{\gamma/2} \cdot (S/\sqrt{n})$
 4. Calcule $\text{IC}(\mu, \gamma)$
 
 ### Exemplo
@@ -726,3 +726,7 @@ de peças defeituosas.
 # Exercícios
 
 ### Exercícios recomendados
+
+- Seção 7.4 - 1 a 5
+- Seção 7.5 - 17, 19, 21, 23, 25, 29
+- **Seção 8.3** (distribuição $t$) - 1
