@@ -680,17 +680,17 @@ adultos acredita no aquecimento global?
 
 A partir da equação do erro máximo provável
 $$
-e = z_{\alpha/2} \cdot \sqrt{\frac{p(1-p)}{n}}
+e = z_{\gamma/2} \cdot \sqrt{\frac{p(1-p)}{n}}
 $$
 podemos isolar $n$ e chegar na seguinte equação para a determinação do
 tamanho amostral para uma proporção populacional
 $$
-n = \left( \frac{z_{\alpha/2}}{e} \right)^2 \cdot p(1-p)
+n = \left( \frac{z_{\gamma/2}}{e} \right)^2 \cdot p(1-p)
 $$
 
 ### Determinação do tamanho amostral
 
-Como **não conhecemos** a proporção poppulacional $p$, temos duas
+Como **não conhecemos** a proporção populacional $p$, temos duas
 alternativas:
 
 1. Usar $\hat{p}$ no lugar de $p$ (estimativa otimista)
