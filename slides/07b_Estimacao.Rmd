@@ -574,3 +574,155 @@ do ensino médio de uma cidade. Quantos professores devem ser
 selecionados para termos 90% de confiança que a média amostral esteja
 a menos de R\$30,00 da média populacional? Sabe-se apenas que os
 salários variam entre R\$800,00 e R\$1.200,00.
+
+# Intervalo de confiança para a proporção $p$
+
+## IC para a proporção $p$
+
+### Proporção amostral
+
+A proporção amostral
+$$
+\hat{p} = \frac{x}{n} = \frac{\text{número de sucessos}}{\text{total de
+tentativas}}
+$$
+é a "melhor estimativa" para a proporção populacional $p$
+
+Através do estudo da distribuição amostral da proporção, chegamos aos
+seguintes resultados:
+
+- A proporção amostral $\hat{p}$ **tende** para o valor da proporção
+populacional $p$
+- A distribuição das proporções amostrais tende a ser uma **distribuição
+  normal**
+- $\text{E}(\hat{p}) = \mu_{\hat{p}} = p$
+- $\text{Var}(\hat{p}) = \sigma^{2}_{\hat{p}} = \frac{p(1-p)}{n}$
+
+### Distribuição amostral da proporção $\hat{p}$
+
+Assim, sabemos que
+$$
+p \sim \text{N} \left( p, \frac{p(1-p)}{n} \right)
+$$
+
+Ainda podemos mostrar que a quantidade
+$$
+Z = \frac{\hat{p} - p}{\sqrt{\frac{p(1-p)}{n}}} \, \sim \, \text{N}(0,1)
+$$
+
+Quando não conhecemos $p$, usamos $\hat{p}=x/n$ como estimativa
+
+### Erro amostral da proporção
+
+O **erro amostral** da proporção pode ser definido por
+$$
+e = \hat{p} - p \quad \Rightarrow \quad p = \hat{p} + e
+$$
+então
+$$
+Z = \frac{\hat{p} - p}{\sqrt{\frac{p(1-p)}{n}}} =
+ \frac{e}{\sqrt{\frac{p(1-p)}{n}}}\, \sim \, \text{N}(0,1)
+$$
+
+Portanto o **erro máximo provável** ou **margem de erro** da proporção é
+$$
+e = z_{\gamma/2} \cdot \sqrt{\frac{p(1-p)}{n}}
+$$
+
+### Intervalo de confiança
+
+Com estas definições, podemos construir um **intervalo de
+confiança** para $p$, com **coeficiente de confiança** $\gamma$
+$$
+\text{IC}(p, \gamma) = \left[ \hat{p} - z_{\gamma/2} \cdot
+  \sqrt{\frac{p(1-p)}{n}} ;
+  \hat{p} + z_{\gamma/2} \cdot
+   \sqrt{\frac{p(1-p)}{n}}
+  \right]
+$$
+
+Outras notações:
+$$\hat{p} - e < p < \hat{p} + e$$
+$$\hat{p} \pm e$$
+$$[\hat{p} - e; \hat{p} + e]$$
+
+### Procedimentos gerais para a construção de intervalos de confiança
+
+1. Verifique se as suposições necessárias estão satisfeitas
+   - Temos uma AAS
+   - As condições para a distribuição binomial são satisfeitas
+      - as tentativas são independentes
+      - há duas categorias de resultado ("sucesso", "fracasso")
+      - a probabilidade de sucesso $p$ permanece constante
+   - A distribuição normal pode ser usada como aproximação para a
+   distribuição binomial, ou seja, $np \geq 5$ e $np(1-p) \geq 5$
+2. Determine o nível de confiança $\gamma$, e encontre o valor crítico
+  $z_{\gamma/2}$
+3. Calcule a margem de erro $e = z_{\gamma/2} \cdot \sqrt{\frac{p(1-p)}{n}}$
+4. Calcule $\text{IC}(p, \gamma)$
+
+### Exemplo
+
+Em uma pesquisa realizada por um instituto de pesquisa Norte-Americano,
+1500 adultos foram selecionados aleatoriamente para responder à pergunta
+se acreditam ou não no aquecimento global. 1050 entrevistados respoderam
+que sim. Com isso:
+
+a) Para um nível de confiança de 95\%, calcule o intervalo de confiança
+para a verdadeira proporção de pessoas que acreditam no aquecimento
+global
+b) Com base nesse resultado, podemos concluir que a maioria dos
+adultos acredita no aquecimento global?
+
+## Determinação do tamanho amostral
+
+### Determinação do tamanho amostral
+
+A partir da equação do erro máximo provável
+$$
+e = z_{\alpha/2} \cdot \sqrt{\frac{p(1-p)}{n}}
+$$
+podemos isolar $n$ e chegar na seguinte equação para a determinação do
+tamanho amostral para uma proporção populacional
+$$
+n = \left( \frac{z_{\alpha/2}}{e} \right)^2 \cdot p(1-p)
+$$
+
+### Determinação do tamanho amostral
+
+Como **não conhecemos** a proporção poppulacional $p$, temos duas
+alternativas:
+
+1. Usar $\hat{p}$ no lugar de $p$ (estimativa otimista)
+2. Usar $p = 0,5$ (estimativa conservadora). Porque quando $p=0,5$
+   teremos o maior tamanho de amostra possível.
+\begin{table}[h]
+\centering
+\begin{tabular}{ccc}
+\hline
+$p$ & $(1-p)$ & $p(1-p)$ \\
+\hline
+0,1 & 0,9 & 0,09 \\
+0,3 & 0,7 & 0,21 \\
+0,5 & 0,5 & \textbf{0,25} \\
+0,6 & 0,4 & 0,24 \\
+0,8 & 0,2 & 0,16 \\
+\hline
+\end{tabular}
+\end{table}
+
+### Exemplo
+
+Um fabricante de peças deseja estimar a verdadeira
+proporção de peças defeituosas no processo de fabricação, com um erro
+máximo de 3\% e nível de confiança de 99\%. Calcule o tamanho da
+amostra necessário para se estimar esta proporção se:
+
+a) O fabricante tem uma estimativa de que em uma amostra anterior,
+aproximadamente 10\% das peças eram defeituosas.
+b) O fabricante não tem nenhuma informação prévia sobre a proporção
+de peças defeituosas.
+
+# Exercícios
+
+### Exercícios recomendados
