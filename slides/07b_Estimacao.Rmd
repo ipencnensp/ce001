@@ -241,6 +241,15 @@ Uma amostra aleatória de 25 pessoas apresentou um tempo médio de uso de
 Construa um intervalo de confiança para a média $\mu$ com coeficiente de
 confiança de 95%.
 
+```{r, results='hide'}
+xbar <- 22.4
+n <- 25
+sigma <- 5.2
+zcrit <- qnorm(.975)
+erro <- zcrit * sigma/sqrt(n)
+c(xbar - erro, xbar + erro)
+```
+
 ### Amplitude de um intervalo
 
 A **amplitude** de um intervalo de confiança é dada pela
@@ -290,6 +299,48 @@ amostra
    - $(i)\ n = 15 \quad (ii)\ n = 100$
 d) Calcule as amplitudes dos intervalos acima e explique a
 diferença.
+
+```{r, results='hide'}
+##----------------------------------------------------------------------
+## a)
+xbar <- 18.5
+n <- 50
+sigma <- sqrt(36)
+## i)
+zcrit <- qnorm(0.95)
+erro <- zcrit * sigma/sqrt(n)
+IC1 <- c(xbar - erro, xbar + erro)
+## ii)
+zcrit <- qnorm(0.975)
+erro <- zcrit * sigma/sqrt(n)
+IC2 <- c(xbar - erro, xbar + erro)
+## ii)
+zcrit <- qnorm(0.995)
+erro <- zcrit * sigma/sqrt(n)
+IC3 <- c(xbar - erro, xbar + erro)
+##----------------------------------------------------------------------
+## b)
+diff(IC1)
+diff(IC2)
+diff(IC3)
+##----------------------------------------------------------------------
+## c)
+xbar <- 18.5
+sigma <- sqrt(36)
+zcrit <- qnorm(0.975)
+## i)
+n <- 15
+erro <- zcrit * sigma/sqrt(n)
+IC1 <- c(xbar - erro, xbar + erro)
+## ii)
+n <- 100
+erro <- zcrit * sigma/sqrt(n)
+IC2 <- c(xbar - erro, xbar + erro)
+##----------------------------------------------------------------------
+## d)
+diff(IC1)
+diff(IC2)
+```
 
 ## Determinação do tamanho amostral
 
@@ -355,6 +406,28 @@ igual a 2 unidades, com níveis de confiança de
    - $(i)\ 90\% \quad (ii)\ 95\%$
 d) Compare as estimativas do item anterior e analise o impacto
 do nível de confiança para a determinação do tamanho amostral.
+
+```{r, results='hide'}
+##----------------------------------------------------------------------
+## a)
+sigma <- sqrt(36)
+zcrit <- qnorm(0.975)
+## i)
+erro <- 0.5
+((zcrit * sigma)/erro)^2
+## ii)
+erro <- 2
+((zcrit * sigma)/erro)^2
+##----------------------------------------------------------------------
+## c)
+erro <- 2
+## i)
+zcrit <- qnorm(0.95)
+((zcrit * sigma)/erro)^2
+## ii)
+zcrit <- qnorm(0.975)
+((zcrit * sigma)/erro)^2
+```
 
 # Intervalos de confiança para a média: $\sigma$ desconhecido
 
@@ -483,7 +556,7 @@ $$[\bar{x} - e; \bar{x} + e]$$
 ### Exemplo
 
 Em um teste da eficácia do alho na dieta para a redução do
-colesterol, 49 pessoas foram avaliadas e seus níveis de colesterol
+colesterol, 51 pessoas foram avaliadas e seus níveis de colesterol
 foram medidos antes e depois do tratamento. As **mudanças** nos
 níveis de colesterol apresentaram média de 0,4 e desvio-padrão de
 21.
@@ -494,6 +567,27 @@ b) O que o intervalo de confiança sugere sobre a eficácia do uso do
 alho na dieta para a redução do colesterol?
 c) Resolva o mesmo exemplo supondo que o $\sigma = s$ é conhecido (ou
 seja, usando a distribuição $Z$). Compare os dois métodos.
+
+```{r, results='hide'}
+##----------------------------------------------------------------------
+xbar <- 0.4
+n <- 51
+S <- 21
+##----------------------------------------------------------------------
+## a)
+zcrit <- qt(0.975, df = n - 1)
+erro <- zcrit * S/sqrt(n)
+IC1 <- c(xbar - erro, xbar + erro)
+##----------------------------------------------------------------------
+## c)
+zcrit <- qnorm(0.975)
+sigma <- S
+erro <- zcrit * sigma/sqrt(n)
+IC2 <- c(xbar - erro, xbar + erro)
+## Comparando
+diff(IC1)
+diff(IC2)
+```
 
 ## Determinação do tamanho amostral
 
@@ -574,6 +668,18 @@ do ensino médio de uma cidade. Quantos professores devem ser
 selecionados para termos 90% de confiança que a média amostral esteja
 a menos de R\$30,00 da média populacional? Sabe-se apenas que os
 salários variam entre R\$800,00 e R\$1.200,00.
+
+Use
+$$
+n = \left[ \frac{z_{\alpha/2} \cdot \sigma}{e} \right]^2
+$$
+
+```{r, results='hide'}
+zcrit <- qnorm(0.95)
+erro <- 30
+sigma <- (1200 - 800)/4
+((zcrit * sigma)/erro)^2
+```
 
 # Intervalo de confiança para a proporção $p$
 
@@ -703,6 +809,27 @@ e compare os resultados.
 b) Com base nesses resultados, podemos concluir que a maioria dos
 adultos acredita no aquecimento global?
 
+```{r, results='hide'}
+##----------------------------------------------------------------------
+x <- 1050
+n <- 1500
+pchapeu <- x/n
+##----------------------------------------------------------------------
+## a)
+zcrit <- qnorm(0.975)
+## i)
+p <- pchapeu
+erro <- zcrit * sqrt((p*(1-p))/n)
+IC1 <- c(pchapeu - erro, pchapeu + erro)
+## ii)
+p <- 0.5
+erro <- zcrit * sqrt((p*(1-p))/n)
+IC2 <- c(pchapeu - erro, pchapeu + erro)
+## Comparando
+diff(IC1)
+diff(IC2)
+```
+
 ## Determinação do tamanho amostral
 
 ### Determinação do tamanho amostral
@@ -731,6 +858,19 @@ a) O fabricante tem uma estimativa de que em uma amostra anterior,
 aproximadamente 10\% das peças eram defeituosas.
 b) O fabricante não tem nenhuma informação prévia sobre a proporção
 de peças defeituosas.
+
+```{r, results='hide'}
+erro <- 0.03
+zcrit <- qnorm(0.995)
+##----------------------------------------------------------------------
+## a)
+p <- 0.1
+(zcrit/erro)^2 * p*(1-p)
+##----------------------------------------------------------------------
+## b)
+p <- 0.5
+(zcrit/erro)^2 * p*(1-p)
+```
 
 # Exercícios
 
