@@ -45,6 +45,8 @@ navbar:
         href: slides/06_Variaveis_Continuas.pdf
       - text: "Estimação: (A) propriedades e distribuições amostrais [PDF]"
         href: slides/07a_Estimacao.pdf
+      - text: "Estimação: (B) estimação por intervalo [PDF]"
+        href: slides/07b_Estimacao.pdf
   right:
     - text: GitHub
       icon: fa-github fa-lg
