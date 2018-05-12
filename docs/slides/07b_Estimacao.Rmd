@@ -259,7 +259,7 @@ diferença entre o  limite superior e inferior, ou seja,
   \left[ \bar{x} + z_{\gamma/2} \cdot
   \left( \frac{\sigma}{\sqrt{n}} \right) \right] -
   \left[ \bar{x} - z_{\gamma/2} \cdot
-  \left( \frac{\gamma}{\sqrt{n}} \right) \right] \\
+  \left( \frac{\sigma}{\sqrt{n}} \right) \right] \\
  &= 2 \times z_{\gamma/2} \cdot (\sigma/\sqrt{n})
 \end{align*}
 
@@ -708,7 +708,7 @@ populacional $p$
 
 Assim, sabemos que
 $$
-p \sim \text{N} \left( p, \frac{p(1-p)}{n} \right)
+\hat{p} \sim \text{N} \left( p, \frac{p(1-p)}{n} \right)
 $$
 
 Ainda podemos mostrar que a quantidade
