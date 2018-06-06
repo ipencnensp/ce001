@@ -109,7 +109,7 @@ que a probabilidade de falha seja constante, isto é, após cada impacto,
 existe uma probabilidade $p$ que ele falhe.
 
 Representando por $X$ a variável número de impactos anteriores à falha,
-pretende-se verificar se o modelo Geométrico com $p = 0.4$ pe adequado
+pretende-se verificar se o modelo Geométrico com $p = 0.4$ é adequado
 para caracterizar essa variável.
 
 # Teste para a Média Populacional
@@ -132,16 +132,16 @@ a população com média $18$.
 #### Hipótese nula $H_0$
 É uma afirmativa de que o valor de um parâmetro populacional é
 **igual** a algum valor especificado. (O termo *nula* é
-usado para indicar nenhuma mudança, nenhum efeito). Ex.:
+usado para indicar nenhuma mudança, nenhum efeito). 
 
-- $\mu = 170$ cm
-- $p = 0,5$
+- No ex. 8.1 temos: $\mu = 14$ unidades/ml
+- No ex. 8.2 temos: $p = 0,4$
 
 #### Hipótese alternativa $H_a$
 É uma afirmativa de que o parâmetro tem um valor, que, de alguma
 forma, difere da hipótese nula. Ex.:
 
-- $\mu \neq 170$ \qquad $\mu < 170$ \qquad $\mu > 170$
+- $p \neq 0,4$ \qquad $p < 0,4$ \qquad $p > 0,4$
 
 ### Tipos de hipóteses
 
@@ -176,6 +176,12 @@ hipótese
 
 ### Erros ao realizar um teste de hipótese
 
+```{r,, out.width='70%'}
+knitr::include_graphics("../img/errors.jpg")
+```
+
+### Erros ao realizar um teste de hipótese
+
 - **Erro Tipo I**: rejeitar $H_0$, quando $H_0$ é verdadeira.
 - **Erro Tipo II**: não rejeitar $H_0$ quando $H_0$ é falsa.
 
@@ -205,26 +211,6 @@ No exemplo 8.1, se $H_0: \mu = 18$ e $H_a: \mu < 18$, então:
 
 - $\alpha = P(\text{concluir que o tratamento é eficaz quando na verdade não é})$
 - $\beta = P(\text{concluir que o tratamento não é eficaz quando na verdade é})$
-
-### Erros ao realizar um teste de hipótese
-
-```{r,, out.width='70%'}
-knitr::include_graphics("../img/errors.jpg")
-```
-
-### Erros ao realizar um teste de hipótese
-
-A situação ideal é aquela em que ambas as probabilidades, $\alpha$ e
-$\beta$, são próximas de zero.
-
-No entanto, à medida que diminuimos $\alpha$, a probabilidade $\beta$
-tende a aumentar.
-
-Levando isso em conta, ao formular as hipóteses, **devemos cuidar para que
-o erro mais importante a ser evitado seja o erro do tipo I**.
-
-Por isso, a probabilidade $\alpha$ recebe o nome de **nível de
-significância** do teste, e é esse erro que devemos controlar.
 
 ### Erros ao realizar um teste de hipótese
 
@@ -269,6 +255,20 @@ polygon(x = cord.x2, y = cord.y2, col = "black",
 legend("topright", legend = c(expression(alpha), expression(beta)),
        fill = c("gray", "black"), angle = c(NA, 45), density = c(NA, 20))
 ```
+
+### Erros ao realizar um teste de hipótese
+
+A situação ideal é aquela em que ambas as probabilidades, $\alpha$ e
+$\beta$, são próximas de zero.
+
+No entanto, à medida que diminuimos $\alpha$, a probabilidade $\beta$
+tende a aumentar.
+
+Levando isso em conta, ao formular as hipóteses, **devemos cuidar para que
+o erro mais importante a ser evitado seja o erro do tipo I**.
+
+Por isso, a probabilidade $\alpha$ recebe o nome de **nível de
+significância** do teste, e é esse erro que devemos controlar.
 
 ### Valor crítico
 
