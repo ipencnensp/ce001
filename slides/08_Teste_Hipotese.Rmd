@@ -39,7 +39,7 @@ Na **inferência estatística** os dois principais objetivos são:
 
 - **Estimar** um parâmetro populacional
   - Estimativa pontual
-  - Estimativa intevalar
+  - Estimativa intervalar
 - **Testar** uma hipótese ou afirmativa sobre um parâmetro populacional
 
 ### Testes de hipótese
@@ -59,7 +59,7 @@ Suponha que, entre pessoas sadias, a concentração de certa substância no
 sangue se comporta segundo um modelo Normal com média 14 unidades/ml e
 desvio padrão 6 unidades/ml.
 
-Pessoas sofrendo de uma doença específica tem concentração méda da
+Pessoas sofrendo de uma doença específica tem concentração média da
 substância alterada para 18 unidades/ml.
 
 Admitimos que o modelo Normal com desvio padrão 6 unidades/ml, continua
@@ -85,7 +85,7 @@ legend("topright", legend = c("Sadio", "Doente"),
 ### Exemplo 8.1
 
 Para averiguar se um tratamento é eficaz contra a doença, selecionamos
-uma amostra de 30 indivíduos submetidos ao tratemento.
+uma amostra de 30 indivíduos **submetidos ao tratamento**.
 
 Assumimos que todos os elementos da amostra $X_1, \ldots, X_{30}$ possuem
 a mesma distribuição: $X_i \sim \text{N}(\mu, 36)$, onde:
@@ -132,7 +132,7 @@ a população com média $18$.
 #### Hipótese nula $H_0$
 É uma afirmativa de que o valor de um parâmetro populacional é
 **igual** a algum valor especificado. (O termo *nula* é
-usado para indicar nenhuma mudança, nenhum efeito). 
+usado para indicar nenhuma mudança, nenhum efeito).
 
 - No ex. 8.1 temos: $\mu = 14$ unidades/ml
 - No ex. 8.2 temos: $p = 0,4$
@@ -450,8 +450,8 @@ $$
 
 ### Exemplo 8.5
 
-Deseja-se investigar se uma certa moléstica que ataca o rim altera o
-consumo de oxigênio desse orgão. Para indivíduos sadios, admite-se que
+Deseja-se investigar se uma certa moléstia que ataca o rim altera o
+consumo de oxigênio desse órgão. Para indivíduos sadios, admite-se que
 esse consumo tem distribuição Normal com média 12 cm$^3$/min.
 
 Os valores medidos em cinco pacientes com a moléstia foram: 14.4; 12.9;
