@@ -11,11 +11,11 @@ source("setup_knitr.R")
 
 [![Build Status](https://travis-ci.org/leg-ufpr/ce001.svg?branch=master)](https://travis-ci.org/leg-ufpr/ce001)
 
-<div class="alert alert-danger" role="alert">
-**AVISO:** a sabatina 7 que seria realizada no dia 30/05 para os alunos
-da Zootecnia que cursam a disciplina CE001 - N foi cancelada. Uma nova
-data será marcada durante as próximas aulas.
-</div>
+<!-- <div class="alert alert-danger" role="alert"> -->
+<!-- **AVISO:** a sabatina 7 que seria realizada no dia 30/05 para os alunos -->
+<!-- da Zootecnia que cursam a disciplina CE001 - N foi cancelada. Uma nova -->
+<!-- data será marcada durante as próximas aulas. -->
+<!-- </div> -->
 
 # Detalhes da oferta da disciplina
 
