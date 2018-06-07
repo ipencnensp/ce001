@@ -47,6 +47,8 @@ navbar:
         href: slides/07a_Estimacao.pdf
       - text: "Estimação: (B) estimação por intervalo [PDF]"
         href: slides/07b_Estimacao.pdf
+      - text: "Testes de hipóteses [PDF]"
+        href: slides/08_Teste_Hipotese.pdf
   right:
     - text: GitHub
       icon: fa-github fa-lg
