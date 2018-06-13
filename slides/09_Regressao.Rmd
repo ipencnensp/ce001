@@ -1,6 +1,6 @@
 ---
-title: "Testes de hipóteses"
-short-title: "Testes de hipóteses"
+title: "Regressão e correlação"
+short-title: "Regressão e correlação"
 author: |
   | Wagner H. Bonat
   | Fernando P. Mayer
@@ -17,6 +17,8 @@ safe-columns: true
 fontfamily: inconsolata
 output:
   legtheme::beamer_leg
+header-includes:
+  - \usepackage[normalem]{ulem}
 ---
 
 ```{r setup, cache=FALSE, include=FALSE}
@@ -83,11 +85,12 @@ $$
 \text{(observação)} = \text{(previsível)} + \text{(aleatório)}
 $$
 
-Simbolicamente, podemos escrever
+Matematicamente, podemos escrever
 $$
 y_i = \theta + e_i
 $$
 onde
+
 - $y_i$ = observação $i$
 - $\theta$ = efeito fixo, comum a todos os indivíduos
 - $e_i$ = "erro" da observação $i$, ou efeito residual ou
@@ -98,7 +101,7 @@ características que não estão explícitas no modelo.
 
 ### Introdução
 
-**Exemplo:** considerando que o peso médio da população é de $\mu
+**Exemplo:** considerando que o peso médio da população é de $\mu =
 62$ kg, então o peso de cada pessoa $y_i$ pode ser descrita pelo
 seguinte modelo
 $$
@@ -119,13 +122,13 @@ Por exemplo, podemos relacionar os pesos de 5 pessoas com suas
 respectivas alturas.
 
 ```{r, fig.width=6, fig.height=5}
-alt <- c(1.65, 1.68, 1.7, 1.75, 1.78)
+alt <- c(165, 168, 170, 175, 178)
 peso <- c(55, 57, 65, 68, 71)
-plot(peso ~ alt, xlab = "Altura (m)", ylab = "Peso (kg)", pch = 19)
+plot(peso ~ alt, xlab = "Altura (cm)", ylab = "Peso (kg)", pch = 19)
 ```
 
 E notamos que existe uma aparente **relação linear** entre estas
-duas variáveis.
+variáveis.
 
 ### Introdução
 
@@ -133,25 +136,28 @@ Por exemplo, podemos relacionar os pesos de 5 pessoas com suas
 respectivas alturas.
 
 ```{r, fig.width=6, fig.height=5}
-plot(peso ~ alt, xlab = "Altura (m)", ylab = "Peso (kg)", pch = 19)
+plot(peso ~ alt, xlab = "Altura (cm)", ylab = "Peso (kg)", pch = 19)
 abline(h = 62, col = 2, lwd = 2)
+text(x = 164, y = 62, labels = expression(mu == 62),
+     xpd = TRUE, pos = 2, offset = -0.5)
 ```
 
 E notamos que existe uma aparente **relação linear** entre estas
-duas variáveis.
+variáveis.
 
 ### Introdução
 
-```{r fig.width=6, fig.height=5}
-alt <- c(1.65,1.68,1.7,1.75,1.78)
-peso <- c(55,57,65,68,71)
-plot(peso ~ alt, xlab = "Altura (cm)", ylab = "Peso (kg)", pch = 19)
-m0 <- lm(peso ~ alt)
-abline(m0)
-```
-
 Como o peso depende da altura de maneira linear, podemos então aprimorar
 o modelo anterior incorporando essa informação.
+
+```{r fig.width=6, fig.height=5}
+plot(peso ~ alt, xlab = "Altura (cm)", ylab = "Peso (kg)", pch = 19)
+abline(h = 62, col = 2, lwd = 2)
+text(x = 164, y = 62, labels = expression(mu == 62),
+     xpd = TRUE, pos = 2, offset = -0.5)
+m0 <- lm(peso ~ alt)
+abline(m0, lty = 2, lwd = 2, col = 2)
+```
 
 ### Introdução
 
@@ -170,7 +176,7 @@ y_i = \beta_0 + \beta_1\, \text{altura} + e_i
 $$
 Note que o erro deve diminuir, pois agora
 $$
-e_i = f(\text{altura}, \text{sexo}, \text{idade}, \text{país}, \ldots)
+e_i = f(\text{\sout{altura}}, \text{sexo}, \text{idade}, \text{país}, \ldots)
 $$
 ou seja, incorporamos uma informação para explicar o peso, que antes
 estava inserida no erro.
@@ -203,7 +209,6 @@ Y &= \beta_0 X^{\beta_1} &\qquad \text{potência} \\
 Y &= \beta_0 e^{\beta_1 X} &\qquad \text{exponencial} \\
 Y &= \beta_0 + \beta_1 X + \beta_2 X^2 &\qquad \text{polinomial} \\
 \end{align*}
-
 Em todos os casos, a variável **dependente** é $Y$, aquela que
 será **predita** a partir da relação e da variável **independente** $X$
 
@@ -236,6 +241,7 @@ $$
 Y_i = \beta_0 + \beta_1 X_i + e_i, \quad i = 1, 2, ..., n
 $$
 onde:
+
 - $Y$ é a variável **resposta** (ou **dependente**)
 - $X$ é a variável **explicativa** (ou **independente**)
 - $\beta_0$ é o **intercepto** da reta (valor de $Y$ quando
@@ -262,14 +268,16 @@ aumento em $Y$
 - $\beta_1 < 0$ mostra que com a aumento de $X$, há uma diminuição
 em $Y$
 
-<!-- ```{r echo=FALSE, pdfcrop=TRUE, out.width=".7\\textwidth", fig.width=6,fig.height=5} -->
-<!-- plot(peso ~ alt, xlab = "Altura (cm)", ylab = "Peso (kg)", pch = 19) -->
-<!-- abline(m0) -->
-<!-- beta0 <- round(coef(m0)[1], 2) -->
-<!-- beta1 <- round(coef(m0)[2], 2) -->
-<!-- text(x = 1.75, y = 60, -->
-<!-- labels = bquote(hat(Y) == .(beta0) + .(beta1) * X)) -->
-<!-- ``` -->
+### Interpretação dos parâmetros
+
+```{r, fig.width=6, fig.height=5, out.width='80%'}
+plot(peso ~ alt, xlab = "Altura (cm)", ylab = "Peso (kg)", pch = 19)
+abline(m0)
+beta0 <- round(coef(m0)[1], 2)
+beta1 <- round(coef(m0)[2], 2)
+text(x = 175, y = 60,
+     labels = bquote(hat(Y) == .(beta0) + .(beta1) * X))
+```
 
 ### Estimação dos parâmetros
 
@@ -348,11 +356,12 @@ onde
 A tabela a seguir relaciona as distâncias percorridas por carros (km)
 e seus consumos de combustível (litros), em uma amostra de 10 carros
 novos.
-\scriptsize
-{|l|l|l|l|l|l|l|l|l|l|l|}
-Distância & 20 & 60 & 15 & 45 & 35 & 80 & 70 & 73 & 28 & 85 \\
-Consumo & 1,33 & 5,45 & 1,66 & 3,46 & 2,92 & 6,15 & 4,11 & 5,00 &
-2,95 & 6,54 \\
+
+```{r}
+dist <- c(20,60,15,45,35,80,70,73,28,85)
+cons <- c(1.33, 5.45, 1.66, 3.46, 2.92, 6.15, 4.11, 5.00, 2.95, 6.54)
+rbind(Distância = dist, Consumo = cons)
+```
 
 Com isso:
 
@@ -366,9 +375,7 @@ distância de 50 km.
 
 ### Exemplo
 
-```{r, fig.width=6, fig.height=5}
-dist <- c(20,60,15,45,35,80,70,73,28,85)
-cons <- c(1.33, 5.45, 1.66, 3.46, 2.92, 6.15, 4.11, 5.00, 2.95, 6.54)
+```{r, fig.width=6, fig.height=5, out.width='80%'}
 plot(cons ~ dist, xlab = "Distância (km)", ylab = "Consumo (l)", pch = 19,
      xlim = c(0,90), ylim = c(0, 8))
 m1 <- lm(cons ~ dist)
@@ -384,12 +391,13 @@ text(x = 70, y = 2,
 
 A tabela a seguir relaciona os pesos de carros (t) e as taxas de
 consumo de combustível (km/l), para uma amostra de 10 carros.
-\tiny
-{|l|l|l|l|l|l|l|l|l|l|l|}
-Peso & 1,32 & 1,59 & 1,27 & 1,99 & 1,13 & 1,54 & 1,36 & 1,5 &
-1,27 & 1,09 \\
-Consumo & 13,18 & 11,45 & 12,33 & 10,63 & 13,18 & 12,33 & 11,90 & 11,90 &
-11,90 & 14,00 \\
+
+```{r}
+peso <- c(1.32, 1.59, 1.27, 1.99, 1.13, 1.54, 1.36, 1.5, 1.27, 1.09)
+cons2 <- c(13.18, 11.45, 12.33, 10.63, 13.18, 12.33, 11.90, 11.90, 11.90,
+           14.00)
+rbind(Peso = peso, Consumo = cons2)
+```
 
 Com isso:
 
@@ -403,10 +411,7 @@ veículo com peso de 1,8 t.
 
 ### Exemplo
 
-```{r, fig.width=6, fig.height=5}
-peso <- c(1.32, 1.59, 1.27, 1.99, 1.13, 1.54, 1.36, 1.5, 1.27, 1.09)
-cons2 <- c(13.18, 11.45, 12.33, 10.63, 13.18, 12.33, 11.90, 11.90, 11.90,
-           14.00)
+```{r, fig.width=6, fig.height=5, out.width='80%'}
 plot(cons2 ~ peso, xlab = "Peso (t)", ylab = "Consumo (km/l)", pch = 19,
      xlim = c(1,2), ylim = c(10, 15))
 m2 <- lm(cons2 ~ peso)
