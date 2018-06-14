@@ -814,8 +814,9 @@ knitr::include_graphics("../img/cor2.png")
 ### Exercícios recomendados
 
 - Seção 9.5 - **1**, **2** (fazer o teste para correlação), **3** (fazer
-  o teste para correlação e não fazer o teste da letra b)
+  o teste para correlação e não fazer o teste da letra b).
 - Seção 9.6 - **22** (faça o teste de correlação), **23** (faça o teste
   de correlação), **24** (fazer teste de correlação e não fazer letra
   c), **25**, **26** (faça o teste de correlação), **28** (faça o teste
-  de correlação)
+  de correlação).
+- Use $\alpha = 0.05$ em todos os testes.
