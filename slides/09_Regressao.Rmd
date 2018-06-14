@@ -339,16 +339,15 @@ $$
 Dessa forma, chegamos às **estimativas de mínimos quadrados**
 para os parâmetros $\beta_0$ e $\beta_1$:
 \begin{align*}
-\hat{\beta}_1 &= \frac{\sum_{i=1}^{n} X_iY_i - \frac{\sum_{i=1}^{n}
-X_i \sum_{i=1}^{n} Y_i}{n}}{\sum_{i=1}^{n}X_i^2 -
-\frac{(\sum_{i=1}^{n} X_i)^2}{n}} \\
+\hat{\beta}_1 &= \frac{\sum_{i=1}^{n} x_i y_i - n \bar{x} \bar{y}}
+ {\sum_{i=1}^{n} x_i^2 - n \bar{x}^2} \\
 & \\
-\hat{\beta_0} &= \bar{Y} - \hat{\beta}_1 \bar{X}
+\hat{\beta_0} &= \bar{y} - \hat{\beta}_1 \bar{x}
 \end{align*}
 onde
 \begin{align*}
-\bar{Y} = \frac{1}{n} \sum_{i=1}^{n} Y_i \qquad \text{e} \qquad
-\bar{X} = \frac{1}{n} \sum_{i=1}^{n} X_i
+\bar{y} = \frac{1}{n} \sum_{i=1}^{n} y_i \qquad \text{e} \qquad
+\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
 \end{align*}
 
 ### Exemplo
@@ -446,11 +445,8 @@ variáveis, por isso não é necessário especificar quem influencia e quem
 O **grau de relação** entre duas variáveis pode ser medido
 através do **coeficiente de correlação linear** ($r$), dado por
 $$
-r = \frac{\sum_{i=1}^{n} X_iY_i - \frac{\sum_{i=1}^{n}
-X_i \sum_{i=1}^{n} Y_i}{n}}{\sqrt{\sum_{i=1}^{n}X_i^2 -
-\frac{(\sum_{i=1}^{n} X_i)^2}{n}} \cdot \sqrt{\sum_{i=1}^{n}Y_i^2 -
-\frac{(\sum_{i=1}^{n} Y_i)^2}{n}}}
- = \frac{\text{Cov}(XY)}{\text{DP}(X) \cdot \text{DP}(Y)}
+r = \frac{\sum_{i=1}^n x_i y_i - n\bar{x}\bar{y}}{\sqrt{[\sum_{j=1}^n x_j^2 - n \bar{x}^2] [\sum_{j=1}^n y_j^2 - n \bar{y}^2]}}
+= \frac{\text{Cov}(XY)}{\text{DP}(X) \cdot \text{DP}(Y)}
 $$
 onde
 $$
@@ -554,7 +550,7 @@ $\sum_{i=1}^{n} Y_i^2 = `r sum(cons^2)`$
 
 ### Exemplo
 
-```{r, fig.width=6, fig.height=5}
+```{r, fig.width=6, fig.height=5, out.width='80%'}
 plot(cons ~ dist, xlab = "Distância (km)", ylab = "Consumo (l)", pch = 19,
      xlim = c(0,90), ylim = c(0, 8))
 m1 <- lm(cons ~ dist)
@@ -564,9 +560,9 @@ text(x = 70, y = 2,
      labels = bquote(hat(Y) == .(beta0) + .(beta1) * X),
      cex = 1.2)
 text(x = 20, y = 6,
-     labels = bquote(r == .(cor1)), cex = 1.2)
+     labels = bquote(r == .(round(cor1, 2))), cex = 1.2)
 text(x = 20, y = 5,
-     labels = bquote(r^2 == .(cor1^2)), cex = 1.2)
+     labels = bquote(r^2 == .(round(cor1^2, 2))), cex = 1.2)
 ```
 
 ### Exemplo
@@ -574,23 +570,21 @@ text(x = 20, y = 5,
 Usando os dados do segundo exemplo anterior, calcule o coeficiente de
 correlação e o $r^2$.
 
-\tiny
-{|l|l|l|l|l|l|l|l|l|l|l|}
-Peso & 1,32 & 1,59 & 1,27 & 1,99 & 1,13 & 1,54 & 1,36 & 1,5 &
-1,27 & 1,09 \\
-Consumo & 13,18 & 11,45 & 12,33 & 10,63 & 13,18 & 12,33 & 11,90 & 11,90 &
-11,90 & 14,00 \\
+```{r}
+rbind(Peso = peso, Rendimento = rend)
+```
 
 $\sum_{i=1}^{n} X_i = `r sum(peso)`$ \quad
 $\sum_{i=1}^{n} Y_i = `r sum(rend)`$ \quad
-$\sum_{i=1}^{n} X_iY_i = `r sum(rend*peso)`$ \\ \vspace{1em}
+$\sum_{i=1}^{n} X_iY_i = `r sum(rend*peso)`$
+
 $\sum_{i=1}^{n} X_i^2 = `r sum(peso^2)`$ \quad
 $\sum_{i=1}^{n} Y_i^2 = `r sum(rend^2)`$
 
-### Exemplos
+### Exemplo
 
-```{r, fig.width=6, fig.height=5}
-plot(rend ~ peso, xlab = "Peso (t)", ylab = "Consumo (km/l)", pch = 19,
+```{r, fig.width=6, fig.height=5, out.width='80%'}
+plot(rend ~ peso, xlab = "Peso (t)", ylab = "Rendimento (km/l)", pch = 19,
      xlim = c(1,2), ylim = c(10, 15))
 m2 <- lm(rend ~ peso)
 abline(m2)
@@ -599,9 +593,9 @@ text(x = 1.8, y = 14,
      labels = bquote(hat(Y) == .(beta02) - .(beta12) * X),
      cex = 1.2)
 text(x = 1.1, y = 11,
-     labels = bquote(r == .(cor2)), cex = 1.2)
+     labels = bquote(r == .(round(cor2, 2))), cex = 1.2)
 text(x = 1.1, y = 10.5,
-     labels = bquote(r^2 == .(cor2^2)), cex = 1.2)
+     labels = bquote(r^2 == .(round(cor2^2, 2))), cex = 1.2)
 ```
 
 ### Teste para o coeficiente de correlação
@@ -636,17 +630,14 @@ que tem distribuição $t$ de Student com $n-2$ graus de liberdade.
 
 ### Teste para o coeficiente de correlação
 
-**Procedimentos gerais para a construção de um teste de hipótese
-para $\rho$**
+**Procedimentos gerais**
 
 - Usar as hipótestes:
-\begin{align*}
-H_0 : \rho = 0 \\
-H_a : \rho \neq 0
-\end{align*}
-- Definir um nível de **significância*** $\alpha$ (ex.: $\alpha
-0,05$), que irá determinar o nível de **confiança** $100(1-\alpha)\%$ do
-teste
+$$
+H_0 : \rho = 0 \quad \text{vs} \quad H_a : \rho \neq 0
+$$
+- Definir um nível de **significância*** $\alpha$ (ex.: $\alpha =
+0,05$)
 - Determinar a **região de rejeição** com base no nível de
 significância $\rightarrow$ $t_{crit}$ (com $n-2$ graus de liberdade)
 - Calcular a **estatística de teste**, sob a hipótese nula
@@ -654,7 +645,7 @@ $$
 t_{calc} = r \sqrt{\frac{n-2}{1-r^2}}
 $$
 - Rejeitar a hipótese nula se a estatística de teste calculada
-estiver dentro da região de rejeição ($|t_{calc}| > |t_{crit}|$)
+estiver dentro da região de rejeição ou $|t_{calc}| > |t_{crit}|$
 
 ### Exemplo
 
@@ -662,8 +653,8 @@ Usando os dados dos exemplos anteriores, realize os testes de hipótese
 para o coeficiente de correlação $\rho$, usando um nível de 5\% de
 significância.
 
-- Distância (km) x Consumo (l) $\rightarrow$ $r = `r cor1`$
-- Peso (t) x Consumo (km/l) $\rightarrow$ $r = `r cor2`$
+- Distância (km) x Consumo (l) $\rightarrow$ $r = `r round(cor1, 2)`$
+- Peso (t) x Rendimento (km/l) $\rightarrow$ $r = `r round(cor2, 2)`$
 
 ```{r eval=FALSE, echo=FALSE}
 cor.test(dist, cons)
@@ -677,14 +668,29 @@ Existir uma correlação (positiva ou negativa) entre duas VAs $X$ e
 $Y$, \underline{mesmo que significativa}, **não** implica que $X$
 **causa** $Y$.
 
+####
+Vários exemplos em *Spurious
+correlations*: http://www.tylervigen.com/spurious-correlations
+
 ### Correlação
 
-```{r}
+```{r, out.width='70%'}
 knitr::include_graphics("../img/cor1.jpg")
 ```
 
 ### Correlação
 
-```{r}
+```{r, out.width='80%'}
 knitr::include_graphics("../img/cor2.png")
 ```
+
+# Exercícios recomendados
+
+### Exercícios recomendados
+
+- Seção 9.5 - **1**, **2** (fazer o teste para correlação), **3** (fazer
+  o teste para correlação e não fazer o teste da letra b)
+- Seção 9.6 - **22** (faça o teste de correlação), **23** (faça o teste
+  de correlação), **24** (fazer teste de correlação e não fazer letra
+  c), **25**, **26** (faça o teste de correlação), **28** (faça o teste
+  de correlação)
