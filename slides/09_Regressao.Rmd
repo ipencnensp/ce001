@@ -372,6 +372,32 @@ longos há maior consumo de combustível?
 d. Faça uma *predição* do consumo de combustível para uma
 distância de 50 km.
 
+```{r, include=FALSE}
+## Gráfico -------------------------------------------------------------
+plot(cons ~ dist, xlab = "Distância (km)", ylab = "Consumo (l)", pch = 19,
+     xlim = c(0,90), ylim = c(0, 8))
+m1 <- lm(cons ~ dist)
+abline(m1)
+
+## Estimativa dos parâmetros -------------------------------------------
+x <- dist
+y <- cons
+n <- length(x)
+## Somatórios
+(xy <- sum(x*y))
+(xbar <- mean(x))
+(ybar <- mean(y))
+(x2 <- sum(x^2))
+## Resultado
+b1 <- (xy - n*xbar*ybar)/(x2 - n*xbar^2)
+b0 <- ybar - b1*xbar
+## Conferindo
+coef(m1)
+
+## Predição ------------------------------------------------------------
+b0 + b1*50
+```
+
 ### Exemplo
 
 ```{r, fig.width=6, fig.height=5, out.width='80%'}
@@ -406,7 +432,33 @@ c. Estime os parâmetros $\hat{\beta}_0$ e $\hat{\beta}_1$
 d. Interprete o resultado. O que você pode concluir a respeito do
 rendimento?
 e. Faça uma *predição* do rendimento de combustível para um
-veículo com peso de 1,8 t.
+veículo com peso de 1.8 t.
+
+```{r, include=FALSE}
+## Gráfico -------------------------------------------------------------
+plot(rend ~ peso, xlab = "Peso (t)", ylab = "Rendimento (km/l)", pch = 19,
+     xlim = c(1,2), ylim = c(10, 15))
+m2 <- lm(rend ~ peso)
+abline(m2)
+
+## Estimativa dos parâmetros -------------------------------------------
+x <- peso
+y <- rend
+n <- length(x)
+## Somatórios
+(xy <- sum(x*y))
+(xbar <- mean(x))
+(ybar <- mean(y))
+(x2 <- sum(x^2))
+## Resultado
+b1 <- (xy - n*xbar*ybar)/(x2 - n*xbar^2)
+b0 <- ybar - b1*xbar
+## Conferindo
+coef(m2)
+
+## Predição ------------------------------------------------------------
+b0 + b1*1.8
+```
 
 ### Exemplo
 
@@ -545,8 +597,24 @@ $\sum_{i=1}^{n} X_i = `r sum(dist)`$ \quad
 $\sum_{i=1}^{n} Y_i = `r sum(cons)`$ \quad
 $\sum_{i=1}^{n} X_iY_i = `r sum(cons*dist)`$
 
-$\sum_{i=1}^{n} X_i^2 = `r sum(dist^2)`$ \quad
+$\sum_{i=1}^{n} X_i^2 = `r format(sum(dist^2),sci=F)`$ \quad
 $\sum_{i=1}^{n} Y_i^2 = `r sum(cons^2)`$
+
+```{r, include=FALSE}
+x <- dist
+y <- cons
+n <- length(x)
+## Somatórios
+(xy <- sum(x*y))
+(xbar <- mean(x))
+(ybar <- mean(y))
+(x2 <- sum(x^2))
+(y2 <- sum(y^2))
+## Correlação
+r <- (xy - n*xbar*ybar)/(sqrt((x2 - n*xbar^2)*(y2 - n*ybar^2)))
+r; r^2
+cor(x, y)
+```
 
 ### Exemplo
 
@@ -580,6 +648,22 @@ $\sum_{i=1}^{n} X_iY_i = `r sum(rend*peso)`$
 
 $\sum_{i=1}^{n} X_i^2 = `r sum(peso^2)`$ \quad
 $\sum_{i=1}^{n} Y_i^2 = `r sum(rend^2)`$
+
+```{r, include=FALSE}
+x <- peso
+y <- rend
+n <- length(x)
+## Somatórios
+(xy <- sum(x*y))
+(xbar <- mean(x))
+(ybar <- mean(y))
+(x2 <- sum(x^2))
+(y2 <- sum(y^2))
+## Correlação
+r <- (xy - n*xbar*ybar)/(sqrt((x2 - n*xbar^2)*(y2 - n*ybar^2)))
+r; r^2
+cor(x, y)
+```
 
 ### Exemplo
 
@@ -636,7 +720,7 @@ que tem distribuição $t$ de Student com $n-2$ graus de liberdade.
 $$
 H_0 : \rho = 0 \quad \text{vs} \quad H_a : \rho \neq 0
 $$
-- Definir um nível de **significância*** $\alpha$ (ex.: $\alpha =
+- Definir um nível de **significância** $\alpha$ (ex.: $\alpha =
 0,05$)
 - Determinar a **região de rejeição** com base no nível de
 significância $\rightarrow$ $t_{crit}$ (com $n-2$ graus de liberdade)
@@ -656,10 +740,51 @@ significância.
 - Distância (km) x Consumo (l) $\rightarrow$ $r = `r round(cor1, 2)`$
 - Peso (t) x Rendimento (km/l) $\rightarrow$ $r = `r round(cor2, 2)`$
 
-```{r eval=FALSE, echo=FALSE}
+```{r, include=FALSE}
+## Primeiro exemplo ----------------------------------------------------
+r <- cor(dist, cons)
+n <- length(dist)
+tcalc <- r * sqrt((n - 2)/(1 - r^2))
+tcrit <- qt(0.05/2, df = n - 2)
+abs(tcalc) > abs(tcrit)
+## p-valor
+2 * pt(tcalc, df = n - 2, lower.tail = FALSE)
 cor.test(dist, cons)
+
+## Segundo exemplo -----------------------------------------------------
+r <- cor(peso, rend)
+n <- length(peso)
+tcalc <- r * sqrt((n - 2)/(1 - r^2))
+tcrit <- qt(0.05/2, df = n - 2)
+abs(tcalc) > abs(tcrit)
+## p-valor
+2 * pt(tcalc, df = n - 2)
 cor.test(peso, rend)
 ```
+
+### Exemplo
+
+```{r}
+tc <- round(qt(0.975, df = n - 2), 3)
+r <- round(cor(dist, cons), 2)
+n <- length(dist)
+tcalc <- round(r * sqrt((n - 2)/(1 - r^2)), 3)
+```
+
+**Para o primeiro exemplo - Distância (km) x Consumo (l)**
+
+Hipóteses: $H_0: \rho = 0$ vs $H_a: \rho \neq 0$
+
+$\alpha = 0.05 \Rightarrow t_{crit} = `r tc` \Rightarrow RC = \{t \in
+\mathbb{R} : t < `r -tc` \text{ ou } t > `r tc`\}$
+
+$$
+t_{calc} = r \sqrt{\frac{n-2}{1-r^2}} = `r r` \sqrt{\frac{`r n`-2}{1-`r r`^2}} = `r tcalc`
+$$
+
+Como $|t_{calc}| = `r tcalc` > `r tc` = |t_{crit}| \Rightarrow
+\text{ Rejeita } H_0$
+
 
 ### Correlação
 
