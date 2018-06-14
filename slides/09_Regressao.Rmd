@@ -389,14 +389,14 @@ text(x = 70, y = 2,
 
 ### Exemplo
 
-A tabela a seguir relaciona os pesos de carros (t) e as taxas de
-consumo de combustível (km/l), para uma amostra de 10 carros.
+A tabela a seguir relaciona os pesos de carros (t) e o rendimento de
+combustível (em km/l), para uma amostra de 10 carros.
 
 ```{r}
 peso <- c(1.32, 1.59, 1.27, 1.99, 1.13, 1.54, 1.36, 1.5, 1.27, 1.09)
-cons2 <- c(13.18, 11.45, 12.33, 10.63, 13.18, 12.33, 11.90, 11.90, 11.90,
-           14.00)
-rbind(Peso = peso, Consumo = cons2)
+rend <- c(13.18, 11.45, 12.33, 10.63, 13.18, 12.33, 11.90, 11.90, 11.90,
+          14.00)
+rbind(Peso = peso, Rendimento = rend)
 ```
 
 Com isso:
@@ -404,17 +404,17 @@ Com isso:
 a. Faça um diagrama de dispersão
 b. Traçe um modelo linear aproximado
 c. Estime os parâmetros $\hat{\beta}_0$ e $\hat{\beta}_1$
-d. Interprete o resultado. O que você pode concluir a respeito da
-taxa de consumo?
-e. Faça uma *predição* do consumo de combustível para um
+d. Interprete o resultado. O que você pode concluir a respeito do
+rendimento?
+e. Faça uma *predição* do rendimento de combustível para um
 veículo com peso de 1,8 t.
 
 ### Exemplo
 
 ```{r, fig.width=6, fig.height=5, out.width='80%'}
-plot(cons2 ~ peso, xlab = "Peso (t)", ylab = "Consumo (km/l)", pch = 19,
+plot(rend ~ peso, xlab = "Peso (t)", ylab = "Rendimento (km/l)", pch = 19,
      xlim = c(1,2), ylim = c(10, 15))
-m2 <- lm(cons2 ~ peso)
+m2 <- lm(rend ~ peso)
 abline(m2)
 beta02 <- round(coef(m2)[1], 3)
 beta12 <- abs(round(coef(m2)[2], 3))
@@ -450,7 +450,7 @@ r = \frac{\sum_{i=1}^{n} X_iY_i - \frac{\sum_{i=1}^{n}
 X_i \sum_{i=1}^{n} Y_i}{n}}{\sqrt{\sum_{i=1}^{n}X_i^2 -
 \frac{(\sum_{i=1}^{n} X_i)^2}{n}} \cdot \sqrt{\sum_{i=1}^{n}Y_i^2 -
 \frac{(\sum_{i=1}^{n} Y_i)^2}{n}}}
-r = \frac{\text{Cov}(XY)}{\text{DP}(X) \cdot \text{DP}(Y)}
+ = \frac{\text{Cov}(XY)}{\text{DP}(X) \cdot \text{DP}(Y)}
 $$
 onde
 $$
@@ -468,7 +468,7 @@ Existem muitos tipos de associações possíveis, e o coeficiente de
 correlação avalia o quanto uma nuvem de pontos no gráfico de dispersão
 se aproxima de uma reta.
 
-```{r out.width=".33\\textwidth",fig.show="hold", fig.width=5,fig.height=5}
+```{r, out.width='30%', fig.show="hold", fig.width=5, fig.height=5}
 plot(1:10, 1:10, type = "l", xlab = "", ylab = "",  main = "r = 1")
 plot(1:10, rep(5,10), type = "l", xlab = "", ylab = "", main = "r = 0")
 plot(1:10, -1:-10, type = "l", xlab = "", ylab = "", main = "r = -1")
@@ -488,11 +488,11 @@ Quanto mais próximo de 1, maior é a explicação da variável $Y$ pela
 variável $X$.
 
 ### Correlação
-```{r}
+```{r, out.width='80%', fig.width=8,fig.height=6}
 x <- (1:100)/10
 n <- length(x)
 set.seed(1000)
-par(mfrow=c(2,2))
+par(mfrow=c(2,2), mar = c(4, 4, 4, 2))
 e <- rnorm(n, 0, 2)
 y <- 20 + x + e
 cor <- round(cor(x,y), 2)
@@ -533,7 +533,7 @@ plot(y ~ x, xlim = c(0, 10), ylim = c(0, 45))
 mtext(do.call(expression, lis), side = 3, line = 0:1)
 mm <- lm(y ~ x)
 abline(mm, lwd = 2)
-par(mfrow = c(1,1))
+par(op)
 ```
 
 ### Exemplo
@@ -541,15 +541,14 @@ par(mfrow = c(1,1))
 Usando os dados do primeiro exemplo anterior, calcule o coeficiente de
 correlação e o $r^2$.
 
-\scriptsize
-{|l|l|l|l|l|l|l|l|l|l|l|}
-Distância & 20 & 60 & 15 & 45 & 35 & 80 & 70 & 73 & 28 & 85 \\
-Consumo & 1,33 & 5,45 & 1,66 & 3,46 & 2,92 & 6,15 & 4,11 & 5,00 &
-2,95 & 6,54 \\
+```{r}
+rbind(Distância = dist, Consumo = cons)
+```
 
 $\sum_{i=1}^{n} X_i = `r sum(dist)`$ \quad
 $\sum_{i=1}^{n} Y_i = `r sum(cons)`$ \quad
-$\sum_{i=1}^{n} X_iY_i = `r sum(cons*dist)`$ \\ \vspace{1em}
+$\sum_{i=1}^{n} X_iY_i = `r sum(cons*dist)`$
+
 $\sum_{i=1}^{n} X_i^2 = `r sum(dist^2)`$ \quad
 $\sum_{i=1}^{n} Y_i^2 = `r sum(cons^2)`$
 
@@ -583,19 +582,19 @@ Consumo & 13,18 & 11,45 & 12,33 & 10,63 & 13,18 & 12,33 & 11,90 & 11,90 &
 11,90 & 14,00 \\
 
 $\sum_{i=1}^{n} X_i = `r sum(peso)`$ \quad
-$\sum_{i=1}^{n} Y_i = `r sum(cons2)`$ \quad
-$\sum_{i=1}^{n} X_iY_i = `r sum(cons2*peso)`$ \\ \vspace{1em}
+$\sum_{i=1}^{n} Y_i = `r sum(rend)`$ \quad
+$\sum_{i=1}^{n} X_iY_i = `r sum(rend*peso)`$ \\ \vspace{1em}
 $\sum_{i=1}^{n} X_i^2 = `r sum(peso^2)`$ \quad
-$\sum_{i=1}^{n} Y_i^2 = `r sum(cons2^2)`$
+$\sum_{i=1}^{n} Y_i^2 = `r sum(rend^2)`$
 
 ### Exemplos
 
 ```{r, fig.width=6, fig.height=5}
-plot(cons2 ~ peso, xlab = "Peso (t)", ylab = "Consumo (km/l)", pch = 19,
+plot(rend ~ peso, xlab = "Peso (t)", ylab = "Consumo (km/l)", pch = 19,
      xlim = c(1,2), ylim = c(10, 15))
-m2 <- lm(cons2 ~ peso)
+m2 <- lm(rend ~ peso)
 abline(m2)
-cor2 <- cor(cons2, peso)
+cor2 <- cor(rend, peso)
 text(x = 1.8, y = 14,
      labels = bquote(hat(Y) == .(beta02) - .(beta12) * X),
      cex = 1.2)
@@ -668,7 +667,7 @@ significância.
 
 ```{r eval=FALSE, echo=FALSE}
 cor.test(dist, cons)
-cor.test(peso, cons2)
+cor.test(peso, rend)
 ```
 
 ### Correlação
