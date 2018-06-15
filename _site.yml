@@ -49,8 +49,8 @@ navbar:
         href: slides/07b_Estimacao.pdf
       - text: "Testes de hipóteses [PDF]"
         href: slides/08_Teste_Hipotese.pdf
-      - text: slides/09_Regressao.pdf
-        href: "Regressão [PDF]"
+      - text: "Regressão [PDF]"
+        href: slides/09_Regressao.pdf
   right:
     - text: GitHub
       icon: fa-github fa-lg
