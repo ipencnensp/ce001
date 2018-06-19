@@ -11,11 +11,10 @@ source("setup_knitr.R")
 
 [![Build Status](https://travis-ci.org/leg-ufpr/ce001.svg?branch=master)](https://travis-ci.org/leg-ufpr/ce001)
 
-<!-- <div class="alert alert-danger" role="alert"> -->
-<!-- **AVISO:** a sabatina 7 para os alunos da Zootecnia que cursam a -->
-<!-- disciplina CE001 - N será realizada no dia 14/06 (quinta-feira) no mesmo -->
-<!-- horário e sala (18:30 na sala PH-18) -->
-<!-- </div> -->
+ <div class="alert alert-danger" role="alert"> 
+ **AVISO:** a sabatina 10 para os alunos da Biologia diurno 
+ está disponível [aqui](sab10mb.pdf) para entrega até sexta-feira 22/08. 
+ </div> 
 
 # Detalhes da oferta da disciplina
 
