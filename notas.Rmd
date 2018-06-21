@@ -12,6 +12,33 @@ library(tidyverse)
 library(viridis)
 ```
 
+```{r funcoes, include=FALSE}
+## Função para calcular a média final, arredondando para CIMA.
+## Ainda falta uma regra para decidir se notas como 68, 69, serão
+## arredondadas para 70.
+calc.media <- function(da, np){
+    ## da: data.frame com as colunas de notas
+    ## np: número de provas consideradas
+    db <- t(apply(da, 1, sort, decreasing = TRUE, na.last = TRUE))
+    db <- db[, 1:np]
+    res <- ceiling(rowSums(db, na.rm = TRUE)/np)
+    return(res)
+}
+
+## Função para definir a situação dos alunos:
+## Se x >= 70 "Ap"
+## Se 40 <= x < 70 "Ex"
+## Se x < 40 "Re"
+sit <- function(x){
+    ## x: médias finais
+    res <- rep("Ap", times = length(x))
+    res[x >= 40 & x < 70] <- "Ex"
+    res[x < 40] <- "Re"
+    return(res)
+}
+
+```
+
 ## Escolha a aba de sua turma {.tabset}
 
 ### CE001-MB
@@ -24,7 +51,7 @@ kable(mb, row.names = FALSE)
 
 
 ```{r plotmb, out.width = '100%'}
-data1 <- rbind(mb[which(rowSums(!is.na(mb[,2:ncol(mb)]))>0),], 
+data1 <- rbind(mb[which(rowSums(!is.na(mb[,2:ncol(mb)]))>0),],
                data.frame(Matrícula='', mb[1,-1]*0))
 ns <- ncol(data1)-1
 na <- nrow(data1)
@@ -33,10 +60,10 @@ data1$Aluno <- factor(substring(data1$Mat, 6))##, substring(data1$Mat, 6)[order(
 angle <- 90 -360*(rank(data1$Aluno)-0.5)/na
 data1$angle <- ifelse(angle<(-90), angle + 180, angle)
 data <- data.frame(
-  Aluno=rep(data1$Aluno, ns), 
-  Etapa=rep(paste0('E', 1:ns), each=na), 
+  Aluno=rep(data1$Aluno, ns),
+  Etapa=rep(paste0('E', 1:ns), each=na),
   Nota=unlist(data1[,2:(ns+1)]))
-p = ggplot(data) +      
+p = ggplot(data) +
   # Add the stacked bar
   geom_bar(aes(x=Aluno, y=Nota, fill=Etapa), stat="identity", alpha=0.5) +
   scale_fill_viridis(discrete=TRUE) +
@@ -50,11 +77,11 @@ p = ggplot(data) +
     axis.text = element_blank(),
     axis.title = element_blank(),
     panel.grid = element_blank(),
-    plot.margin = unit(rep(0,4), "cm") 
+    plot.margin = unit(rep(0,4), "cm")
   ) +
   geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+50, label=Aluno), color="black", fontface="bold",alpha=0.6, size=3, angle=data1$angle, inherit.aes = FALSE ) +
-  coord_polar()  
-  ##geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+15, label=Aluno), color="black", fontface="bold",alpha=0.6, size=4, inherit.aes = FALSE, angle=90) 
+  coord_polar()
+  ##geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+15, label=Aluno), color="black", fontface="bold",alpha=0.6, size=4, inherit.aes = FALSE, angle=90)
 p
 ```
 
@@ -67,8 +94,16 @@ n <- n[order(n$Matrícula), ]
 kable(n, row.names = FALSE)
 ```
 
+```{r, include=FALSE}
+n2 <- cbind(n, M = calc.media(da = n[, -1], np = 6))
+str(n2)
+n2$Sit <- sit(x = n2$M)
+str(n2)
+table(n2$Sit)
+```
+
 ```{r plotn, out.width = '100%'}
-data1 <- rbind(n[which(rowSums(!is.na(n[,2:ncol(n)]))>0),], 
+data1 <- rbind(n[which(rowSums(!is.na(n[,2:ncol(n)]))>0),],
                data.frame(Matrícula='', n[1,-1]*0))
 ns <- ncol(data1)-1
 na <- nrow(data1)
@@ -77,10 +112,10 @@ data1$Aluno <- factor(substring(data1$Mat, 6))##, substring(data1$Mat, 6)[order(
 angle <- 90 -360*(rank(data1$Aluno)-0.5)/na
 data1$angle <- ifelse(angle<(-90), angle + 180, angle)
 data <- data.frame(
-  Aluno=rep(data1$Aluno, ns), 
-  Etapa=rep(paste0('E', 1:ns), each=na), 
+  Aluno=rep(data1$Aluno, ns),
+  Etapa=rep(paste0('E', 1:ns), each=na),
   Nota=unlist(data1[,2:(ns+1)]))
-p = ggplot(data) +      
+p = ggplot(data) +
   # Add the stacked bar
   geom_bar(aes(x=Aluno, y=Nota, fill=Etapa), stat="identity", alpha=0.5) +
   scale_fill_viridis(discrete=TRUE) +
@@ -94,11 +129,11 @@ p = ggplot(data) +
     axis.text = element_blank(),
     axis.title = element_blank(),
     panel.grid = element_blank(),
-    plot.margin = unit(rep(0,4), "cm") 
+    plot.margin = unit(rep(0,4), "cm")
   ) +
   geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+50, label=Aluno), color="black", fontface="bold",alpha=0.6, size=3, angle=data1$angle, inherit.aes = FALSE ) +
-  coord_polar()  
-  ##geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+15, label=Aluno), color="black", fontface="bold",alpha=0.6, size=4, inherit.aes = FALSE, angle=90) 
+  coord_polar()
+  ##geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+15, label=Aluno), color="black", fontface="bold",alpha=0.6, size=4, inherit.aes = FALSE, angle=90)
 p
 ```
 
@@ -110,8 +145,16 @@ mn <- mn[order(mn$Matrícula), ]
 kable(mn, row.names = FALSE)
 ```
 
+```{r, include=FALSE}
+mn2 <- cbind(mn, M = calc.media(da = mn[, -1], np = 6))
+str(mn2)
+mn2$Sit <- sit(x = mn2$M)
+str(mn2)
+table(mn2$Sit)
+```
+
 ```{r plotmn, out.width = '100%'}
-data1 <- rbind(mn[which(rowSums(!is.na(mn[,2:ncol(mn)]))>0),], 
+data1 <- rbind(mn[which(rowSums(!is.na(mn[,2:ncol(mn)]))>0),],
                data.frame(Matrícula='', mn[1,-1]*0))
 ns <- ncol(data1)-1
 na <- nrow(data1)
@@ -120,10 +163,10 @@ data1$Aluno <- factor(substring(data1$Mat, 6))##, substring(data1$Mat, 6)[order(
 angle <- 90 -360*(rank(data1$Aluno)-0.5)/na
 data1$angle <- ifelse(angle<(-90), angle + 180, angle)
 data <- data.frame(
-  Aluno=rep(data1$Aluno, ns), 
-  Etapa=rep(paste0('E', 1:ns), each=na), 
+  Aluno=rep(data1$Aluno, ns),
+  Etapa=rep(paste0('E', 1:ns), each=na),
   Nota=unlist(data1[,2:(ns+1)]))
-p = ggplot(data) +      
+p = ggplot(data) +
   # Add the stacked bar
   geom_bar(aes(x=Aluno, y=Nota, fill=Etapa), stat="identity", alpha=0.5) +
   scale_fill_viridis(discrete=TRUE) +
@@ -137,10 +180,10 @@ p = ggplot(data) +
     axis.text = element_blank(),
     axis.title = element_blank(),
     panel.grid = element_blank(),
-    plot.margin = unit(rep(0,4), "cm") 
+    plot.margin = unit(rep(0,4), "cm")
   ) +
   geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+50, label=Aluno), color="black", fontface="bold",alpha=0.6, size=3, angle=data1$angle, inherit.aes = FALSE ) +
-  coord_polar()  
-  ##geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+15, label=Aluno), color="black", fontface="bold",alpha=0.6, size=4, inherit.aes = FALSE, angle=90) 
+  coord_polar()
+  ##geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+15, label=Aluno), color="black", fontface="bold",alpha=0.6, size=4, inherit.aes = FALSE, angle=90)
 p
 ```
