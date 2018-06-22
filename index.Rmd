@@ -14,9 +14,9 @@ source("setup_knitr.R")
  <div class="alert alert-danger" role="alert">
  **Exames:**
 
- - Turma MB: 04/06 (quarta-feira, mesmo horário e sala)
- - Turma N: 04/06 (quarta-feira, mesmo horário e sala)
- - Turma MN: 04/06 (quarta-feira, mesmo horário e sala)
+ - Turma MB: 04/07 (quarta-feira, mesmo horário e sala)
+ - Turma N: 04/07 (quarta-feira, mesmo horário e sala)
+ - Turma MN: 04/07 (quarta-feira, mesmo horário e sala)
  </div>
 
 # Detalhes da oferta da disciplina
