@@ -11,10 +11,13 @@ source("setup_knitr.R")
 
 [![Build Status](https://travis-ci.org/leg-ufpr/ce001.svg?branch=master)](https://travis-ci.org/leg-ufpr/ce001)
 
- <div class="alert alert-danger" role="alert"> 
- **AVISO:** a sabatina 10 para os alunos da Biologia diurno 
- está disponível [aqui](sab10mb.pdf) para entrega até sexta-feira 22/08. 
- </div> 
+ <div class="alert alert-danger" role="alert">
+ **Exames:**
+
+ - Turma MB: 04/07 (quarta-feira, mesmo horário e sala)
+ - Turma N: 04/07 (quarta-feira, mesmo horário e sala)
+ - Turma MN: 04/07 (quarta-feira, mesmo horário e sala)
+ </div>
 
 # Detalhes da oferta da disciplina
 
