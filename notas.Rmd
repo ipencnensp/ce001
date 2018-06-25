@@ -88,21 +88,25 @@ p
 
 ### CE001-N
 
+- A média final (`M`) é a média das 6 maiores notas, **já arredondada
+  para cima**.
+- Situação (`Sit`): `Ap`: aprovado, `Ex`: exame, `Re`: reprovado
+
 ```{r notasn}
 n <- read.csv("misc/notas_ce001-N.csv")
 n <- n[order(n$Matrícula), ]
+## Cálculo da média final
+n <- cbind(n, M = calc.media(da = n[, -1], np = 6))
+## Arredonda para 70 aqueles com média final igual a 69
+n$M[n$M == 69] <- 70
+## Insere situação
+n$Sit <- sit(x = n$M)
+str(n)
+table(n$Sit)
 kable(n, row.names = FALSE)
 ```
 
-```{r, include=FALSE}
-n2 <- cbind(n, M = calc.media(da = n[, -1], np = 6))
-str(n2)
-n2$Sit <- sit(x = n2$M)
-str(n2)
-table(n2$Sit)
-```
-
-```{r plotn, out.width = '100%'}
+```{r plotn, out.width = '100%', include=FALSE, eval=FALSE}
 data1 <- rbind(n[which(rowSums(!is.na(n[,2:ncol(n)]))>0),],
                data.frame(Matrícula='', n[1,-1]*0))
 ns <- ncol(data1)-1
@@ -139,21 +143,25 @@ p
 
 ### CE003-MN
 
+- A média final (`M`) é a média das 6 maiores notas, **já arredondada
+  para cima**.
+- Situação (`Sit`): `Ap`: aprovado, `Ex`: exame, `Re`: reprovado
+
 ```{r notasmn}
 mn <- read.csv("misc/notas_ce003-MN.csv")
 mn <- mn[order(mn$Matrícula), ]
+## Cálculo da média final
+mn <- cbind(mn, M = calc.media(da = mn[, -1], np = 6))
+## Arredonda para 70 aqueles com média final igual a 69
+mn$M[mn$M == 69] <- 70
+## Insere situação
+mn$Sit <- sit(x = mn$M)
+str(mn)
+table(mn$Sit)
 kable(mn, row.names = FALSE)
 ```
 
-```{r, include=FALSE}
-mn2 <- cbind(mn, M = calc.media(da = mn[, -1], np = 6))
-str(mn2)
-mn2$Sit <- sit(x = mn2$M)
-str(mn2)
-table(mn2$Sit)
-```
-
-```{r plotmn, out.width = '100%'}
+```{r plotmn, out.width = '100%', include=FALSE, eval=FALSE}
 data1 <- rbind(mn[which(rowSums(!is.na(mn[,2:ncol(mn)]))>0),],
                data.frame(Matrícula='', mn[1,-1]*0))
 ns <- ncol(data1)-1
