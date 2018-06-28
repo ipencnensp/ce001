@@ -301,7 +301,8 @@ mb &lt;- mb[order(mb$Matrícula), ]
 ## Cálculo da média final
 mb$M &lt;- calc.media(da = mb[, -1], np = 7)
 ## Arredonda para 70 aqueles com média final igual a 69
-mb$M[mb$M &gt; 67] &lt;- 70
+mb$M[mb$M == 68] &lt;- 70
+mb$M[mb$M == 69] &lt;- 70
 ## Insere situação
 mb$Sit &lt;- sit(x = mb$M)
 table(mb$Sit)
@@ -355,7 +356,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">90</td>
 <td align="right">100</td>
-<td align="right">70</td>
+<td align="right">73</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="odd">
@@ -370,7 +371,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">90</td>
 <td align="right">70</td>
 <td align="right">80</td>
-<td align="right">70</td>
+<td align="right">75</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="even">
@@ -400,7 +401,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">70</td>
 <td align="right">95</td>
-<td align="right">70</td>
+<td align="right">77</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="even">
@@ -430,7 +431,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">70</td>
 <td align="right">80</td>
 <td align="right">NA</td>
-<td align="right">70</td>
+<td align="right">82</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="even">
@@ -460,7 +461,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">60</td>
 <td align="right">50</td>
 <td align="right">90</td>
-<td align="right">70</td>
+<td align="right">77</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="even">
@@ -475,7 +476,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">70</td>
 <td align="right">80</td>
 <td align="right">100</td>
-<td align="right">70</td>
+<td align="right">81</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="odd">
@@ -490,7 +491,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">60</td>
 <td align="right">NA</td>
-<td align="right">70</td>
+<td align="right">72</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="even">
@@ -520,7 +521,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">80</td>
 <td align="right">NA</td>
-<td align="right">70</td>
+<td align="right">89</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="even">
@@ -550,7 +551,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">NA</td>
 <td align="right">95</td>
-<td align="right">70</td>
+<td align="right">86</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="even">
@@ -565,7 +566,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">50</td>
 <td align="right">80</td>
-<td align="right">70</td>
+<td align="right">73</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="odd">
@@ -580,7 +581,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">90</td>
 <td align="right">NA</td>
 <td align="right">80</td>
-<td align="right">70</td>
+<td align="right">76</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="even">
@@ -595,7 +596,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">80</td>
 <td align="right">100</td>
-<td align="right">70</td>
+<td align="right">86</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="odd">
@@ -610,7 +611,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">70</td>
 <td align="right">80</td>
 <td align="right">100</td>
-<td align="right">70</td>
+<td align="right">82</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="even">
@@ -625,7 +626,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">110</td>
 <td align="right">70</td>
 <td align="right">100</td>
-<td align="right">70</td>
+<td align="right">80</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="odd">
@@ -685,7 +686,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">100</td>
-<td align="right">70</td>
+<td align="right">90</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="odd">
@@ -730,7 +731,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">90</td>
 <td align="right">100</td>
-<td align="right">70</td>
+<td align="right">88</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="even">
@@ -745,7 +746,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">100</td>
 <td align="right">100</td>
-<td align="right">70</td>
+<td align="right">85</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="odd">
@@ -760,7 +761,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">50</td>
 <td align="right">95</td>
-<td align="right">70</td>
+<td align="right">74</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="even">
@@ -790,7 +791,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">90</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
-<td align="right">70</td>
+<td align="right">81</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="even">
@@ -820,7 +821,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">80</td>
 <td align="right">100</td>
-<td align="right">70</td>
+<td align="right">79</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="even">
@@ -880,7 +881,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">100</td>
-<td align="right">70</td>
+<td align="right">85</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="even">
@@ -895,7 +896,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">60</td>
 <td align="right">100</td>
-<td align="right">70</td>
+<td align="right">74</td>
 <td align="left">Ap</td>
 </tr>
 <tr class="odd">
@@ -925,7 +926,7 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">50</td>
 <td align="right">80</td>
 <td align="right">100</td>
-<td align="right">70</td>
+<td align="right">79</td>
 <td align="left">Ap</td>
 </tr>
 </tbody>
