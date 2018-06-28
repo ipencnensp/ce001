@@ -54,7 +54,8 @@ mb <- mb[order(mb$Matrícula), ]
 ## Cálculo da média final
 mb$M <- calc.media(da = mb[, -1], np = 7)
 ## Arredonda para 70 aqueles com média final igual a 69
-mb$M[mb$M > 67] <- 70
+mb$M[mb$M == 68] <- 70
+mb$M[mb$M == 69] <- 70
 ## Insere situação
 mb$Sit <- sit(x = mb$M)
 table(mb$Sit)
