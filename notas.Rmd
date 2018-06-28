@@ -43,14 +43,26 @@ sit <- function(x){
 
 ### CE001-MB
 
+- A média final (`M`) é a média das 7 maiores notas, **já arredondada
+  para cima**.
+- Situação (`Sit`): `Ap`: aprovado, `Ex`: exame, `Re`: reprovado
+
 ```{r notasmb}
 mb <- read.csv2('misc/notas-MB.csv')
+mb <- mb[rowSums(!is.na(mb[,-1]))>0,]
 mb <- mb[order(mb$Matrícula), ]
+## Cálculo da média final
+mb$M <- calc.media(da = mb[, -1], np = 7)
+## Arredonda para 70 aqueles com média final igual a 69
+mb$M[mb$M > 67] <- 70
+## Insere situação
+mb$Sit <- sit(x = mb$M)
+table(mb$Sit)
 kable(mb, row.names = FALSE)
 ```
 
 
-```{r plotmb, out.width = '100%'}
+```{r plotmb, out.width = '100%', eval=FALSE}
 data1 <- rbind(mb[which(rowSums(!is.na(mb[,2:ncol(mb)]))>0),],
                data.frame(Matrícula='', mb[1,-1]*0))
 ns <- ncol(data1)-1

@@ -291,8 +291,23 @@ $(document).ready(function () {
 <h2>Escolha a aba de sua turma</h2>
 <div id="ce001-mb" class="section level3">
 <h3>CE001-MB</h3>
+<ul>
+<li>A média final (<code>M</code>) é a média das 7 maiores notas, <strong>já arredondada para cima</strong>.</li>
+<li>Situação (<code>Sit</code>): <code>Ap</code>: aprovado, <code>Ex</code>: exame, <code>Re</code>: reprovado</li>
+</ul>
 <pre class="r"><code>mb &lt;- read.csv2(&#39;misc/notas-MB.csv&#39;)
+mb &lt;- mb[rowSums(!is.na(mb[,-1]))&gt;0,]
 mb &lt;- mb[order(mb$Matrícula), ]
+## Cálculo da média final
+mb$M &lt;- calc.media(da = mb[, -1], np = 7)
+## Arredonda para 70 aqueles com média final igual a 69
+mb$M[mb$M &gt; 67] &lt;- 70
+## Insere situação
+mb$Sit &lt;- sit(x = mb$M)
+table(mb$Sit)
+
+Ap Ex Re 
+25 11  4 
 kable(mb, row.names = FALSE)</code></pre>
 <table>
 <thead>
@@ -308,6 +323,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <th align="right">S8</th>
 <th align="right">S9</th>
 <th align="right">S10</th>
+<th align="right">M</th>
+<th align="left">Sit</th>
 </tr>
 </thead>
 <tbody>
@@ -323,6 +340,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="right">0</td>
+<td align="left">Re</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20127314</td>
@@ -336,6 +355,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">90</td>
 <td align="right">100</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20130332</td>
@@ -349,6 +370,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">90</td>
 <td align="right">70</td>
 <td align="right">80</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20132857</td>
@@ -362,6 +385,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">70</td>
 <td align="right">80</td>
 <td align="right">NA</td>
+<td align="right">66</td>
+<td align="left">Ex</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20132932</td>
@@ -375,6 +400,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">70</td>
 <td align="right">95</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20133825</td>
@@ -388,6 +415,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">50</td>
 <td align="right">60</td>
 <td align="right">NA</td>
+<td align="right">57</td>
+<td align="left">Ex</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20135918</td>
@@ -401,6 +430,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">70</td>
 <td align="right">80</td>
 <td align="right">NA</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20137411</td>
@@ -414,6 +445,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">70</td>
 <td align="right">50</td>
 <td align="right">80</td>
+<td align="right">66</td>
+<td align="left">Ex</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20140076</td>
@@ -427,6 +460,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">60</td>
 <td align="right">50</td>
 <td align="right">90</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20140726</td>
@@ -440,6 +475,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">70</td>
 <td align="right">80</td>
 <td align="right">100</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20141348</td>
@@ -453,6 +490,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">60</td>
 <td align="right">NA</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20141513</td>
@@ -466,21 +505,10 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">60</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="odd">
-<td align="left">GRR20142738</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-</tr>
-<tr class="even">
 <td align="left">GRR20142928</td>
 <td align="right">78</td>
 <td align="right">88</td>
@@ -492,19 +520,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">80</td>
 <td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">GRR20142936</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20143886</td>
@@ -518,6 +535,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="right">48</td>
+<td align="left">Ex</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20144018</td>
@@ -531,6 +550,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">NA</td>
 <td align="right">95</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20144489</td>
@@ -544,6 +565,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">50</td>
 <td align="right">80</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20145231</td>
@@ -557,6 +580,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">90</td>
 <td align="right">NA</td>
 <td align="right">80</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20146982</td>
@@ -570,6 +595,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">80</td>
 <td align="right">100</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20150593</td>
@@ -583,6 +610,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">70</td>
 <td align="right">80</td>
 <td align="right">100</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20151260</td>
@@ -596,6 +625,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">110</td>
 <td align="right">70</td>
 <td align="right">100</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20151297</td>
@@ -609,6 +640,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="right">17</td>
+<td align="left">Re</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20151584</td>
@@ -622,6 +655,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">40</td>
 <td align="right">50</td>
 <td align="right">80</td>
+<td align="right">59</td>
+<td align="left">Ex</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20151704</td>
@@ -635,6 +670,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">70</td>
 <td align="right">70</td>
 <td align="right">NA</td>
+<td align="right">60</td>
+<td align="left">Ex</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20152057</td>
@@ -648,6 +685,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">100</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20152082</td>
@@ -661,6 +700,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">60</td>
 <td align="right">100</td>
+<td align="right">67</td>
+<td align="left">Ex</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20152670</td>
@@ -674,6 +715,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="right">27</td>
+<td align="left">Re</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20152787</td>
@@ -687,6 +730,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">90</td>
 <td align="right">100</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20152917</td>
@@ -700,6 +745,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">100</td>
 <td align="right">100</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20153767</td>
@@ -713,6 +760,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">50</td>
 <td align="right">95</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20153807</td>
@@ -726,6 +775,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">70</td>
 <td align="right">20</td>
+<td align="right">67</td>
+<td align="left">Ex</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20154108</td>
@@ -739,6 +790,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">90</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20155146</td>
@@ -752,6 +805,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">70</td>
 <td align="right">80</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20155858</td>
@@ -765,6 +820,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">80</td>
 <td align="right">100</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20157747</td>
@@ -778,6 +835,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
+<td align="right">10</td>
+<td align="left">Re</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20157822</td>
@@ -791,6 +850,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">10</td>
 <td align="right">80</td>
 <td align="right">NA</td>
+<td align="right">53</td>
+<td align="left">Ex</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20157882</td>
@@ -804,6 +865,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">70</td>
 <td align="right">40</td>
 <td align="right">NA</td>
+<td align="right">59</td>
+<td align="left">Ex</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20158408</td>
@@ -817,6 +880,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">100</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20158954</td>
@@ -830,6 +895,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">60</td>
 <td align="right">100</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20159607</td>
@@ -843,6 +910,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">40</td>
 <td align="right">50</td>
 <td align="right">60</td>
+<td align="right">56</td>
+<td align="left">Ex</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20159933</td>
@@ -856,6 +925,8 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">50</td>
 <td align="right">80</td>
 <td align="right">100</td>
+<td align="right">70</td>
+<td align="left">Ap</td>
 </tr>
 </tbody>
 </table>
@@ -890,9 +961,7 @@ p = ggplot(data) +
   geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+50, label=Aluno), color=&quot;black&quot;, fontface=&quot;bold&quot;,alpha=0.6, size=3, angle=data1$angle, inherit.aes = FALSE ) +
   coord_polar()
   ##geom_text(data=data1, aes(x=Aluno, y=max(data1$Total)+15, label=Aluno), color=&quot;black&quot;, fontface=&quot;bold&quot;,alpha=0.6, size=4, inherit.aes = FALSE, angle=90)
-p
-Warning: Removed 72 rows containing missing values (position_stack).</code></pre>
-<p><img src="figures/plotmb-1.png" width="100%" style="display: block; margin: auto;" /></p>
+p</code></pre>
 </div>
 <div id="ce001-n" class="section level3">
 <h3>CE001-N</h3>
