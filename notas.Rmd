@@ -51,6 +51,8 @@ sit <- function(x){
 mb <- read.csv2('misc/notas-MB.csv')
 mb <- mb[rowSums(!is.na(mb[,-1]))>0,]
 mb <- mb[order(mb$Matrícula), ]
+final <- mb$Final
+mb <- mb[, -ncol(mb)]
 ## Cálculo da média final
 mb$M <- calc.media(da = mb[, -1], np = 7)
 ## Arredonda para 70 aqueles com média final igual a 69
@@ -58,7 +60,10 @@ mb$M[mb$M == 68] <- 70
 mb$M[mb$M == 69] <- 70
 ## Insere situação
 mb$Sit <- sit(x = mb$M)
-table(mb$Sit)
+mb$Final <- final
+mb$MediaFinal <- ifelse(mb$Sit!='Ex', mb$M, 
+  ifelse(is.na(final), ceiling(mb$M/2), ceiling((mb$M+final)/2)))
+mb$Resultado <- ifelse(mb$MediaFinal>49, "Aprovado", "Reprovado")
 kable(mb, row.names = FALSE)
 ```
 

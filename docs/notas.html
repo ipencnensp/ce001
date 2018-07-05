@@ -298,6 +298,8 @@ $(document).ready(function () {
 <pre class="r"><code>mb &lt;- read.csv2(&#39;misc/notas-MB.csv&#39;)
 mb &lt;- mb[rowSums(!is.na(mb[,-1]))&gt;0,]
 mb &lt;- mb[order(mb$Matrícula), ]
+final &lt;- mb$Final
+mb &lt;- mb[, -ncol(mb)]
 ## Cálculo da média final
 mb$M &lt;- calc.media(da = mb[, -1], np = 7)
 ## Arredonda para 70 aqueles com média final igual a 69
@@ -305,10 +307,10 @@ mb$M[mb$M == 68] &lt;- 70
 mb$M[mb$M == 69] &lt;- 70
 ## Insere situação
 mb$Sit &lt;- sit(x = mb$M)
-table(mb$Sit)
-
-Ap Ex Re 
-27  9  4 
+mb$Final &lt;- final
+mb$MediaFinal &lt;- ifelse(mb$Sit!=&#39;Ex&#39;, mb$M, 
+  ifelse(is.na(final), ceiling(mb$M/2), ceiling((mb$M+final)/2)))
+mb$Resultado &lt;- ifelse(mb$MediaFinal&gt;49, &quot;Aprovado&quot;, &quot;Reprovado&quot;)
 kable(mb, row.names = FALSE)</code></pre>
 <table>
 <thead>
@@ -326,6 +328,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <th align="right">S10</th>
 <th align="right">M</th>
 <th align="left">Sit</th>
+<th align="right">Final</th>
+<th align="right">MediaFinal</th>
+<th align="left">Resultado</th>
 </tr>
 </thead>
 <tbody>
@@ -343,6 +348,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">0</td>
 <td align="left">Re</td>
+<td align="right">NA</td>
+<td align="right">0</td>
+<td align="left">Reprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20127314</td>
@@ -358,6 +366,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">73</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">73</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20130332</td>
@@ -373,6 +384,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">75</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">75</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20132857</td>
@@ -388,6 +402,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">71</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">71</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20132932</td>
@@ -403,6 +420,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">95</td>
 <td align="right">77</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">77</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20133825</td>
@@ -418,6 +438,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">57</td>
 <td align="left">Ex</td>
+<td align="right">12</td>
+<td align="right">35</td>
+<td align="left">Reprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20135918</td>
@@ -433,6 +456,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">82</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">82</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20137411</td>
@@ -448,6 +474,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">66</td>
 <td align="left">Ex</td>
+<td align="right">47</td>
+<td align="right">57</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20140076</td>
@@ -463,6 +492,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">90</td>
 <td align="right">77</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">77</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20140726</td>
@@ -478,6 +510,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">81</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">81</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20141348</td>
@@ -493,6 +528,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">95</td>
 <td align="right">77</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">77</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20141513</td>
@@ -508,6 +546,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">74</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">74</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20142928</td>
@@ -523,6 +564,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">89</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">89</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20143886</td>
@@ -538,6 +582,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">48</td>
 <td align="left">Ex</td>
+<td align="right">NA</td>
+<td align="right">24</td>
+<td align="left">Reprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20144018</td>
@@ -553,6 +600,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">95</td>
 <td align="right">86</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">86</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20144489</td>
@@ -568,6 +618,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">73</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">73</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20145231</td>
@@ -583,6 +636,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">76</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">76</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20146982</td>
@@ -598,6 +654,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">86</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">86</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20150593</td>
@@ -613,6 +672,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">82</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">82</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20151260</td>
@@ -628,6 +690,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">80</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">80</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20151297</td>
@@ -643,6 +708,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">17</td>
 <td align="left">Re</td>
+<td align="right">NA</td>
+<td align="right">17</td>
+<td align="left">Reprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20151584</td>
@@ -658,6 +726,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">59</td>
 <td align="left">Ex</td>
+<td align="right">13</td>
+<td align="right">36</td>
+<td align="left">Reprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20151704</td>
@@ -673,6 +744,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">70</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">70</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20152057</td>
@@ -688,6 +762,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">90</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">90</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20152082</td>
@@ -703,6 +780,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">70</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">70</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20152670</td>
@@ -718,6 +798,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">27</td>
 <td align="left">Re</td>
+<td align="right">NA</td>
+<td align="right">27</td>
+<td align="left">Reprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20152787</td>
@@ -733,6 +816,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">88</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">88</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20152917</td>
@@ -748,6 +834,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">85</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">85</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20153767</td>
@@ -763,6 +852,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">95</td>
 <td align="right">74</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">74</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20153807</td>
@@ -778,6 +870,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">0</td>
 <td align="right">67</td>
 <td align="left">Ex</td>
+<td align="right">33</td>
+<td align="right">50</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20154108</td>
@@ -793,6 +888,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">81</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">81</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20155146</td>
@@ -808,6 +906,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">80</td>
 <td align="right">70</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">70</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20155858</td>
@@ -823,6 +924,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">79</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">79</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20157747</td>
@@ -838,6 +942,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">10</td>
 <td align="left">Re</td>
+<td align="right">NA</td>
+<td align="right">10</td>
+<td align="left">Reprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20157822</td>
@@ -853,6 +960,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">53</td>
 <td align="left">Ex</td>
+<td align="right">NA</td>
+<td align="right">27</td>
+<td align="left">Reprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20157882</td>
@@ -868,6 +978,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">59</td>
 <td align="left">Ex</td>
+<td align="right">NA</td>
+<td align="right">30</td>
+<td align="left">Reprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20158408</td>
@@ -883,6 +996,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">85</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">85</td>
+<td align="left">Aprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20158954</td>
@@ -898,6 +1014,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">NA</td>
 <td align="right">66</td>
 <td align="left">Ex</td>
+<td align="right">9</td>
+<td align="right">38</td>
+<td align="left">Reprovado</td>
 </tr>
 <tr class="odd">
 <td align="left">GRR20159607</td>
@@ -913,6 +1032,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">60</td>
 <td align="right">56</td>
 <td align="left">Ex</td>
+<td align="right">15</td>
+<td align="right">36</td>
+<td align="left">Reprovado</td>
 </tr>
 <tr class="even">
 <td align="left">GRR20159933</td>
@@ -928,6 +1050,9 @@ kable(mb, row.names = FALSE)</code></pre>
 <td align="right">100</td>
 <td align="right">79</td>
 <td align="left">Ap</td>
+<td align="right">NA</td>
+<td align="right">79</td>
+<td align="left">Aprovado</td>
 </tr>
 </tbody>
 </table>
