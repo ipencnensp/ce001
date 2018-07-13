@@ -50,7 +50,7 @@ sit <- function(x){
 ```{r notasmb}
 mb <- read.csv2('misc/notas-MB.csv')
 mb <- mb[rowSums(!is.na(mb[,-1]))>0,]
-mb <- mb[order(mb$Matrícula), ]
+##mb <- mb[order(mb$Matrícula), ]
 final <- mb$Final
 mb <- mb[, -ncol(mb)]
 ## Cálculo da média final
