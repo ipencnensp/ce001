@@ -65,4 +65,8 @@ cat(paste0("- **", datas1, " (Qua)", "**:\n", "- **",
 - **22/06 (Sex)**: Sabatina 10.
 
 
-## Exercícios
+## Exames
+
+- Turma MB: 04/07 (quarta-feira, mesmo horário e sala)
+- Turma N: 04/07 (quarta-feira, mesmo horário e sala)
+- Turma MN: 04/07 (quarta-feira, mesmo horário e sala)
