@@ -61,7 +61,7 @@ mb$M[mb$M == 69] <- 70
 ## Insere situação
 mb$Sit <- sit(x = mb$M)
 mb$Final <- final
-mb$MediaFinal <- ifelse(mb$Sit!='Ex', mb$M, 
+mb$MediaFinal <- ifelse(mb$Sit!='Ex', mb$M,
   ifelse(is.na(final), ceiling(mb$M/2), ceiling((mb$M+final)/2)))
 mb$Resultado <- ifelse(mb$MediaFinal>49, "Aprovado", "Reprovado")
 kable(mb, row.names = FALSE)
@@ -109,18 +109,31 @@ p
 - A média final (`M`) é a média das 6 maiores notas, **já arredondada
   para cima**.
 - Situação (`Sit`): `Ap`: aprovado, `Ex`: exame, `Re`: reprovado
+- `EX`: nota do exame, `MF`: média final **já arredondada para cima**
 
 ```{r notasn}
 n <- read.csv("misc/notas_ce001-N.csv")
 n <- n[order(n$Matrícula), ]
+exame <- n$EX
+n <- n[, -ncol(n)]
 ## Cálculo da média final
 n <- cbind(n, M = calc.media(da = n[, -1], np = 6))
 ## Arredonda para 70 aqueles com média final igual a 69
 n$M[n$M == 69] <- 70
 ## Insere situação
 n$Sit <- sit(x = n$M)
+## Insere exame
+n$EX <- exame
+## Calcula média final após exame
+n$MF <- ifelse(n$Sit == "Ex",
+               ceiling((n$M + n$EX)/2),
+               n$M)
+## Resultado final
+n$Resultado <- ifelse(n$MF > 49, "Aprovado", "Reprovado")
 str(n)
 table(n$Sit)
+table(n$Resultado)
+prop.table(table(n$Resultado))
 kable(n, row.names = FALSE)
 ```
 
@@ -164,18 +177,31 @@ p
 - A média final (`M`) é a média das 6 maiores notas, **já arredondada
   para cima**.
 - Situação (`Sit`): `Ap`: aprovado, `Ex`: exame, `Re`: reprovado
+- `EX`: nota do exame, `MF`: média final **já arredondada para cima**
 
 ```{r notasmn}
 mn <- read.csv("misc/notas_ce003-MN.csv")
 mn <- mn[order(mn$Matrícula), ]
+exame <- mn$EX
+mn <- mn[, -ncol(mn)]
 ## Cálculo da média final
 mn <- cbind(mn, M = calc.media(da = mn[, -1], np = 6))
 ## Arredonda para 70 aqueles com média final igual a 69
 mn$M[mn$M == 69] <- 70
 ## Insere situação
 mn$Sit <- sit(x = mn$M)
+## Insere exame
+mn$EX <- exame
+## Calcula média final após exame
+mn$MF <- ifelse(mn$Sit == "Ex",
+               ceiling((mn$M + mn$EX)/2),
+               mn$M)
+## Resultado final
+mn$Resultado <- ifelse(mn$MF > 49, "Aprovado", "Reprovado")
 str(mn)
 table(mn$Sit)
+table(mn$Resultado)
+prop.table(table(mn$Resultado))
 kable(mn, row.names = FALSE)
 ```
 
