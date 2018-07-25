@@ -4,6 +4,7 @@
 .Ruserdata
 Rplots.pdf
 cache/
+docs/
 *_cache/
 auto/
 logo/
