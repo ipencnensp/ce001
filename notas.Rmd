@@ -7,6 +7,9 @@ output:
 
 ```{r setup, include=FALSE, cache=FALSE}
 source("setup_knitr.R")
+```
+
+```{r pacotes, include=FALSE, eval=FALSE}
 library(ggplot2)
 library(tidyverse)
 library(viridis)
